@@ -1,0 +1,68 @@
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Acme">
+body{
+font-family:Acme;
+}
+
+.register{
+position:fixed;
+width:50%;
+height:50%;
+margin-top:100px;
+margin-left:50%;
+background-color: #063146;
+color:white;
+padding-left:15px;
+padding-top:60px;
+text-align:center;
+}
+.cl1{
+margin-left:150px;
+}
+.cl2{
+margin-left:80px;
+}
+.cl3{
+margin-left:80px;
+}
+.cl5{
+margin-left:110px;
+}
+.cl6{
+font-size:20px;
+color:white;
+background-color:black;
+border:2px solid white;
+}
+.btn
+{
+	background-color:#063146;
+	color:white;
+	margin-top:5px;
+	font-size:20px;
+	border-color:#063146;
+}
+.login header{
+font-family:Acme;
+}
+.login{
+position:fixed;
+width:50%;
+height:50%;
+background-color: #063146;
+margin-top:100px;
+margin-right:50%;
+left:0px;
+color:white;
+padding-left:15px;
+padding-top:60px;
+text-align:center;
+
+}
+div:hover{
+ opacity:0.7;
+}
+body{
+background-image:url(http://localhost/ams/images/student.jpg);
+background-repeat:no-repeat;
+background-size:cover;
+}
