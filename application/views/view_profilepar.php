@@ -67,6 +67,7 @@ font-family:verdana;
 	<td>Relation:</td>
 	<td class="cl2"><b><?php echo $item->relation;?></b></td>
 </tr>
+
 <?php }?>
 </table>
 <center><a href="<?php echo site_url('web');?>"><input type="button" value="home" class="btn"></a></center>

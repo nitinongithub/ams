@@ -34,6 +34,22 @@ border-collapse:collapse;
 font-size:25px;
 font-family:verdana;
 }
+.tab1{
+width:90%;
+height:50px;
+
+margin-left:70px;
+border:2px solid #063146;
+border-collapse:collapse;
+font-size:25px;
+font-family:verdana;
+
+}
+.x{
+	text-align:center;
+	color:white;
+	background-color:#063146;
+}
 .btn
 {
 	background-color:#063146;
@@ -97,18 +113,20 @@ color:white;
 <?php }?>
 </table>
 <?php foreach($save as $item){?>
-<center><h2><?php echo "<a  href='view_profilestd?id=".$item->enrollment_no."'>Subject Details</a>";?></h2></center>
+<center><h2><?php echo "<a  href='view_profilestd?id=".$item->semester_id."'>Subject Details</a>";?></h2></center>
 <?php }?>
-<table border="1" class="tab">
+<table border="1" class="tab1">
 <tr>
-<td class="sub"><center>SUBJECTS</center></td>
+<td class="x"> SUBJECTS</td>
 </tr>
-<?php foreach($save1 as $a){ ?>
-<tr>
-<td><?php echo $a->subject_name; ?></td>
+
+<?php foreach($a as $item){?>
+
+<td><?php echo $item->subject_name;?></td>
 </tr>
 <?php }?>
 </table>
+
 <center><a href="<?php echo site_url('web');?>"><input type="button" value="home" class="btn"></a></center>
 </div>
 </body>

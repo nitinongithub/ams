@@ -82,7 +82,6 @@ foreach($x as $item){?>
 <tr>
 	<td class="cc">Subject:</td>
 	<td class="cc">Course:</td>
-	<td class="cc">Semester:</td>
 	<td class="cc">Class:</td>
 </tr>
 <?php
@@ -91,7 +90,6 @@ foreach($x as $item){?>
 	
 	<td class="cl2"><b><?php echo $item->subject_name;?></b></td>
 	<td class="cl2"><b><?php echo $item->course_name;?></b></td>
-	<td class="cl2"><b><?php echo $item->semester_name;?></b></td>
 	<td class="cl2"><b><?php echo $item->class;?></b></td>
 </tr>
 <?php

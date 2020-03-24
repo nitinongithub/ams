@@ -9,6 +9,7 @@ class My_model extends CI_Model{
 		$this->db->select('a.username, b.STATUS, b.pic');
 		$this->db->from('login a');
 		$this->db->join('user_status b', 'b.STID = a.STID');
+		$this->db->join('session c', 'c.sess_id = a.sess_id');
 		$query = $this->db->get();
 		
 		if($query->num_rows() != 0){
@@ -61,6 +62,28 @@ class My_model extends CI_Model{
 		return false;
 		}
 	}
+	function department()
+	{
+		$this->db->select('a.dept_id,a.dept_name');
+		$this->db->from('department a');
+		$query = $this->db->get();
+		return $query->result();
+	}
+	function course()
+	{
+		$this->db->select('a.course_id');
+		$this->db->from('course a');
+		$query = $this->db->get();
+		return $query->result();
+	}
+	function semester()
+	{
+		$this->db->select('a.semester_id');
+		$this->db->from('semester a');
+		$query = $this->db->get();
+		return $query->result();
+	}
+	
 	function add_faculty()
 	{
 		$data1 = array(
@@ -90,7 +113,6 @@ class My_model extends CI_Model{
 		'faculty_id'=> $this->input->post('fac_id'),
 		'subject_code' => $this->input->post('subject'),
 		'course_id'=> $this->input->post('course'),
-		'semester_id' => $this->input->post('semester'),
 		'class' => $this->input->post('class') 
 		);
 		$this->db->insert('subfaculty', $data3);
@@ -146,7 +168,8 @@ class My_model extends CI_Model{
 	{
 	$data3 = array(
 		'subject_code' => $this->input->post('c1'),
-		'subject_name' => $this->input->post('sub1')
+		'subject_name' => $this->input->post('sub1'),
+		'semester_id' => $this->input->post('semester')
 		);		
 		$this->db->insert('subject', $data3);
 		
@@ -177,20 +200,10 @@ class My_model extends CI_Model{
 		$this->db->where('feedback_id',$id);
 		$this->db->delete('feedback');	
 	}
-	function stdsubdata($id)
-	{
-		$this->db->where('enrollment_no',$id);
-		$this->db->select('a.subject_name');
-		$this->db->from('subject a');
-		$this->db->join('stdsub b','b.subject_code = a.subject_code','left');
-		$query = $this->db->get();
-		return $query->result();
-	
-	}
 	function view_profilestd()
 	{
 		$this->db->where('username', $this->session->userdata('usr_') );
-		$this->db->select('a.enrollment_no,a.roll_no,b.course_name, a.student_name, a.email, a.contact,c.dept_name,d.semester_name');
+		$this->db->select('a.enrollment_no,a.roll_no,b.course_name,d.semester_id,d.semester_name,a.student_name, a.email, a.contact,c.dept_name');
 		$this->db->from('student a');
 		$this->db->join('course b','b.course_id = a.course_id');
 		$this->db->join('department c','c.dept_id = a.dept_id');
@@ -198,6 +211,15 @@ class My_model extends CI_Model{
 		$query = $this->db->get();
 		return $query->result();
 		
+	}
+	function stdsubdata($id)
+	{
+		$this->db->where('semester_id',$id);
+		$this->db->select('a.subject_name');
+		$this->db->from('subject a');
+		$query = $this->db->get();
+		return $query->result();
+
 	}
 	function view_profilefac()
 	{
@@ -211,12 +233,11 @@ class My_model extends CI_Model{
 	function view_profilefac1()
 	{
 		$this->db->where('username', $this->session->userdata('usr_'));
-		$this->db->select('c.subject_name, d.course_name, e.semester_name, b.class');
+		$this->db->select('c.subject_name, d.course_name, b.class');
 		$this->db->from('faculty a');
 		$this->db->join('subfaculty b','b.faculty_id = a.faculty_id');
 		$this->db->join('subject c','c.subject_code = b.subject_code');
 		$this->db->join('course d','d.course_id = b.course_id');
-		$this->db->join('semester e','e.semester_id = b.semester_id');
 		$query = $this->db->get();
 		return $query->result();
 	}
@@ -247,12 +268,7 @@ function a($id)
 	}	
 	function mark_attendance()
 	{
-		$this->db->where('subject_code', $this->input->post('subject'));
-		$this->db->select('a.enrollment_no,a.roll_no, a.student_name ');
-		$this->db->from('student a');
-		$this->db->join('stdsub b','b.enrollment_no = a.enrollment_no');
-		$query1 = $this->db->get();
-		return $query1->result();
+	return true;
 	}
 	
 	

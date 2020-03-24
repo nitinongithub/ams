@@ -91,7 +91,10 @@ class Web extends CI_Controller {
 	}
 	function add_std()
 	{
-	$this->load->view('add_std');
+	$r['c']= $this->mm->semester();	
+	$r['b']= $this->mm->course();
+	$r['a']= $this->mm->department();
+	$this->load->view('add_std',$r);
 	}
 	function add_par()
 	{
@@ -99,11 +102,14 @@ class Web extends CI_Controller {
 	}
 	function add_fac()
 	{
-	$this->load->view('add_fac');
+	$r['b']= $this->mm->course();
+	$r['a']= $this->mm->department();
+	$this->load->view('add_fac',$r);
 	}
 	function add_sub()
 	{
-	$this->load->view('add_sub');
+	$r['c']= $this->mm->semester();	
+	$this->load->view('add_sub',$r);
 	}
 	function mark_attendance()
 	{
@@ -115,12 +121,12 @@ class Web extends CI_Controller {
 	}
 	function view_attend()
 	{
-	$r['a'] = $this->mm->b();
-	$this->load->view('view_attend',$r);
+	
+	$this->load->view('view_attend');
 	}
 	function std_view_attend()
 	{
-	$this->load->view('std_view_attend');
+	$this->load->view('std_view_attend',$r);
 	}
 	function view_profilefac()
 	{
@@ -131,8 +137,8 @@ class Web extends CI_Controller {
 	
 	function view_profilestd()
 	{
-	$id = $this->input->get('id');
-	$r['save1'] = $this->mm->stdsubdata($id);
+	$id = $this->input->get('id');	
+	$r['a']= $this->mm->stdsubdata($id);	
 	$r['save'] = $this->mm->view_profilestd();
 	$this->load->view('view_profilestd',$r);
 	}

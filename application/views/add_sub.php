@@ -41,8 +41,15 @@ font-size:20px;
 <form class="form" method="post" action="<?php echo site_url('web/add_subject');?>">
 <label>Subject Code :</label><input type="text"  name="c1"/></br></br>
 <label>Subject :</label><input type="text"  name="sub1"/></br></br>
+<label>Semester :</label>
+<select name="semester" class="cl">
+<?php foreach($c as $item){?>
+	<option><?php echo $item->semester_id;?> </option>
+<?php }?>
+</select></br></br>
 <input type="submit" value="add" class="bt">
 <input type="reset" value="reset" class="bt"></br></br>
+
 </form>
 </div>
 </body>
