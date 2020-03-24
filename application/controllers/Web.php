@@ -7,7 +7,7 @@ class Web extends CI_Controller {
 		parent::__construct();
 		//redirect('authenticate/uc');
 		$this->load->model('my_model','mm');
-	if(!$this->session->userdata('usr_')) {redirect('authenticate/login');}
+
 	}
 	
 	function index()
@@ -113,11 +113,8 @@ class Web extends CI_Controller {
 	}
 	function mark_attendance()
 	{
-		$id = $this->input->get('id');
-		$r['a'] = $this->mm->b();
-	$r['s'] = $this->mm->a($id);
-	$r['save'] = $this->mm->mark_attendance();
-	$this->load->view('mark_attendance',$r);
+		
+	$this->load->view('mark_attendance');
 	}
 	function view_attend()
 	{
@@ -142,7 +139,10 @@ class Web extends CI_Controller {
 	$r['save'] = $this->mm->view_profilestd();
 	$this->load->view('view_profilestd',$r);
 	}
-	
+	function about()
+	{
+		$this->load->view('about');
+	}
 	function view_profilepar()
 	{
 		

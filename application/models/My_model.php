@@ -250,26 +250,7 @@ class My_model extends CI_Model{
 		$query = $this->db->get();
 		return $query->result();
 	}
-	function b()
-	{
-		$this->db->where('username', $this->session->userdata('usr_'));
-		$this->db->select('a.faculty_id');
-		$this->db->from('faculty a');
-		$query = $this->db->get();	
-		return $query->result();		
-	}
-function a($id)
-	{
-		$this->db->where('faculty_id',$id);
-		$this->db->select('a.subject_code');
-		$this->db->from('subfaculty a');
-		$query1 = $this->db->get();
-		return $query1->result();
-	}	
-	function mark_attendance()
-	{
-	return true;
-	}
+	
 	
 	
 
