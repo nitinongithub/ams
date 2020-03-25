@@ -28,11 +28,11 @@ margin-right:20px;
 }
 .btn
 {
-	background-color:#063146;
+	background-color:black;
 	color:white;
 	margin-top:5px;
 	font-size:20px;
-	border-color:#063146;
+	border-color:black;
 }
 .tab{
 	margin-top:20px;
