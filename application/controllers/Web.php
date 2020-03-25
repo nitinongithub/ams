@@ -7,6 +7,7 @@ class Web extends CI_Controller {
 		parent::__construct();
 		//redirect('authenticate/uc');
 		$this->load->model('my_model','mm');
+		if(!$this->session->userdata('sts_')){ redirect('authenticate');}
 
 	}
 	
