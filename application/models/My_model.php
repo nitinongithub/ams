@@ -241,7 +241,6 @@ class My_model extends CI_Model{
 		$query = $this->db->get();
 		return $query->result();
 	}
-	
 	function view_profile()
 	{
 		$this->db->where('username', $this->session->userdata('usr_') );
@@ -250,6 +249,33 @@ class My_model extends CI_Model{
 		$query = $this->db->get();
 		return $query->result();
 	}
+	function mark_attendance()
+	{
+		$this->db->where('semester_id', $this->input->post('semester'));
+		$this->db->select('a.roll_no,a.student_name,a.enrollment_no');
+		$this->db->from('student a');
+		$query = $this->db->get();
+		return $query->result();
+	}
+	function subject()
+	{
+		$this->db->where('semester_id',$this->input->post('semester'));
+		$this->db->select('a.subject_name');
+		$this->db->from('subject a');
+		$query = $this->db->get();
+		return $query->result();
+
+	}
+	function coursemark()
+	{
+		$this->db->where('semester_id',$this->input->post('semester'));
+		$this->db->select('b.course_id');
+		$this->db->from('semester a');
+		$this->db->join('course b','b.course_id= a.course_id');
+		$query = $this->db->get();
+		return $query->result();
+	}
+	
 	
 	
 	
