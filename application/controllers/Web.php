@@ -87,6 +87,7 @@ class Web extends CI_Controller {
 		redirect('web/add_par');
 		}
 	}
+	
 	function contact(){
 	$this->load->view('contact');
 	}
@@ -193,6 +194,7 @@ class Web extends CI_Controller {
 		$this->mm->give_feedback();
 		redirect('web/feedback');
 	}
+	
 	
 }
 
