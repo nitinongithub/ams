@@ -264,19 +264,40 @@ class My_model extends CI_Model{
 		$this->db->from('subject a');
 		$query = $this->db->get();
 		return $query->result();
-
+	}
+	function coursedata($id1)
+	{
+		$this->db->where('dept_id',$id1);
+		$this->db->select('a.course_id');
+		$this->db->from('course a');
+		$query = $this->db->get();
+		return $query->result();
 	}
 	function coursemark()
 	{
 		$this->db->where('semester_id',$this->input->post('semester'));
 		$this->db->select('b.course_id');
 		$this->db->from('semester a');
-		$this->db->join('course b','b.course_id= a.course_id');
+		$this->db->join('course b','b.course_id = a.course_id');
 		$query = $this->db->get();
 		return $query->result();
 	}
-	
-	
+	function departmentdata($id)
+	{
+		$this->db->where('faculty_id',$id);
+		$this->db->select('a.dept_id');
+		$this->db->from('faculty a');
+		$query = $this->db->get();
+		return $query->result();
+	}
+	function semesterdata($id2)
+	{
+		$this->db->where('course_id',$id2);
+		$this->db->select('a.semester_id');
+		$this->db->from('semester a');
+		$query = $this->db->get();
+		return $query->result();
+	}
 	
 
 }

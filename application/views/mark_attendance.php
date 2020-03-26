@@ -54,20 +54,42 @@
 			font-size:20px;
 			margin-left:1100px;
 			}
+			a{
+				color:white;
+				text-decoration:none;
+			}
 		</style>
 	</head>
 	<body>
 		<div class="top">
 			<form method="post" action="<?php site_url('web/mark_attendance');?>">
-				<center>
-					<label>Semester:</label>
+		
+				<?php foreach($b as $i){?>
+					<label><?php echo "<a href='mark_attendance?id=".$i->faculty_id."'>Department:</a>";?></label>
+				<?php }?>	
+					<select name="dept" class="select">
+						<?php foreach($f as $i){?>
+						<option><?php echo $i->dept_id;?></option>
+					<?php }?>
+					</select>
+					<?php foreach($f as $i){?>
+					<label><?php echo "<a href='mark_attendance?id=".$i->dept_id."'>course:</a>";?></label>
+					<?php }?>
+					<select name="course" class="select">
+					<?php foreach($a as $i){?>
+						<option><?php echo $i->course_id;?></option>
+					<?php }?>
+					</select>
+					<?php foreach($a as $i){?>
+					<label><?php echo "<a href='mark_attendance?id=".$i->course_id."'>Semester:</a>";?></label>
+					<?php }?>
 					<select name="semester" class="select">
-						<?php foreach($c as $i){?>
+					<?php foreach($c as $i){?>
 						<option><?php echo $i->semester_id;?></option>
 					<?php }?>
 					</select>
 				<input type="submit" value="select student" name="submit" class="btn">
-				</center>
+			
 			</form>
 		</div>
 		<div class="bottom">
@@ -82,14 +104,12 @@
 								<option><?php echo $i->faculty_id?></option>
 							</select>
 						<?php }?>
-
 						<label>course:</label>
 							<select name="course" class="select">
-							<?php foreach($a as $i){?>
-							<option><?php echo $i->course_id;?></option>
+							<?php foreach($g as $i){?>
+								<option><?php echo $i->course_id;?></option>
 							<?php }?>
-							</select>
-					
+							</select>		
 						<label >Subject:</label>
 							<select name="subject" class="select">
 							<?php foreach($e as $i){?>
@@ -97,26 +117,27 @@
 							<?php }?>
 						</select>
 					</center>
-			<table class="tab" border="1">
-				<tr>
-					<td class="t">Roll No</td>
-					<td class="t">Enrollment No</td>
-					<td class="t">Student Name</td>
-					<td class="t">Status</td>
-				</tr>
+					<table class="tab" border="1">
+						<tr>
+							<td class="t">Roll No</td>
+							<td class="t">Enrollment No</td>
+							<td class="t">Student Name</td>
+							<td class="t">Status</td>
+						</tr>
 
-			<?php foreach($d as $i){?>
-				<tr>
-					<td><?php echo $i->roll_no;?></td>
-					<td name="enroll"><?php echo $i->enrollment_no;?></td>
-					<td><?php echo $i->student_name;?></td>
-					<td>Present:<input type="radio" name="attend_<?php echo $i->enrollment_no;?>"> Absent:<input type="radio" name="attend_<?php echo $i->enrollment_no;?>"></td>
-				</tr>
-			<?php }?>
-			</table>
-			<center><input type="submit" value="submit" class="btn">
+						<?php foreach($d as $i){?>
+						<tr>
+							<td><?php echo $i->roll_no;?></td>
+							<td name="enroll"><?php echo $i->enrollment_no;?></td>
+							<td><?php echo $i->student_name;?></td>
+							<td>Present:<input type="radio" name="attend_<?php echo $i->enrollment_no;?>"> Absent:<input type="radio" name="attend_<?php echo $i->enrollment_no;?>"></td>
+						</tr>
+						<?php }?>
+					</table>
+					<center><input type="submit" value="submit" class="btn">
+					<a href="<?php echo site_url('web');?>"><input type="button" value="home" class="btn"></a>
+				</center>
 			</form>
-			<a href="<?php echo site_url('web');?>"><input type="button" value="home" class="btn"></a></center>
 		</div>
 	</body>
 </html>

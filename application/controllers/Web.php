@@ -115,12 +115,21 @@ class Web extends CI_Controller {
 	}
 	function mark_attendance()
 	{
-		$r['e'] = $this->mm->subject();
+		$id2 = $this->input->get('id');
+		$id = $this->input->get('id');
+		$r['f'] = $this->mm->departmentdata($id);
 		$r['d'] = $this->mm->mark_attendance();
-		$r['a'] = $this->mm->coursemark();
+		$id1 = $this->input->get('id');
+		$r['a'] = $this->mm->coursedata($id1);
+		$r['g'] = $this->mm->coursemark();
 		$r['b'] = $this->mm->view_Profilefac();
-		$r['c'] = $this->mm->semester();
+		$r['e'] = $this->mm->subject();
+		$r['c'] = $this->mm->semesterdata($id2);
 	$this->load->view('mark_attendance',$r);
+	}
+	function coursemark()
+	{
+	
 	}
 	function view_attend()
 	{
