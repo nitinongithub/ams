@@ -1,34 +1,63 @@
 <html>
-	<head>
-		<title> attendance management system </title>
-		<link rel="stylesheet" href="<?php echo base_url();?>css/style4.css">
-		<script src="https://kit.fontawesome.com/ada59038f7.js" crossorigin="anonymous"></script>
-	</head>
-	<body>
-		<div class="top">
-			<ul>
-				<li><a  href="<?php echo site_url('authenticate/login');?>"><i class="fas fa-home"></i>HOME</a></li>
-				<li><a href="<?php echo site_url('web/contact');?>"><i class="far fa-address-book"></i>CONTACT</a></li>
-				<li><a href="<?php echo site_url('web/about');?>"><i class="fas fa-info-circle"></i>ABOUT US</li>
-				<li><a href="#"><i class="fab fa-facebook-f"></i>Facebook</a></li>
-				<li><a  href="#"><i class="fab fa-youtube"></i>Youtube</a></li>
-				<li><a href="#"><i class="fab fa-instagram"></i>Instagram</a></li>
-				<li><a href="#"><i class="fab fa-whatsapp"></i>whatsapp</a></li>
-			</ul>
+<head>
+	<title>Login</title>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+	<link rel="stylesheet" href="<?php echo base_url();?>css/stylelogin.css">
+</head>
+<body>
+<header><h1 id="id1"><b>ATTENDANCE MANAGEMENT SYSTEM </b></h1></header>
+<div class="container" >
+	<div class="d-flex justify-content-center h-100" >
+		<div class="card" >
+			<div class="card-header" id="dot">
+				<h3>LOGIN</h3>
+				<div class="d-flex justify-content-end social_icon">
+					<span><a  href="<?php echo site_url('authenticate/login');?>"><i class="fas fa-home"></i></a></span>
+					<span><a href="<?php echo site_url('web/contact');?>"><i class="far fa-address-book"></i></a></span>
+					<span><a href="<?php echo site_url('web/about');?>"><i class="fas fa-info-circle"></i></a></span>
+					<span><a href="<?php echo site_url('web/about');?>"><i class="fab fa-facebook-square"></i></a></span>
+					<span><a href="<?php echo site_url('web/about');?>"><i class="fab fa-google-plus-square"></i></a></span>
+					<span><a href="<?php echo site_url('web/about');?>"><i class="fab fa-twitter-square"></i></a></span>
+				</div>
+			</div>
+			<div class="card-body" >
+				<form method="post" id="form" action="<?php echo site_url('authenticate/checklogin');?>">
+					<div class="input-group form-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text"><i class="fas fa-user"></i></span>
+						</div>
+						<input type="text" class="form-control" placeholder="username" name="username">
+						
+					</div>
+					<div class="input-group form-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text"><i class="fas fa-key"></i></span>
+						</div>
+						<input type="password" class="form-control" placeholder="password" name="password">
+					</div>
+					<div class="form-group">
+						<input type="submit" value="Login" class="btn float-center login_btn" id="btn">
+					</div>
+				</form>
+			</div>
 		</div>
-		<div class="image">
-			<header><h1><b><center>ATTENDANCE MANAGEMENT SYSTEM </center></b></h1></header>
-		</div>
-		<div  class="login">
-			<form  method="post" action="<?php echo site_url('authenticate/checklogin');?>">
-				<header> <h1> <i class="fas fa-sign-in-alt"></i> LOGIN </h1></header>
-				USERNAME:<input type="text" placeholder="username" name="username" class="cl2" id="id4"/></br></br>
-				PASSWORD:<input type="password" placeholder="password" name="password" class="cl3" id="id5"/></br></br>
-				<input type="submit" value="LOGIN" id="btn" class="cl6" onclick="return fun1()">
-			</form>
-		</div>
-		<div class="footer">
-			<header><h1><b><center>ATTEND TODAY, ACHIEVE TOMORROW </center></b></h1></header>
-		</div>
-	</body>
+	</div>
+	</div>
+<header><h1 id="id2"><b><center>ATTEND TODAY, ACHIEVE TOMORROW </center></b></h1></header>
+</body>
+<script>
+$(document).ready(function(){
+	$("#btn").click(function(){
+	$("#form").submit()
+	});
+	});
+	$(document).ready(function(){
+	$("#dot").hide();
+	$("#dot").slideDown('slow');
+	
+	});
+	
+</script>
 </html>

@@ -31,10 +31,12 @@ class Authenticate extends CI_Controller {
 		$r = $this->mm->checklogin();
 		if($r == true)
 		{
+			echo "<script>alert('login Successfully....!!!! ');</script>";
 		redirect('web');
 		} 
 		else 
 		{
+			echo "<script>alert('error');</script>";
 			redirect('authenticate/login');
 		}
 		
