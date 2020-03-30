@@ -2,7 +2,9 @@
 	<head>
 		<title> add student</title>
 		<link rel="stylesheet" href="<?php echo base_url();?>css/style7.css">
-		<script src="https://kit.fontawesome.com/ada59038f7.js" crossorigin="anonymous"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"  crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" crossorigin="anonymous">
 	</head>
 	<style>
 		body{
@@ -10,44 +12,104 @@
 			background-size:cover;
 			background-repeat:no-repeat;
 			}
+			.container{
+			height:85%;
+			width:500px;
+			}
+			.card-header{
+			color:white;
+			}
+			.input-group-prepend span{
+			color:black;
+			font-weight:bold;
+			background-color:#FFC312;
+			}
+
+
 
 	</style>
 	<body>
-	<div class="add_fac">
-		<center><a href="<?php echo site_url('web');?>"><input type="button" value="home" class="btn"></a></center>
-		<center><header><h1><i class="fas fa-user-plus"></i>add student details</h1></header></center>
-		<form class="form" align="center" method="post" action="<?php echo site_url('web/add_student');?>">
-			<h3><b><i> login details</i></b></h3>
-			<label>Username:</label><input type="text" class="cl" name="username" required><br><br>
-			<label>Password:</label><input type="password" class="cl" name="password" required></br></br>
-			<h3><b><i> Academic details</i></b></h3>
-			<label>Enrollment_no:</label><input type="text" class="cl" name="enroll" required><br><br>
-			<label>Student Name :</label><input type="text" class="cl" name="std_name" required><br><br>
-			<label>Roll_no:</label><input type="number" class="cl" name="roll_no" required><br><br>
-			<label>E-mail:</label><input type="text" class="cl" name="std_email" required><br><br>
-			<label>Contact:</label><input type="number" class="cl" name="contact" required><br><br>
-			<label>Department:</label>
-				<select name="dept" class="cl">
-				<?php foreach($a as $item){?>
-					<option><?php echo $item->dept_id;?> </option>
+	<div class="container">
+	<div class="card-header" id="dot">
+		<form id="form1" method="post" action="<?php echo site_url('web/add_student');?>">
+			<h4>Login Details</h4>
+				<div class="md-form input-group input-group-sm mb-3">
+					<div class="input-group-prepend">
+					<span class="input-group-text " ><i class="fas fa-user"></i></span>
+				</div>
+					<input type="text" name="username" class="form-control" placeholder="username">
+				</div>
+				<div class="md-form input-group input-group-sm mb-3">
+					<div class="input-group-prepend">
+						<span class="input-group-text"><i class="fas fa-key"></i></span>
+					</div>
+						<input type="password" name="password" class="form-control" placeholder="password">
+				</div>
+				<h4>Academic Details</h4>
+				<div class="md-form input-group input-group-sm mb-3">
+					<div class="input-group-prepend">
+					<span class="input-group-text " >Enrollment No</span>
+				</div>
+					<input type="text" name="enroll" class="form-control">
+				</div>
+				<div class="md-form input-group input-group-sm mb-3">
+					<div class="input-group-prepend">
+					<span class="input-group-text " >Student Name</span>
+				</div>
+					<input type="text" name="std_name" class="form-control">
+				</div>
+				<div class="md-form input-group input-group-sm mb-3">
+					<div class="input-group-prepend">
+					<span class="input-group-text " >Roll No</span>
+				</div>
+					<input type="number" name="roll_no" class="form-control">
+				</div>
+				<div class="md-form input-group input-group-sm mb-3">
+					<div class="input-group-prepend">
+					<span class="input-group-text " >contact</span>
+				</div>
+					<input type="number" name="contact" class="form-control">
+				</div>
+				<div class="md-form input-group input-group-sm mb-3">
+					<div class="input-group-prepend">
+						<span class="input-group-text md-addon" >Email</span>
+					</div>
+					<input type="email" name="std_email" class="form-control">
+				</div>
+				<div class="md-form input-group input-group-sm mb-3">
+					<div class="input-group-prepend">
+						<span class="input-group-text md-addon" >Department</i></span>
+					</div>
+					<select class="form-control" id="sel1" name="dept">
+					<?php foreach($a as $item){?>
+					<option><?php echo $item->dept_id;?></option>
+					<?php }?>
+				  </select>
+				</div>
+				<div class="md-form input-group input-group-sm mb-3">
+			  <div class="input-group-prepend">
+				<span class="input-group-text md-addon" >Course</span>
+			  </div>
+			  <select class="form-control" id="sel1" name="course">
+			  <?php foreach($b as $item){?>
+				<option><?php echo $item->course_id;?></option>
 				<?php }?>
-				</select></br></br>
-			<label>Course_id:</label>
-				<select name="course" class="cl">
-				<?php foreach($b as $item){?>
-					<option><?php echo $item->course_id;?> </option>
+			  </select>
+			  </div>
+			  <div class="md-form input-group input-group-sm mb-3">
+			  <div class="input-group-prepend">
+				<span class="input-group-text md-addon" >semester</span>
+			  </div>
+			  <select class="form-control" id="sel1" name="course">
+			  <?php foreach($c as $item){?>
+				<option><?php echo $item->semester_id;?></option>
 				<?php }?>
-				</select></br></br>
-			<label>Semester_id:</label>
-				<select name="semester" class="cl">
-				<?php foreach($c as $item){?>
-					<option><?php echo $item->semester_id;?> </option>
-				<?php }?>
-				</select></br></br>
-				<center><input type="submit" value="add" class="btn">
-				<input type="reset" value="reset" class="btn"></br></br>
-			</center>
-		</form>
-	</div>
-</head>
+			  </select>
+			  </div>
+			  	<input   id="btn" type="submit"  value="submit" class="btn btn-primary float-right">
+				<input id="rst" type="reset" value="reset" class="btn btn-primary float-left">
+			</div>
+		</div>
+	</body>
+	
 </html>

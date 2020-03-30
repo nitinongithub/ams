@@ -21,11 +21,13 @@ class Web extends CI_Controller {
 	$a = $this->mm->insert_session();
 	if($a == true)
 	{
+		echo "<script>alert('Form Submitted Successfully....!!!! ');</script>";
 		redirect('web');	
 	}
 	else
 	{
-		redirect('web/manage_session');
+		echo "<script>alert('error ');</script>";
+		redirect('web');
 	}
 	}
 	function add_faculty()
@@ -47,7 +49,7 @@ class Web extends CI_Controller {
 		if($a == true)
 		{
 		
-			redirect('web/add_sub');
+			redirect('web');
 		}
 
 	}
@@ -93,7 +95,7 @@ class Web extends CI_Controller {
 	}
 	function add_std()
 	{
-	$r['c']= $this->mm->semester();	
+	$r['c']= $this->mm->semester();		
 	$r['b']= $this->mm->course();
 	$r['a']= $this->mm->department();
 	$this->load->view('add_std',$r);
@@ -104,6 +106,7 @@ class Web extends CI_Controller {
 	}
 	function add_fac()
 	{
+		$r['d']= $this->mm->subjectadd();
 	$r['b']= $this->mm->course();
 	$r['a']= $this->mm->department();
 	$this->load->view('add_fac',$r);

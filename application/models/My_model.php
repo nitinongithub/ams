@@ -83,7 +83,13 @@ class My_model extends CI_Model{
 		$query = $this->db->get();
 		return $query->result();
 	}
-	
+	function subjectadd()
+	{
+		$this->db->select('a.subject_code');
+		$this->db->from('subject a');
+		$query = $this->db->get();
+		return $query->result();
+	}
 	function add_faculty()
 	{
 		$data1 = array(
@@ -96,11 +102,10 @@ class My_model extends CI_Model{
 		'faculty_id' => $this->input->post('fac_id'),
 		'faculty_name'=> $this->input->post('fac_name'),
 		'contact' => $this->input->post('contact'),
-		'email'=> $this->input->post('fac_email'),
+		'email'=>  $this->input->post('fac_email'),
 		'dept_id' => $this->input->post('dept'),
-		
 		'sess_id' => 2020,
-		'username' => $this->input->post('username')
+		'username'=> $this->input->post('username')
 		);
 		
 		$this->db->insert('login', $data1);
@@ -167,8 +172,8 @@ class My_model extends CI_Model{
 	function add_subject()
 	{
 	$data3 = array(
-		'subject_code' => $this->input->post('c1'),
-		'subject_name' => $this->input->post('sub1'),
+		'subject_code' => $this->input->post('name'),
+		'subject_name' => $this->input->post('name'),
 		'semester_id' => $this->input->post('semester')
 		);		
 		$this->db->insert('subject', $data3);
@@ -265,6 +270,7 @@ class My_model extends CI_Model{
 		$query = $this->db->get();
 		return $query->result();
 	}
+	
 	function coursedata($id1)
 	{
 		$this->db->where('dept_id',$id1);

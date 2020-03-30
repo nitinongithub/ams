@@ -35,25 +35,28 @@
 				color: blue;
 				cursor: pointer;
 				}
+				.btn{
+		color:white;
+		}
 			
 		</style>
 	<body>
-	<form  method="post" action="<?php echo site_url('web/insert_session');?>">
+	<form id="form" method="post" action="<?php echo site_url('web/insert_session');?>">
 	<div class="container" >
 				<div class="d-flex justify-content-center social_icon">
 					<span><a  href="<?php echo site_url('authenticate/login');?>"><i class="fas fa-user-plus"></i></a></span>
 			</div>
   <div class="form-group">
     <label for="session_id" class="c">Session Id:</label>
-    <input type="email" class="form-control" id="sess_id" name="id">
+    <input type="text" class="form-control" id="sess_id" name="id" required>
   </div>
   <div class="form-group">
     <label for="start" class="c">Start Date:</label>
-    <input type="date" class="form-control" id="start" name="start">
+    <input type="date" class="form-control" id="start" name="start" required>
   </div>
   <div class="form-group">
     <label for="end" class="c"> End Date</label>
-	<input type="date" class="form-control" id="end" name="end">
+	<input type="date" class="form-control" id="end" name="end" required>
   </div>
   <button  id="btn" type="submit" class="btn btn-primary float-right">Submit</button>
   <button id="rst" type="reset" class="btn btn-primary float-left">Reset</button>
@@ -71,6 +74,10 @@ $(document).ready(function(){
 	$("#form").trigger('reset');
 	});
 	});
-	
+	$(document).ready(function(){
+	$("#form").hide();
+	$("#form").slideDown('slow');
+
+	});
 </script>
 </html>

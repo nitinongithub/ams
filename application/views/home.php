@@ -13,65 +13,46 @@
 			background-image:url("<?php echo base_url('images/'.$this->session->userdata('pic_'));?>")
 			
 			}
-			.btn{
-		
-		font-weight:normal;
-		font-size:20px;
+			.navbar{
+		color:#FFC312;
+		}	
+		.btn{
 		color:white;
-		background-color:none;
 		}
-		.btn:hover
-		{
-			font-weight:bold;
-			font-size:25px;
-			color:white;
-		}
+			
+		
 	
 		</style>
 	<body>
 	<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <h3 id="id1">Welcome: <?php echo $this->session->userdata('usr_');?></h3>
-	  </div>
-	  <ul class="nav navbar-nav">
-      <li class="active"><?php foreach($menu as $item){?>
-		<button  class=" btn btn-link" id="<?php echo $item->item;?>"><?php echo $item->item;?></button>
-		<?php } ?>
-		<a href="<?php echo site_url('authenticate/logout');?>" >logout</a>
-		</li>
-		 
-		</ul>
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<h3 id="id1">Welcome: <?php echo $this->session->userdata('usr_');?></h3>
+			</div>
+			<ul class="nav navbar-nav">
+			<li class="active"><?php foreach($menu as $item){?>
+			<button  class=" btn btn-link" id="<?php echo $item->item;?>"><?php echo $item->item;?></button>
+			<?php } ?>
+			<a class="btn" href="<?php echo site_url('authenticate/logout');?>" >logout</a>
+			</li>
+		 </ul>
 		</div>
-		</nav>
+	</nav>
 		
-			<div id="pages" > jkjdhsalkhfkjsabf</div>
+			<div id="pages"  >
+			</div>
 
 	</body>
+	
 	<script type="text/javascript">
+	<?php foreach($menu as $item){?>
 	$(document).ready(function(){
-	$("#manage_session").click(function(){
-	$("#pages").load('web/manage_session');
-	});
-	$("#add_faculty").click(function(){
-	$("#pages").load('web/add_fac');
-	});
-	$("#add_subject").click(function(){
-	$("#pages").load('web/add_sub');
-	});
-	$("#add_parent").click(function(){
-	$("#pages").load('web/add_par');
-	});
-	$("#view_attend").click(function(){
-	$("#pages").load('web/view_attend');
-	});
-	$("#view_feedback").click(function(){
-	$("#pages").load('web/view_feedback');
-	});
-	$("#add_student").click(function(){
-	$("#pages").load('web/add_std');
+	$("#<?php echo $item->item;?>").click(function(){
+	$("#pages").load('<?php echo $item->path;?>');
 	});
 	});
+	<?php }?>
+	
 	</script>
 </html>
 	
