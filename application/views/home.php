@@ -9,26 +9,37 @@
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 		</head>
 		<style>
-			body{
-			background-image:url("<?php echo base_url('images/'.$this->session->userdata('pic_'));?>")
 			
-			}
 			.navbar{
-		color:#FFC312;
+		color:black;
 		}	
 		.btn{
-		color:white;
+		color:black;
 		}
+		.bdr{
+		height:50px;
+		background-color:#FFC312;
+		}
+		body{
+				background-image:url(<?php echo base_url('images/tech1.jpg');?>);
+				background-size:cover;
+		background-repeat:no-repeat;
+			}
+	#pages{
+	width:100%;
+	height:auto;
+	}
 			
 		
 	
 		</style>
 	<body>
 	<nav class="navbar navbar-inverse">
-		<div class="container-fluid">
+		<div class="container-fluid bdr">
 			<div class="navbar-header">
 				<h3 id="id1">Welcome: <?php echo $this->session->userdata('usr_');?></h3>
 			</div>
+			
 			<ul class="nav navbar-nav">
 			<li class="active"><?php foreach($menu as $item){?>
 			<button  class=" btn btn-link" id="<?php echo $item->item;?>"><?php echo $item->item;?></button>
@@ -36,11 +47,17 @@
 			<a class="btn" href="<?php echo site_url('authenticate/logout');?>" >logout</a>
 			</li>
 		 </ul>
-		</div>
+	</div>
 	</nav>
+	  </div>
+</div>
 		
-			<div id="pages"  >
+			<div id="pages" class="container-fluid" >
+			
 			</div>
+			
+
+
 
 	</body>
 	

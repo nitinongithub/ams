@@ -58,22 +58,13 @@
     <label for="end" class="c"> End Date</label>
 	<input type="date" class="form-control" id="end" name="end" required>
   </div>
-  <button  id="btn" type="submit" class="btn btn-primary float-right">Submit</button>
-  <button id="rst" type="reset" class="btn btn-primary float-left">Reset</button>
+  <input  id="btn" type="submit" class="btn btn-primary float-right">
+  <input id="rst" type="reset" class="btn btn-primary float-left">
 </form>
 </div>
 </body>
 <script>
-$(document).ready(function(){
-	$("#btn").click(function(){
-	$("#form").submit();
-	});
-	});
-	$(document).ready(function(){
-	$("#rst").click(function(){
-	$("#form").trigger('reset');
-	});
-	});
+
 	$(document).ready(function(){
 	$("#form").hide();
 	$("#form").slideDown('slow');

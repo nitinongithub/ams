@@ -13,9 +13,11 @@
 		background-repeat:no-repeat;
 		}
 		.container{
-			height:50%;
-			width:500px;
-			}
+				height: 50%;
+				margin-top: 100px;
+				width: 500px;
+				background-color: rgba(0,0,0,0.5);
+				}
 			.btn{
 		color:white;
 		}
@@ -28,37 +30,33 @@
 	</style>
 	<body>
 	<div class="container">
+	
 		<div class="card-header">
-			<form id="form1" method="post" action="<?php echo site_url('web/add_subject');?>">
+			<form id="for" method="post" action="<?php echo site_url('web/add_subject');?>">
+			
 				<h4>Add Subject</h4>
 				<div class="form-group">
-			<label  class="c">Subject Name:</label>
-				<input type="text" class="form-control" id="" name="name" required>
-			</div>
-			<div class="form-group">
-				<label class="c">Semester:</label>
+					<label  class="c">Subject Name:</label>
+					<input type="text" class="form-control" id="" name="name" required>
+				</div>
+				<div class="form-group">
+					<label class="c">Semester:</label>
 					<select class="form-control" id="sel1" name="semester">
 					<?php foreach($c as $item){?>
 						<option><?php echo $item->semester_id;?></option>
 					<?php }?>
 					</select>
-					</div>
-					<button  id="btn" type="submit" class="btn btn-primary float-right">Submit</button>
-					<button id="rst" type="reset" class="btn btn-primary float-left">Reset</button>
+				</div>
+					<input   id="btn" type="submit" class="btn btn-primary float-right">
+					<input id="rst" type="reset" class="btn btn-primary float-left">
+				</div>
 				</form>
-			</div>
 		</div>
 	</body>
 	<script>
 	$(document).ready(function(){
-	$("#btn").click(function(){
-	$("#form1").submit();
-	});
-	$("#rst").click(function(){
-	$("#form1").trigger('reset');
-	});
-	$("#form1").hide();
-	$("#form1").slideDown('slow');
+	$("#for").hide();
+	$("#for").slideDown('slow');
 	});
 	</script>
 </html>

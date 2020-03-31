@@ -13,6 +13,8 @@ class Web extends CI_Controller {
 	
 	function index()
 	{
+		$id = $this->input->get('id');	
+	$data['a']= $this->mm->stdsubdata($id);	
 		$data['menu'] = $this->mm->get_menu();
 		$this->load->view('home', $data);
 	}
@@ -93,13 +95,7 @@ class Web extends CI_Controller {
 	function contact(){
 	$this->load->view('contact');
 	}
-	function add_std()
-	{
-	$r['c']= $this->mm->semester();		
-	$r['b']= $this->mm->course();
-	$r['a']= $this->mm->department();
-	$this->load->view('add_std',$r);
-	}
+	
 	function add_par()
 	{
 	$this->load->view('add_par');
@@ -184,7 +180,7 @@ class Web extends CI_Controller {
 	{
 		$id = $this->input->get('id');
 		$this->mm->deleterecord($id);
-		redirect('web/view_feedback');
+		redirect('web');
 	}
 	
 	function manage_session()
@@ -204,7 +200,7 @@ class Web extends CI_Controller {
 	function give_feedback()
 	{
 		$this->mm->give_feedback();
-		redirect('web/feedback');
+		redirect('web');
 	}
 	
 	

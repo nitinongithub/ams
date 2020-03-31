@@ -1,131 +1,92 @@
 <html>
 	<head>
-		<title> student details</title>
+		<title> Student details</title>
+		<link rel="stylesheet" href="<?php echo base_url();?>css/style7.css">
+		<script src="https://kit.fontawesome.com/ada59038f7.js" crossorigin="anonymous"></script>
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"  crossorigin="anonymous">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"  crossorigin="anonymous">
 		<style>
-			.main{
-			position:fixed;
-			width:1510px;
-			height:740px;
-			border:2px solid #063146;
-			}
-			img{
-			width:60px;
-			height:60px;
-			}
-			.c{
-				font_family:verdana;
-				color:red;
-			}
-			.c1{
-				font_family:verdana;
-				color:#063146;
-			}
-			.cl2{
-				font_family:verdana;
-				color:#042331;
-				text-align:center;
-			}
-			.tab{
-			width:90%;
-			height:100px;
-			margin-left:70px;
-			border:2px solid #063146;
-			border-collapse:collapse;
-			font-size:25px;
-			font-family:verdana;
-			}
-			.tab1{
-			width:90%;
-			height:50px;
-
-			margin-left:70px;
-			border:2px solid #063146;
-			border-collapse:collapse;
-			font-size:25px;
-			font-family:verdana;
-
-			}
-			.x{
-				text-align:center;
-				color:white;
-				background-color:#063146;
-			}
-			.btn
-			{
-				background-color:#063146;
-				color:white;
-				margin-top:5px;
-				font-size:20px;
-				border-color:#063146;
-			}
-			.std{
-			text-color:black;
-			}
-			a{
-			text-decoration:none;
-			color:black;
-			}
-			.sub{
-			background-color:#063146;
-			color:white;
-			}
+			.bdr{
+		height:100%;
+		background-color:white;
+		margin-top:0px;
+		}
+		.adr{
+		height:100%;
+		background-color:#FFC312;
+		}
+		.img-fluid{
+		width:10%;
+		height:10%;
+		}
+		 h2{
+		color:red;
+		}
 		</style>
 	</head>
 	<body>
-		<div class="main">
-			<center><img src="<?php echo base_url();?>images/amrapali1.png">
-			<h2 class="c"><b><i>AMRAPALI GROUP OF INSTITUTES</i></b></h2>
-			<h2 class="c1"><b> Student Details </b></h2></center>
-			<table border="1" class="tab">
+	<div class="container-fluid adr">
+		<div class="container bdr">
+			<div class="text-center">
+				<img src="<?php echo base_url();?>images/amrapali1.png" class="img-fluid" alt="Responsive image">
+				<div class="header">
+				<h2>Amrapali Group Of Institutes</h2>
+				<h4>Shiksha Nagar,Haldwani</h4><br>
+				<h1>Student Details</h1>
+				</div>
+			</div>
+			<table class="table table-hover">
 			<?php foreach($save as $item){?>
-				<tr>
-					<td>Enrollment No:</td>
-					<td class="cl2"><b><?php echo $item->enrollment_no;?></b></td>
-				</tr>
-				<tr>
-					<td>Student's Roll_no:</td>
-					<td class="cl2"><b><?php echo $item->roll_no;?></b></td>
-				</tr>
-				<tr>
-					<td>Student Name:</td>
-					<td class="cl2"><b><?php echo $item->student_name;?></b></td>
-				</tr>
-				<tr>	
-					<td>Email:</td>
-					<td class="cl2"><b><?php echo $item->email;?></b></td>
-				</tr>
-				<tr>
-					<td>Contact:</td>
-					<td class="cl2"><b><?php echo $item->contact;?></b></td>
-				</tr>
-				<tr>
-					<td>Department:</td>
-					<td class="cl2"><b><?php echo $item->dept_name;?></b></td>
-				</tr>
-				<tr>
-					<td>Course:</td>
-					<td class="cl2"><b><?php echo $item->course_name;?></b></td>
-				</tr>
-				<tr>
-					<td>Semester:</td>	
-					<td class="cl2"><b><?php echo $item->semester_name;?></b></td>
-				</tr>
+					<tr>
+						<th scope="row">Enrollment No</th>						
+						<td><?php echo $item->enrollment_no;?></td>
+					</tr>
+					<tr>
+						<th scope="row">Student's Roll_no:</th>						
+						<td><?php echo $item->roll_no;?></td>
+					</tr>
+					<tr>
+						<th scope="row">Email</th>						
+						<td><?php echo $item->email;?></td>
+					</tr>
+					<tr>
+						<th scope="row">Contact</th>						
+						<td><?php echo $item->contact;?></td>
+					</tr>
+					<tr>
+						<th scope="row">Department</th>						
+						<td><?php echo $item->dept_name;?></td>
+					</tr>
+					<tr>
+						<th scope="row">Course</th>						
+						<td><?php echo $item->course_name;?></td>
+					</tr>
+					<tr>
+						<th scope="row">Semester</th>						
+						<td><?php echo $item->semester_name;?></td>
+					</tr>
 			<?php }?>
 			</table>
-			<?php foreach($save as $item){?>
-			<center><h2><?php echo "<a  href='view_profilestd?id=".$item->semester_id."'>Subject Details</a>";?></h2></center>
-			<?php }?>
-			<table border="1" class="tab1">
-				<tr>
-					<td class="x"> SUBJECTS</td>
-				</tr>
-				<?php foreach($a as $item){?>
-				<tr>
-					<td><?php echo $item->subject_name;?></td>
-				</tr>
-				<?php }?>
-			</table>
-			<center><a href="<?php echo site_url('web');?>"><input type="button" value="home" class="btn"></a></center>
-		</div>
+			<div class="text-center">
+			<div class="header">
+				<h1><?php echo "<a  href='view_profilestd?id=".$item->semester_id."'>Subject Details</a>";?></h1>
+				</div>
+				</div>
+				<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Subject</th>
+    </tr>
+  </thead>
+  <tbody>
+  <?php foreach($a as $item){?>
+    <tr>
+	<td ><?php echo $item->subject_name;?></td>
+	</tr>
+		<?php }?>
+	</tbody>
+	</table>
+	</div>
+	</div>
 	</body>
 </html>

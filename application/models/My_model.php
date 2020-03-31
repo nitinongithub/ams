@@ -204,6 +204,7 @@ class My_model extends CI_Model{
 	{
 		$this->db->where('feedback_id',$id);
 		$this->db->delete('feedback');	
+		return true;
 	}
 	function view_profilestd()
 	{

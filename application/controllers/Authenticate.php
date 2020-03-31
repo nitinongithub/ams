@@ -41,4 +41,12 @@ class Authenticate extends CI_Controller {
 		}
 		
 	}
+	function addstudent()
+	{
+	$r['c']= $this->mm->semester();		
+	$r['b']= $this->mm->course();
+	$r['a']= $this->mm->department();
+	$this->load->view('student',$r);
+	}
+	
 }

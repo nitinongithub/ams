@@ -1,77 +1,65 @@
 <html>
 	<head>
 		<title> parent details</title>
+		<link rel="stylesheet" href="<?php echo base_url();?>css/style7.css">
+		<script src="https://kit.fontawesome.com/ada59038f7.js" crossorigin="anonymous"></script>
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"  crossorigin="anonymous">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"  crossorigin="anonymous">
 		<style>
-			.main{
-			position:fixed;
-			width:1510px;
-			height:700px;
-			border:2px solid #063146;
-			}
-			img{
-			width:70px;
-			height:70px;
-			}
-			.c{
-				font_family:verdana;
-				color:red;
-			}
-			.c1{
-				font_family:verdana;
-				color:#063146;
-			}
-			.cl2{
-				font_family:verdana;
-				color:#042331;
-				text-align:center;
-			}
-			.tab{
-			width:90%;
-			height:100px;
-			margin-left:70px;
-			border:2px solid #063146;
-			border-collapse:collapse;
-			font-size:25px;
-			font-family:verdana;
-			}
-			.btn
-			{
-				background-color:#063146;
-				color:white;
-				margin-top:5px;
-				font-size:20px;
-				border-color:#063146;
-			}
+			.bdr{
+		height:100%;
+		background-color:white;
+		margin-top:0px;
+		}
+		.adr{
+		height:100%;
+		background-color:#FFC312;
+		}
+		.img-fluid{
+		width:10%;
+		height:10%;
+		}
+		 h2{
+		color:red;
+		}
 		</style>
 	</head>
 	<body>
-		<div class="main">
-		<center><img src="<?php echo base_url();?>images/amrapali1.png">
-		<h2 class="c"><b><i>AMRAPALI GROUP OF INSTITUTES</i></b></h2>
-		<h2 class="c1"><b> <u>Parent Details</u> </b></h2></center>
-		<table border="1" class="tab">
-		<?php foreach($save as $item){?>
-			<tr>
-				<td>Parent Name:</td>
-				<td class="cl2"><b><?php echo $item->parent_name;?></b></td>
-			</tr>
-			<tr>
-				<td>Email:</td>
-				<td class="cl2"><b><?php echo $item->email;?></b></td>
-			</tr>
-			<tr>
-				<td>Contact:</td>
-				<td class="cl2"><b><?php echo $item->contact;?></b></td>
-			</tr>
-			<tr>	
-				<td>Relation:</td>
-				<td class="cl2"><b><?php echo $item->relation;?></b></td>
-			</tr>
-		<?php }?>
-		</table>
-			<center>
-			<a href="<?php echo site_url('web');?>"><input type="button" value="home" class="btn"></a>
-			</center>
+	<div class="container-fluid adr">
+		<div class="container bdr">
+			<div class="text-center">
+				<img src="<?php echo base_url();?>images/amrapali1.png" class="img-fluid" alt="Responsive image">
+				<div class="header">
+				<h2>Amrapali Group Of Institutes</h2>
+				<h4>Shiksha Nagar,Haldwani</h4><br>
+				<h1>Parent Details</h1>
+				</div>
+			</div>
+			<table class="table table-hover">
+			<?php foreach($save as $item){?>
+					<tr>
+						<th scope="row">Parent Name</th>						
+						<td><?php echo $item->parent_name;?></td>
+					</tr>
+					<tr>
+						<th scope="row">Email</th>						
+						<td><?php echo $item->email;?></td>
+					</tr>
+					<tr>
+						<th scope="row">Contact</th>						
+						<td><?php echo $item->contact;?></td>
+					</tr>
+					<tr>
+						<th scope="row">Parent Name</th>						
+						<td><?php echo $item->parent_name;?></td>
+					</tr>
+					<tr>
+						<th scope="row">Relation:</th>						
+						<td><?php echo $item->relation;?></td>
+					</tr>
+			<?php }?>
+			</table>
 		</div>
+	</div>
 	</body>
 </html>

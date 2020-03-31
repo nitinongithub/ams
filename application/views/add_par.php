@@ -22,9 +22,12 @@
 			background-color:#FFC312;
 			}
 			.container{
-			height:65%;
-			width:500px;
-			}
+				height: 60%;
+				margin-top: 100px;
+				margin-bottom: auto;
+				width: 500px;
+				background-color: rgba(0,0,0,0.5);
+				}
 			.btn{
 		color:white;
 		}
@@ -38,32 +41,32 @@
 						<div class="input-group-prepend">
 							<span class="input-group-text " ><i class="fas fa-user"></i></span>
 						</div>
-							<input type="text" name="username" class="form-control" placeholder="username">
+							<input type="text" name="username" class="form-control" placeholder="username" required>
 					</div>
 					<div class="md-form input-group input-group-sm mb-3">
 						<div class="input-group-prepend">
 							<span class="input-group-text " ><i class="fas fa-key"></i></span>
 						</div>
-							<input type="text" name="password" class="form-control" placeholder="password">
+							<input type="text" name="password" class="form-control" placeholder="password" required>
 					</div>
 					<h4>Parent Details</h4>
 					<div class="md-form input-group input-group-sm mb-3">
 						<div class="input-group-prepend">
 							<span class="input-group-text " ><i class="fas fa-user"></i></span>
 						</div>
-							<input type="text" name="parent" class="form-control" placeholder="Father/Mother Name">
+							<input type="text" name="parent" class="form-control" placeholder="Father/Mother Name" required>
 					</div>
 					<div class="md-form input-group input-group-sm mb-3">
 					<div class="input-group-prepend">
 						<span class="input-group-text md-addon" ><i class="fas fa-at"></i></i></span>
 					</div>
-					<input type="email" name="fac_email" class="form-control" placeholder="Email">
+					<input type="email" name="fac_email" class="form-control" placeholder="Email" required>
 					</div>
 					<div class="md-form input-group input-group-sm mb-3">
 					<div class="input-group-prepend">
 						<span class="input-group-text md-addon" ><i class="fas fa-address-book"></i></span>
 					</div>
-						<input required type="number" name="contact" class="form-control"  placeholder="contact">
+						<input type="number" name="contact" class="form-control"  placeholder="contact" required>
 					</div>
 					<div class="md-form input-group input-group-sm mb-3">
 					<div class="input-group-prepend">
@@ -76,8 +79,8 @@
 						</select>
 					</div>
 					<div class="form-group">
-					<button  id="btn" type="submit" class="btn btn-primary float-right">Submit</button>
-				<button id="rst" type="reset" class="btn btn-primary float-left">Reset</button>
+					<input  id="btn" type="submit" class="btn btn-primary float-right">
+				<input id="rst" type="reset" class="btn btn-primary float-left">
 					
 				</div>
 				</form>
@@ -85,16 +88,7 @@
 		</div>
 	</body>
 	<script>
-	$(document).ready(function(){
-	$("#btn").click(function(){
-	$("#form").submit();
-	});
-	});
-	$(document).ready(function(){
-	$("#rst").click(function(){
-	$("#form").trigger('reset');
-	});
-	});
+	
 	$(document).ready(function(){
 	$("#form").hide();
 	$("#form").slideDown('slow');
