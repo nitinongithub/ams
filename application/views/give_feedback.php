@@ -31,7 +31,7 @@
 	<body>
 	<div class="container">
 	<div class="card-header" id="dot">
-		<form id="form1" method="post" action="<?php echo site_url('web/give_feedback');?>">
+		<form id="form1" method="post" name="form1" type="form">
 			<h4>Give Feedback</h4>
 				<div class="form-group">
 				<label for="parent" class="c">Parent Name</label>
@@ -39,10 +39,51 @@
 				</div>
 				<div class="form-group">
 				<label for="feedback" class="c">feedback</label>
-				<textarea class="form-control" name="feedback" rows="5" id="feedback" required></textarea>
+				<textarea class="form-control" name="feedback" rows="5" id="feed" required></textarea>
 			</div>
-			<input   id="btn" type="submit"  value="submit" class="btn btn-primary float-right">
+			<button   id="btn"  value="submit" class="btn btn-primary float-right">submit</button>
 			</div>
 		</div>
 	</body>
+	<script>
+	$(document).ready(function(){
+		$("#form1").hide();
+		$("#form1").slideDown('slow');
+	});
+	$(document).ready(function(){
+		$('#btn').on('click',function(){
+			var parent = $('#parent').val();
+			var feedback = $('#feed').val();
+			if( parent != '' && feedback != '')
+			{
+				jQuery.ajax({
+				type: "POST",
+				url: "<?php echo base_url('/index.php/web/give_feedback');?>",
+				dataType: 'html',
+				data: 
+				{parent: parent, 
+				feedback:feedback
+				},
+				success: function(res) 
+				{
+					if(res==1)
+					{
+						alert(' success');	
+					}
+			
+				},
+				error:function()
+				{
+					alert('error');	
+				}
+				});
+			}
+			else
+			{
+				alert("pls fill all fields first");
+			}
+		});
+	});
+
+	</script>
 </html>

@@ -35,31 +35,50 @@
 				<h1>Parent Details</h1>
 				</div>
 			</div>
-			<table class="table table-hover">
-			<?php foreach($save as $item){?>
-					<tr>
-						<th scope="row">Parent Name</th>						
-						<td><?php echo $item->parent_name;?></td>
-					</tr>
-					<tr>
-						<th scope="row">Email</th>						
-						<td><?php echo $item->email;?></td>
-					</tr>
-					<tr>
-						<th scope="row">Contact</th>						
-						<td><?php echo $item->contact;?></td>
-					</tr>
-					<tr>
-						<th scope="row">Parent Name</th>						
-						<td><?php echo $item->parent_name;?></td>
-					</tr>
-					<tr>
-						<th scope="row">Relation:</th>						
-						<td><?php echo $item->relation;?></td>
-					</tr>
-			<?php }?>
-			</table>
+		<table class="table table-striped table-bordered" style="margin-top:150px;">
+				<thead class="thead-dark">
+				<tr class="text-center">
+					<th scope="col">Parent Name</th>
+					<th scope="col">email</th>
+					<th scope="col">contact</th>
+					<th scope="col">relation</th>
+				</tr>
+				</thead>
+				<tbody class="c" id="show_data">
+				</tbody >
+				</table>
 		</div>
 	</div>
 	</body>
+	<script>
+	$(function(){
+		view_profilepar();
+		function view_profilepar(){
+			$.ajax({
+			type:'ajax',
+			url :"<?php echo site_url('web/view_profile');?>",
+			async :false,
+			dataType:'json',
+			success : function(data){
+			var hey= '';
+			var i;
+			for(i=0;i< data.length;i++){
+				hey += '<tr class="table-hover text-center">'+
+				'<td>'+data[i].parent_name+'</td>'+
+				'<td>'+data[i].email+'</td>'+
+				'<td>'+data[i].contact+'</td>'+
+				'<td>'+data[i].relation+'</td>'+
+				'</tr>';
+			}
+						$('#show_data').html(hey);
+			
+			},
+			error:function()
+			{
+			alert('fail');
+			}
+			});
+		}
+	});
+</script>
 </html>

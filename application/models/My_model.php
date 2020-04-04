@@ -26,11 +26,17 @@ class My_model extends CI_Model{
 	}
 	function feedback()
 	{
-		
 		$this->db->select('a.feedback_id,a.parent_name,a.feedback');
 		$this->db->from('feedback a');
 		$query = $this->db->get();
-		return $query->result();
+		if($query->num_rows()>0)
+		{
+			return $query->result();
+		}
+		else
+		{
+		return false;
+		}
 	}
 	function get_menu()
 	{
@@ -42,39 +48,51 @@ class My_model extends CI_Model{
 		$query=$this->db->get();
 	return $query->result();
 	}
-	function insert_session()
+	
+	
+	function insert_session($data)
 	{
-		$a = $this->input->post('id');
-		$b = $this->input->post('start');
-		$c = $this->input->post('end');
-		if($a && $b && $c != 'null')
+		if($this->db->insert('session',$data))
 		{
-		$data = array(
-		'sess_id'=> $a,
-		'start_date'=> $b,
-		'end_date'=> $c,
-		'session_created'=> $b
-		);
-		$this->db->insert('session', $data);
-		return true;
+		return 1;	
 		}
-		else{
-		return false;
+		else
+		{
+		return 0;	
 		}
-	}
+    }
+	
+	
+	
+	
 	function department()
 	{
 		$this->db->select('a.dept_id,a.dept_name');
 		$this->db->from('department a');
 		$query = $this->db->get();
-		return $query->result();
+		if($query->num_rows() > 0){
+			$r = $query->row();
+			$this->session->set_userdata('dept_', $r->dept_id);
+			return $query->result();
+		}
+		else{
+		return false;
+		}
 	}
 	function course()
 	{
+		$this->db->where('dept_id',$this->session->userdata('dept_'));
 		$this->db->select('a.course_id');
 		$this->db->from('course a');
 		$query = $this->db->get();
-		return $query->result();
+		if($query->num_rows() > 0){
+			$r = $query->row();
+			$this->session->set_userdata('cor_', $r->course_id);
+			return $query->result();
+		}
+		else{
+		return false;
+		}
 	}
 	function semester()
 	{
@@ -147,66 +165,63 @@ class My_model extends CI_Model{
 		$this->db->insert('student', $data2);
 		return true;
 	}
-	function add_parent()
+	
+	
+	function add_parent($u,$p,$par,$e,$c,$r)
 	{
+
 		$data3 = array(
-		'username' => $this->input->post('username'),
-		'password' => $this->input->post('password'),
+		'username' => $u,
+		'password' => $p,
 		'STID' => 2,
 		'sess_id' => 2020
 		);
+		$this->db->insert('login',$data3);
 		$data4 = array(
-		'parent_name' => $this->input->post('parent'),
-		'email' => $this->input->post('fac_email'),
-		'contact' => $this->input->post('contact'),
-		'relation' => $this->input->post('relation'),
-		'sess_id' => 2020,
-		'username' => $this->input->post('username')
+		'parent_id'=> 20,
+		'username' => $u,
+		'parent_name' => $par,
+		'email' => $e,
+		'contact' => $c,
+		'relation' => $r,
+		'sess_id' => 2020
 		);
+		$this->db->insert('parent',$data4);
+		return 1;
 		
-		$this->db->insert('login', $data3);
-		$this->db->insert('parent', $data4);
-		return true;
-		
-	}
-	function add_subject()
-	{
-	$data3 = array(
-		'subject_code' => $this->input->post('name'),
-		'subject_name' => $this->input->post('name'),
-		'semester_id' => $this->input->post('semester')
-		);		
-		$this->db->insert('subject', $data3);
-		
-		return true;
 	}
 	
-	function give_feedback()
+	
+	
+	function add_subject($data)
 	{
-		$a = $this->input->post('parent');
-		$b = $this->input->post('feedback');
-		if($a && $b != 'null')
+	
+		if($this->db->insert('subject', $data))
 		{
-			$data = array(
-		'parent_name'=> $a,
-		'feedback'=> $b,
-		'sess_id'=> 2020
-		);
-		$this->db->insert('feedback', $data);	
-		return true;
+			return 1;
 		}
 		else
 		{
-			return false;
+			return 0;
 		}
 	}
-	function deleterecord($id)
+	
+	
+	function give_feedback($data)
 	{
-		$this->db->where('feedback_id',$id);
-		$this->db->delete('feedback');	
-		return true;
+		if($this->db->insert('feedback', $data))
+		{
+			return 1;
+		}
+		else
+		{
+			return 0;
+		}
 	}
-	function view_profilestd()
+	
+	
+	
+	function view_profiles()
 	{
 		$this->db->where('username', $this->session->userdata('usr_') );
 		$this->db->select('a.enrollment_no,a.roll_no,b.course_name,d.semester_id,d.semester_name,a.student_name, a.email, a.contact,c.dept_name');
@@ -215,18 +230,26 @@ class My_model extends CI_Model{
 		$this->db->join('department c','c.dept_id = a.dept_id');
 		$this->db->join('semester d','d.semester_id = a.semester_id');
 		$query = $this->db->get();
-		return $query->result();
-		
+		if($query->num_rows()>0)
+		{
+			$r = $query->row();
+			$this->session->set_userdata('sem_', $r->semester_id);
+			return $query->result();
+		}
+		else{
+			return false;
+		}
 	}
-	function stdsubdata($id)
+	function stdsubdata()
 	{
-		$this->db->where('semester_id',$id);
+		$this->db->where('semester_id', $this->session->userdata('sem_'));
 		$this->db->select('a.subject_name');
 		$this->db->from('subject a');
 		$query = $this->db->get();
 		return $query->result();
-
 	}
+	
+	
 	function view_profilefac()
 	{
 		$this->db->where('username', $this->session->userdata('usr_'));
@@ -247,14 +270,25 @@ class My_model extends CI_Model{
 		$query = $this->db->get();
 		return $query->result();
 	}
+	
+	
 	function view_profile()
 	{
 		$this->db->where('username', $this->session->userdata('usr_') );
 		$this->db->select('a.parent_name, a.relation, a.email, a.contact');
 		$this->db->from('parent a');
 		$query = $this->db->get();
-		return $query->result();
+		if($query->num_rows()>0)
+		{
+			return $query->result();
+		}
+		else
+		{
+		return false;
+		}
 	}
+	
+	
 	function mark_attendance()
 	{
 		$this->db->where('semester_id', $this->input->post('semester'));

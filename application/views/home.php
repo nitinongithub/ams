@@ -17,6 +17,7 @@
 		color:black;
 		}
 		.bdr{
+			margin-top:10px;
 		height:50px;
 		background-color:#FFC312;
 		}
@@ -29,10 +30,10 @@
 	width:100%;
 	height:auto;
 	}
-			
-		
-	
-		</style>
+	#pages{
+	border:2px solid red;
+	}
+	</style>
 	<body>
 	<nav class="navbar navbar-inverse">
 		<div class="container-fluid bdr">
@@ -53,7 +54,7 @@
 </div>
 		
 			<div id="pages" class="container-fluid" >
-			
+			<h1><center><?php echo $this->session->userdata('sts_');?></center></h1>
 			</div>
 			
 

@@ -16,24 +16,60 @@
 	</head>
 	<body>
 		<div class="container-fluid ">
-				<table class="table table-bordered">
+				<table class="table table-striped table-bordered" >
 				<thead class="thead-dark">
-				<tr>
+				<tr class="text-center">
 					<th scope="col">Parent Name</th>
 					<th scope="col">Feedback</th>
-					<th scope="col">Feedback Delete</th>
-				</tr>
+					</tr>
 				</thead>
-				<tbody class="c">
-				<?php foreach($data as $value){?>
-				<tr class="table-primary">
-				<td ><?php echo $value->parent_name;?></td>
-				<td><?php echo $value->feedback;?></td>
-				<td><?php echo "<a href='deletedata?id=".$value->feedback_id."'>delete</a>";?></td>
-				<tr>
-				<?php }?>
-				</tbody>
+				<tbody class="c" id="show_data">
+				</tbody >
 				</table>
 		</div>
 	</body>
+	<script type="text/javascript">
+	$(function(){
+		view_feedback();
+		function view_feedback(){
+		$.ajax({
+			type:'ajax',
+			url :"<?php echo site_url('web/view_feedback');?>",
+			async :false,
+			dataType:'json',
+			success : function(data){
+				
+			var hey= '';
+			var i;
+			for(i=0;i< data.length;i++){
+				hey += '<tr class="table-primary text-center">'+
+				'<td>'+data[i].parent_name+'</td>'+
+				'<td>'+data[i].feedback+'</td>'+
+				'</td>'+
+				'</tr>';
+			}
+				$('#show_data').html(hey);
+			
+			},
+			error:function()
+			{
+			alert('fail');
+			}
+			});
+		}
+	});
+	
+	</script>
 </html>
+
+	function add_session()
+	{
+		var parameter = $("#myform").serialize();
+		$.post("<?php echo site_url('web/insert_session');?>",parameter,
+		function(res)
+		{
+			alert('session created successfully');
+		});
+	}
+		
+	

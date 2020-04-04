@@ -32,22 +32,21 @@
 	<div class="container">
 	
 		<div class="card-header">
-			<form id="for" method="post" action="<?php echo site_url('web/add_subject');?>">
-			
-				<h4>Add Subject</h4>
+			<form id="form" method="post"  name="form" role="form">
+			<h4>Add Subject</h4>
 				<div class="form-group">
 					<label  class="c">Subject Name:</label>
-					<input type="text" class="form-control" id="" name="name" required>
+					<input type="text" class="form-control" id="subject" name="name" required>
 				</div>
 				<div class="form-group">
 					<label class="c">Semester:</label>
-					<select class="form-control" id="sel1" name="semester">
+					<select class="form-control" id="semester" name="semester">
 					<?php foreach($c as $item){?>
 						<option><?php echo $item->semester_id;?></option>
 					<?php }?>
 					</select>
 				</div>
-					<input   id="btn" type="submit" class="btn btn-primary float-right">
+					<button   id="btn" type="submit" class="btn btn-primary float-right">submit</button>
 					<input id="rst" type="reset" class="btn btn-primary float-left">
 				</div>
 				</form>
@@ -55,8 +54,43 @@
 	</body>
 	<script>
 	$(document).ready(function(){
-	$("#for").hide();
-	$("#for").slideDown('slow');
+	$("#form").hide();
+	$("#form").slideDown('slow');
 	});
+	$(document).ready(function(){
+		$('#btn').on('click',function(){
+			var subject = $('#subject').val();
+			var semester = $('#semester').val();
+			if(subject != '' && semester != '')
+			{
+				jQuery.ajax({
+				type: "POST",
+				url: "<?php echo base_url('/index.php/web/add_subject'); ?>",
+				dataType: 'html',
+				data: 
+				{subject: subject, 
+				semester: semester
+				},
+				success: function(res) 
+				{
+					if(res==1)
+					{
+						alert('subject added successfully');	
+					}
+			
+				},
+				error:function()
+				{
+					alert('oops something went wrong');	
+				}
+				});
+			}
+			else
+			{
+				alert("pls fill all fields first");
+			}
+		});
+	});
+
 	</script>
 </html>

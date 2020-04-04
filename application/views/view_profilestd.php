@@ -30,63 +30,107 @@
 			<div class="text-center">
 				<img src="<?php echo base_url();?>images/amrapali1.png" class="img-fluid" alt="Responsive image">
 				<div class="header">
-				<h2>Amrapali Group Of Institutes</h2>
-				<h4>Shiksha Nagar,Haldwani</h4><br>
-				<h1>Student Details</h1>
+					<h2>Amrapali Group Of Institutes</h2>
+					<h4>Shiksha Nagar,Haldwani</h4><br>
+					<h1>Student Details</h1>
 				</div>
 			</div>
-			<table class="table table-hover">
-			<?php foreach($save as $item){?>
-					<tr>
-						<th scope="row">Enrollment No</th>						
-						<td><?php echo $item->enrollment_no;?></td>
-					</tr>
-					<tr>
-						<th scope="row">Student's Roll_no:</th>						
-						<td><?php echo $item->roll_no;?></td>
-					</tr>
-					<tr>
-						<th scope="row">Email</th>						
-						<td><?php echo $item->email;?></td>
-					</tr>
-					<tr>
-						<th scope="row">Contact</th>						
-						<td><?php echo $item->contact;?></td>
-					</tr>
-					<tr>
-						<th scope="row">Department</th>						
-						<td><?php echo $item->dept_name;?></td>
-					</tr>
-					<tr>
-						<th scope="row">Course</th>						
-						<td><?php echo $item->course_name;?></td>
-					</tr>
-					<tr>
-						<th scope="row">Semester</th>						
-						<td><?php echo $item->semester_name;?></td>
-					</tr>
-			<?php }?>
+			<table class="table table-hover" >
+				<thead class="thead-dark">
+					<tr class="text-center">
+						<th scope="col">Enrollment No</th>
+						<th scope="col">Roll No</th>
+						<th scope="col">Student Name</th>
+						<th scope="col">E-mail</th>
+						<th scope="col">contact Name</th>
+						<th scope="col">Department Name</th>
+						<th scope="col">Course Name</th>
+						<th scope="col">Semester Name</th>
+					</tr>	
+				</thead>
+				<tbody class="c" id="show_data">
+				</tbody >
 			</table>
 			<div class="text-center">
-			<div class="header">
-				<h1><?php echo "<a  href='view_profilestd?id=".$item->semester_id."'>Subject Details</a>";?></h1>
+				<div class="header">
+					<h1>subject Details</h1>
 				</div>
-				</div>
-				<table class="table">
-  <thead class="thead-dark">
-    <tr>
-      <th scope="col">Subject</th>
-    </tr>
-  </thead>
-  <tbody>
-  <?php foreach($a as $item){?>
-    <tr>
-	<td ><?php echo $item->subject_name;?></td>
-	</tr>
-		<?php }?>
-	</tbody>
-	</table>
+			</div>
+			<table class="table table-hover " >
+				<thead class="thead-dark">
+					<tr class="text-center">
+						<th scope="col">Subject</th>
+					</tr>
+					</thead>
+					<tbody class="c" id="showdata">				
+					</tbody >
+			</table>
+		</div>
 	</div>
-	</div>
-	</body>
+		
+	<script>
+	$(function(){
+		view_profilestd();
+		function view_profilestd(){
+		$.ajax({
+			type:'ajax',
+			url :"<?php echo site_url('web/view_profiles');?>",
+			async :false,
+			dataType:'json',
+			success : function(data){
+				
+			var hey= '';
+			var i;
+			for(i=0;i< data.length;i++){
+				hey += '<tr class="table-primary text-center">'+
+				'<td>'+data[i].enrollment_no+'</td>'+
+				'<td>'+data[i].roll_no+'</td>'+
+				'<td>'+data[i].student_name+'</td>'+
+				'<td>'+data[i].email+'</td>'+
+				'<td>'+data[i].contact+'</td>'+
+				'<td>'+data[i].dept_name+'</td>'+
+				'<td>'+data[i].course_name+'</td>'+
+				'<td>'+data[i].semester_name+'</td>'+
+				'</td>'+
+				'</tr>';
+			}
+							$('#show_data').html(hey);
+			
+			},
+			error:function()
+			{
+			alert('fail');
+			}
+			});
+		}
+	});
+	$(function(){
+		view_profilestdsub();
+		function view_profilestdsub(){
+		$.ajax({
+			type:'ajax',
+			url :"<?php echo site_url('web/view_stdsubdata');?>",
+			async :false,
+			dataType:'json',
+			success : function(data){
+				
+			var hey= '';
+			var i;
+			for(i=0;i< data.length;i++){
+				hey += '<tr  class="text-center">'+
+				'<td>'+data[i].subject_name+'</td>'+
+				'</td>'+
+				'</tr>';
+			}
+							$('#showdata').html(hey);
+			
+			},
+			error:function()
+			{
+			alert('fail');
+			}
+			});
+		}
+	});
+	</script>
 </html>

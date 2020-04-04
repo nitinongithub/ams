@@ -3,8 +3,8 @@
 		<title> manage session </title>
 		<link rel="stylesheet" href="<?php echo base_url();?>css/style7.css">
 		<script src="https://kit.fontawesome.com/ada59038f7.js" crossorigin="anonymous"></script>
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"  crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"  crossorigin="anonymous">
 	</head>
 		<style>
 			body{
@@ -41,24 +41,24 @@
 			
 		</style>
 	<body>
-	<form id="form" method="post" action="<?php echo site_url('web/insert_session');?>">
+	<form id="myform" method="post" name="myform" role="form">
 	<div class="container" >
 				<div class="d-flex justify-content-center social_icon">
-					<span><a  href="<?php echo site_url('authenticate/login');?>"><i class="fas fa-user-plus"></i></a></span>
+					<span><i class="fas fa-user-plus" style="color:white;"></i></span>
 			</div>
   <div class="form-group">
     <label for="session_id" class="c">Session Id:</label>
-    <input type="text" class="form-control" id="sess_id" name="id" required>
+    <input type="text" class="form-control" id="sess_id" name="id" >
   </div>
   <div class="form-group">
     <label for="start" class="c">Start Date:</label>
-    <input type="date" class="form-control" id="start" name="start" required>
+    <input type="date" class="form-control" id="start" name="start" >
   </div>
   <div class="form-group">
     <label for="end" class="c"> End Date</label>
-	<input type="date" class="form-control" id="end" name="end" required>
+	<input type="date" class="form-control" id="end" name="end">
   </div>
-  <input  id="btn" type="submit" class="btn btn-primary float-right">
+  <button  id="btn"  class="btn btn-primary float-right">submit</button>
   <input id="rst" type="reset" class="btn btn-primary float-left">
 </form>
 </div>
@@ -66,9 +66,41 @@
 <script>
 
 	$(document).ready(function(){
-	$("#form").hide();
-	$("#form").slideDown('slow');
-
+		$("#myform").hide();
+		$("#myform").slideDown('slow');
 	});
+	$(document).ready(function(){
+		$('#btn').on('click',function(){
+			var sess_id = $('#sess_id').val();
+			var start = $('#start').val();
+			var end = $('#end').val();
+			if(sess_id != '' && start != '' && end != '')
+			{
+				jQuery.ajax({
+				type: "POST",
+				url: "<?php echo base_url('/index.php/web/insert_session'); ?>",
+				dataType: 'html',
+				data: {sess_id: sess_id, start:start,end:end},
+				success: function(res) 
+				{
+					if(res==1)
+					{
+						alert('session created');	
+					}
+			
+				},
+				error:function()
+				{
+					alert('error');	
+				}
+				});
+			}
+			else
+			{
+				alert("pls fill all fields first");
+			}
+		});
+	});
+
 </script>
 </html>

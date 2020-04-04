@@ -35,53 +35,100 @@
 				<h1>Faculty Details</h1>
 				</div>
 			</div>
-			<table class="table table-hover">
-			<tbody>
-			<?php foreach($x as $item){?>
-					<tr>
-						<th scope="row">Faculty Name:</th>						
-						<td><?php echo $item->faculty_name;?></td>
-					</tr>
-					<tr>
-						<th scope="row">Contact:</th>						
-						<td><?php echo $item->contact;?></td>
-					</tr>
-					<tr>
-						<th scope="row">Email</th>						
-						<td><?php echo $item->email;?></td>
-					</tr>
-					<tr>
-						<th scope="row">Department</th>						
-						<td><?php echo $item->dept_name;?></td>
-					</tr>
-					
-			<?php }?>
-			</tbody>
+			<table class="table table-hover" >
+				<thead class="thead-dark">
+					<tr class="text-center">
+						<th scope="col">Faculty Name</th>
+						<th scope="col">contact </th>
+						<th scope="col"> Email</th>
+						<th scope="col">Department Name</th>
+					</tr>	
+				</thead>
+				<tbody class="c" id="show_fac">
+				</tbody >
 			</table>
 			<div class="text-center">
 			<div class="header">
-				<h1>Academic Teaching Details</h1>
+				<h3 style="margin-top:100px;">Academic Teaching Details</h3>
 				</div>
 				</div>
-				<table class="table">
-  <thead class="thead-dark">
-    <tr>
-      <th scope="col">Subject</th>
-      <th scope="col">Course</th>
-      <th scope="col">Class</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-	<?php foreach($y as $item){?>
-      <td ><?php echo $item->subject_name;?></td>
-      <td><?php echo $item->course_name;?></td>
-      <td><?php echo $item->class;?></td>
-	<?php }?>
-    </tr>
-	</tbody>
-	</table>
+				<table class="table table-hover" >
+				<thead class="thead-dark">
+					<tr class="text-center">
+						<th scope="col">Subject Name</th>
+						<th scope="col">Course</th>
+						<th scope="col"> class</th>
+					</tr>	
+				</thead>
+				<tbody class="c" id="show_fac1">
+				</tbody >
+			</table>
+				
 		</div>
 	</div>
 	</body>
+	<script>
+	$(function(){
+		view_profilefac();
+		function view_profilefac(){
+		$.ajax({
+			type:'ajax',
+			url :"<?php echo site_url('web/view_profilefac');?>",
+			async :false,
+			dataType:'json',
+			success : function(data){
+				
+			var hey= '';
+			var i;
+			for(i=0;i< data.length;i++){
+				hey += '<tr class="table-primary text-center">'+
+				'<td>'+data[i].faculty_name+'</td>'+
+				'<td>'+data[i].email+'</td>'+
+				'<td>'+data[i].contact+'</td>'+
+				'<td>'+data[i].dept_name+'</td>'+
+				'</td>'+
+				'</tr>';
+			}
+						$('#show_fac').html(hey);
+			
+			},
+			error:function()
+			{
+			alert('fail');
+			}
+			});
+		}
+	});
+	$(function(){
+		view_profilefac1();
+		function view_profilefac1(){
+		$.ajax({
+			type:'ajax',
+			url :"<?php echo site_url('web/view_profilefac1');?>",
+			async :false,
+			dataType:'json',
+			success : function(data){
+				
+			var hey= '';
+			var i;
+			for(i=0;i< data.length;i++){
+				hey += '<tr class="table-primary text-center">'+
+				'<td>'+data[i].subject_name+'</td>'+
+				'<td>'+data[i].course_name+'</td>'+
+				'<td>'+data[i].class+'</td>'+
+				'</td>'+
+				'</tr>';
+			}
+				$('#show_fac1').html(hey);
+			
+			},
+			error:function()
+			{
+			alert('fail');
+			}
+			});
+		}
+	});
+	
+	</script>
 </html>
