@@ -1,59 +1,75 @@
-<html>
-	<head>
-		<title> feedback </title>
-		
-	</head>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"  crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"  crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"  crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"  crossorigin="anonymous"></script>
+    <title>view feedback</title>
 	<style>
-	body{
-	background-image:url(<?php echo base_url('images/'.$this->session->userdata('pic_'));?>);
-	background-size:cover;
-	background-repeat:no-repeat;
-		}
-	.tab{
-		border-collapse:collapse;
-
-
-	
-
+	.table{
+	margin-top:50px;
 	}
-	h1{
-	color:white;
-	top:0px;
-	}
-	.c{
-		text-align:center;
-		color:white;
-		border: 3px solid black;
-	 font-size:20px;
-	 font-family:verdana;
-	background-color:#042331;	
-	}
-	.btn
-{
-margin-top:15px;
-border:black;
-color:white;
-background-color:black;
-font-size:25px;
-}
+		
 	</style>
+	</head>
 	<body>
-	
-	<table width="100%" align="center" border="1" class="tab">
-	<tr>
-		<td class="c"><b>parent name</b></td>
-		<td class="c"><b>Feedback</b></td>
-		<td class="c"><b>Feedback Delete</b></td>
-	</tr>
-	<?php foreach($data as $value){?>
-	<tr>
-		<td class="c1"><center><?php echo $value->parent_name;?></center> </td>
-		<td class="c2"><center><?php echo $value->feedback;?></center></td>
-		<td><center> <?php echo "<a href='deletedata?id=".$value->feedback_id."'>delete</a>";?></center></td>
-	</tr>
-	<?php }?>
-	
-	</table>
-	<a href="<?php echo site_url('web');?>"><center><input type="button" class="btn" value="home"></center></a>
+		<div class="container-fluid ">
+				<table class="table table-striped table-bordered" >
+				<thead class="thead-dark">
+				<tr class="text-center">
+					<th scope="col">Parent Name</th>
+					<th scope="col">Feedback</th>
+					</tr>
+				</thead>
+				<tbody class="c" id="show_data">
+				</tbody >
+				</table>
+		</div>
 	</body>
+	<script type="text/javascript">
+	$(function(){
+		view_feedback();
+		function view_feedback(){
+		$.ajax({
+			type:'ajax',
+			url :"<?php echo site_url('web/view_feedback');?>",
+			async :false,
+			dataType:'json',
+			success : function(data){
+				
+			var hey= '';
+			var i;
+			for(i=0;i< data.length;i++){
+				hey += '<tr class="table-primary text-center">'+
+				'<td>'+data[i].parent_name+'</td>'+
+				'<td>'+data[i].feedback+'</td>'+
+				'</td>'+
+				'</tr>';
+			}
+				$('#show_data').html(hey);
+			
+			},
+			error:function()
+			{
+			alert('fail');
+			}
+			});
+		}
+	});
+	
+	</script>
 </html>
+
+	function add_session()
+	{
+		var parameter = $("#myform").serialize();
+		$.post("<?php echo site_url('web/insert_session');?>",parameter,
+		function(res)
+		{
+			alert('session created successfully');
+		});
+	}
+		
+	

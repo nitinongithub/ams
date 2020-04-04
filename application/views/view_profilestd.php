@@ -1,133 +1,136 @@
 <html>
-<head>
-<title> student details</title>
-<style>
-.main{
-position:fixed;
-width:1510px;
-height:740px;
-border:2px solid #063146;
-}
-img{
-width:60px;
-height:60px;
-}
-.c{
-	font_family:verdana;
-	color:red;
-}
-.c1{
-	font_family:verdana;
-	color:#063146;
-}
-.cl2{
-	font_family:verdana;
-	color:#042331;
-	text-align:center;
-}
-.tab{
-width:90%;
-height:100px;
-margin-left:70px;
-border:2px solid #063146;
-border-collapse:collapse;
-font-size:25px;
-font-family:verdana;
-}
-.tab1{
-width:90%;
-height:50px;
-
-margin-left:70px;
-border:2px solid #063146;
-border-collapse:collapse;
-font-size:25px;
-font-family:verdana;
-
-}
-.x{
-	text-align:center;
-	color:white;
-	background-color:#063146;
-}
-.btn
-{
-	background-color:#063146;
-	color:white;
-	margin-top:5px;
-	font-size:20px;
-	border-color:#063146;
-}
-.std{
-text-color:black;
-}
-a{
-text-decoration:none;
-color:black;
-}
-.sub{
-background-color:#063146;
-color:white;
-}
-</style>
-</head>
-<body>
-<div class="main">
-<center><img src="<?php echo base_url();?>images/amrapali1.png">
-<h2 class="c"><b><i>AMRAPALI GROUP OF INSTITUTES</i></b></h2>
-<h2 class="c1"><b> Student Details </b></h2></center>
-<table border="1" class="tab">
-<?php foreach($save as $item){?>
-<tr>
-	<td>Enrollment No:</td>
-	<td class="cl2"><b><?php echo $item->enrollment_no;?></b></td>
-</tr>
-<tr>
-	<td>Student's Roll_no:</td>
-	<td class="cl2"><b><?php echo $item->roll_no;?></b></td>
-</tr>
-<tr>
-	<td>Student Name:</td>
-	<td class="cl2"><b><?php echo $item->student_name;?></b></td>
-</tr>
-<tr>	
-	<td>Email:</td>
-	<td class="cl2"><b><?php echo $item->email;?></b></td>
-</tr>
-<tr>
-	<td>Contact:</td>
-	<td class="cl2"><b><?php echo $item->contact;?></b></td>
-</tr>
-<tr>
-	<td>Department:</td>
-	<td class="cl2"><b><?php echo $item->dept_name;?></b></td>
-</tr>
-<tr>
-	<td>Course:</td>
-	<td class="cl2"><b><?php echo $item->course_name;?></b></td>
-</tr>
-<tr>
-	<td>Semester:</td>
-	<td class="cl2"><b><?php echo $item->semester_name;?></b></td>
-</tr>
-<?php }?>
-</table>
-<?php foreach($save as $item){?>
-<center><h2><?php echo "<a  href='view_profilestd?id=".$item->semester_id."'>Subject Details</a>";?></h2></center>
-<?php }?>
-<table border="1" class="tab1">
-<tr>
-<td class="x"> SUBJECTS</td>
-</tr>
-
-<?php foreach($a as $item){?>
-
-<td><?php echo $item->subject_name;?></td>
-</tr>
-<?php }?>
-</table>
-
-<center><a href="<?php echo site_url('web');?>"><input type="button" value="home" class="btn"></a></center>
-</div>
-</body>
+	<head>
+		<title> Student details</title>
+		<link rel="stylesheet" href="<?php echo base_url();?>css/style7.css">
+		<script src="https://kit.fontawesome.com/ada59038f7.js" crossorigin="anonymous"></script>
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"  crossorigin="anonymous">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"  crossorigin="anonymous">
+		<style>
+			.bdr{
+		height:100%;
+		background-color:white;
+		margin-top:0px;
+		}
+		.adr{
+		height:100%;
+		background-color:#FFC312;
+		}
+		.img-fluid{
+		width:10%;
+		height:10%;
+		}
+		 h2{
+		color:red;
+		}
+		</style>
+	</head>
+	<body>
+	<div class="container-fluid adr">
+		<div class="container bdr">
+			<div class="text-center">
+				<img src="<?php echo base_url();?>images/amrapali1.png" class="img-fluid" alt="Responsive image">
+				<div class="header">
+					<h2>Amrapali Group Of Institutes</h2>
+					<h4>Shiksha Nagar,Haldwani</h4><br>
+					<h1>Student Details</h1>
+				</div>
+			</div>
+			<table class="table table-hover" >
+				<thead class="thead-dark">
+					<tr class="text-center">
+						<th scope="col">Enrollment No</th>
+						<th scope="col">Roll No</th>
+						<th scope="col">Student Name</th>
+						<th scope="col">E-mail</th>
+						<th scope="col">contact Name</th>
+						<th scope="col">Department Name</th>
+						<th scope="col">Course Name</th>
+						<th scope="col">Semester Name</th>
+					</tr>	
+				</thead>
+				<tbody class="c" id="show_data">
+				</tbody >
+			</table>
+			<div class="text-center">
+				<div class="header">
+					<h1>subject Details</h1>
+				</div>
+			</div>
+			<table class="table table-hover " >
+				<thead class="thead-dark">
+					<tr class="text-center">
+						<th scope="col">Subject</th>
+					</tr>
+					</thead>
+					<tbody class="c" id="showdata">				
+					</tbody >
+			</table>
+		</div>
+	</div>
+		
+	<script>
+	$(function(){
+		view_profilestd();
+		function view_profilestd(){
+		$.ajax({
+			type:'ajax',
+			url :"<?php echo site_url('web/view_profiles');?>",
+			async :false,
+			dataType:'json',
+			success : function(data){
+				
+			var hey= '';
+			var i;
+			for(i=0;i< data.length;i++){
+				hey += '<tr class="table-primary text-center">'+
+				'<td>'+data[i].enrollment_no+'</td>'+
+				'<td>'+data[i].roll_no+'</td>'+
+				'<td>'+data[i].student_name+'</td>'+
+				'<td>'+data[i].email+'</td>'+
+				'<td>'+data[i].contact+'</td>'+
+				'<td>'+data[i].dept_name+'</td>'+
+				'<td>'+data[i].course_name+'</td>'+
+				'<td>'+data[i].semester_name+'</td>'+
+				'</td>'+
+				'</tr>';
+			}
+							$('#show_data').html(hey);
+			
+			},
+			error:function()
+			{
+			alert('fail');
+			}
+			});
+		}
+	});
+	$(function(){
+		view_profilestdsub();
+		function view_profilestdsub(){
+		$.ajax({
+			type:'ajax',
+			url :"<?php echo site_url('web/view_stdsubdata');?>",
+			async :false,
+			dataType:'json',
+			success : function(data){
+				
+			var hey= '';
+			var i;
+			for(i=0;i< data.length;i++){
+				hey += '<tr  class="text-center">'+
+				'<td>'+data[i].subject_name+'</td>'+
+				'</td>'+
+				'</tr>';
+			}
+							$('#showdata').html(hey);
+			
+			},
+			error:function()
+			{
+			alert('fail');
+			}
+			});
+		}
+	});
+	</script>
 </html>

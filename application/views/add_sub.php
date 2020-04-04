@@ -1,56 +1,96 @@
 <html>
-<head>
-<title> add subject </title>
+	<head>
+		<title> add subject </title>
+		<link rel="stylesheet" href="<?php echo base_url();?>css/style7.css">
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"  crossorigin="anonymous">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"  crossorigin="anonymous">
+	</head>
+	<style>
+	body{
+		background-image:url(<?php echo base_url('images/'.$this->session->userdata('pic_'));?>);
+		background-size:cover;
+		background-repeat:no-repeat;
+		}
+		.container{
+				height: 50%;
+				margin-top: 100px;
+				width: 500px;
+				background-color: rgba(0,0,0,0.5);
+				}
+			.btn{
+		color:white;
+		}
+		.card-header{
+			color:white;
+		}
+		.c{
+			color:#FFC312;
+		}
+	</style>
+	<body>
+	<div class="container">
+	
+		<div class="card-header">
+			<form id="form" method="post"  name="form" role="form">
+			<h4>Add Subject</h4>
+				<div class="form-group">
+					<label  class="c">Subject Name:</label>
+					<input type="text" class="form-control" id="subject" name="name" required>
+				</div>
+				<div class="form-group">
+					<label class="c">Semester:</label>
+					<select class="form-control" id="semester" name="semester">
+					<?php foreach($c as $item){?>
+						<option><?php echo $item->semester_id;?></option>
+					<?php }?>
+					</select>
+				</div>
+					<button   id="btn" type="submit" class="btn btn-primary float-right">submit</button>
+					<input id="rst" type="reset" class="btn btn-primary float-left">
+				</div>
+				</form>
+		</div>
+	</body>
+	<script>
+	$(document).ready(function(){
+	$("#form").hide();
+	$("#form").slideDown('slow');
+	});
+	$(document).ready(function(){
+		$('#btn').on('click',function(){
+			var subject = $('#subject').val();
+			var semester = $('#semester').val();
+			if(subject != '' && semester != '')
+			{
+				jQuery.ajax({
+				type: "POST",
+				url: "<?php echo base_url('/index.php/web/add_subject'); ?>",
+				dataType: 'html',
+				data: 
+				{subject: subject, 
+				semester: semester
+				},
+				success: function(res) 
+				{
+					if(res==1)
+					{
+						alert('subject added successfully');	
+					}
+			
+				},
+				error:function()
+				{
+					alert('oops something went wrong');	
+				}
+				});
+			}
+			else
+			{
+				alert("pls fill all fields first");
+			}
+		});
+	});
 
-<link rel="stylesheet" href="<?php echo base_url();?>css/style7.css">
-<script src="https://kit.fontawesome.com/ada59038f7.js" crossorigin="anonymous"></script>
-</head>
-<style>
-body{
-	background-image:url(<?php echo base_url('images/'.$this->session->userdata('pic_'));?>);
-	background-size:cover;
-	background-repeat:no-repeat;
-}
-.add_fa
-{
-	position:fixed;
-border:2px solid #042331;
-width:400px;
-height:400px;
-left:550px;
-background-color:#042331;
-color:white;
-margin-top:100px;
-opacity:0.8;
-}
-
-.bt
-{
-margin-top:55px;
-border:black;
-color:white;
-background-color:black;
-font-size:20px;
-}
-
-</style>
-<body>
-<div class="add_fa" align="center">
-<a href="<?php echo site_url('web');?>"><input type="button" value="home" class="bt"></a>
-<header><h1><i class="fas fa-user-plus"></i>Add Subject</h1></header>
-<form class="form" method="post" action="<?php echo site_url('web/add_subject');?>">
-<label>Subject Code :</label><input type="text"  name="c1"/></br></br>
-<label>Subject :</label><input type="text"  name="sub1"/></br></br>
-<label>Semester :</label>
-<select name="semester" class="cl">
-<?php foreach($c as $item){?>
-	<option><?php echo $item->semester_id;?> </option>
-<?php }?>
-</select></br></br>
-<input type="submit" value="add" class="bt">
-<input type="reset" value="reset" class="bt"></br></br>
-
-</form>
-</div>
-</body>
+	</script>
 </html>

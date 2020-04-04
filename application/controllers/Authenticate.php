@@ -31,12 +31,22 @@ class Authenticate extends CI_Controller {
 		$r = $this->mm->checklogin();
 		if($r == true)
 		{
+			echo "<script>alert('login Successfully....!!!! ');</script>";
 		redirect('web');
 		} 
 		else 
 		{
+			echo "<script>alert('error');</script>";
 			redirect('authenticate/login');
 		}
 		
 	}
+	function addstudent()
+	{
+	$r['c']= $this->mm->semester();		
+	$r['b']= $this->mm->course();
+	$r['a']= $this->mm->department();
+	$this->load->view('student',$r);
+	}
+	
 }
