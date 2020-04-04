@@ -21,7 +21,7 @@
 				<tr class="text-center">
 					<th scope="col">Parent Name</th>
 					<th scope="col">Feedback</th>
-					</tr>
+				</tr>
 				</thead>
 				<tbody class="c" id="show_data">
 				</tbody >
@@ -45,7 +45,6 @@
 				hey += '<tr class="table-primary text-center">'+
 				'<td>'+data[i].parent_name+'</td>'+
 				'<td>'+data[i].feedback+'</td>'+
-				'</td>'+
 				'</tr>';
 			}
 				$('#show_data').html(hey);
@@ -58,6 +57,7 @@
 			});
 		}
 	});
+
 	
 	</script>
 </html>
