@@ -84,8 +84,8 @@
 					<label><?php echo "<a href='mark_attendance?id=".$i->course_id."'>Semester:</a>";?></label>
 					<?php }?>
 					<select name="semester" class="select">
-					<?php foreach($c as $i){?>
-						<option><?php echo $i->semester_id;?></option>
+						<?php foreach($c as $i){?>
+						<option value="<?php echo $i->semester_id;?>"><?php echo $i->semester_id;?></option>
 					<?php }?>
 					</select>
 				<input type="submit" value="select student" name="submit" class="btn">
@@ -99,21 +99,21 @@
 							Date:<input type="date" name="date">
 						</label>
 						<?php foreach($b as $i){?>
-						<label >Faculty Id:</label>
-							<select name="id">
-								<option><?php echo $i->faculty_id?></option>
+						<label>Faculty Id:</label>
+						<select name="id">
+							<option value="<?php echo $i->faculty_id?>"><?php echo $i->faculty_id?></option>
 							</select>
 						<?php }?>
 						<label>course:</label>
 							<select name="course" class="select">
 							<?php foreach($g as $i){?>
-								<option><?php echo $i->course_id;?></option>
+								<option value="<?php echo $i->course_id;?>"><?php echo $i->course_id;?></option>
 							<?php }?>
 							</select>		
 						<label >Subject:</label>
 							<select name="subject" class="select">
 							<?php foreach($e as $i){?>
-								<option><?php echo $i->subject_name;?></option>
+								<option value="<?php echo $i->subject_name;?>"><?php echo $i->subject_name;?></option>
 							<?php }?>
 						</select>
 					</center>
