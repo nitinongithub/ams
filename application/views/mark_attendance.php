@@ -63,7 +63,7 @@
 					<label>Semester:</label>
 					<select name="semester" class="select">
 						<?php foreach($c as $i){?>
-						<option><?php echo $i->semester_id;?></option>
+						<option value="<?php echo $i->semester_id;?>"><?php echo $i->semester_id;?></option>
 					<?php }?>
 					</select>
 				<input type="submit" value="select student" name="submit" class="btn">
@@ -79,7 +79,7 @@
 					<?php foreach($b as $i){?>
 						<label >Faculty Id:</label>
 						<select name="id">
-							<option><?php echo $i->faculty_id?></option>
+							<option value="<?php echo $i->faculty_id?>"><?php echo $i->faculty_id?></option>
 						</select>
 					<?php }?>
 
