@@ -43,7 +43,7 @@
 			
 			<ul class="nav navbar-nav">
 			<li class="active"><?php foreach($menu as $item){?>
-			<button  class=" btn btn-link" id="<?php echo $item->item;?>"><?php echo $item->item;?></button>
+			<button  class="btn btn-link" id="<?php echo $item->item;?>"><?php echo $item->item;?></button>
 			<?php } ?>
 			<a class="btn" href="<?php echo site_url('authenticate/logout');?>" >logout</a>
 			</li>
@@ -66,7 +66,7 @@
 	<?php foreach($menu as $item){?>
 	$(document).ready(function(){
 	$("#<?php echo $item->item;?>").click(function(){
-	$("#pages").load('<?php echo $item->path;?>');
+	$("#pages").load('<?php echo site_url($item->path);?>');
 	});
 	});
 	<?php }?>
