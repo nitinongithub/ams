@@ -66,9 +66,14 @@
 	
 	<script type="text/javascript">
 <<<<<<< HEAD
+<<<<<<< HEAD
 	$(document).ready(function(){
 	<?php foreach($menu as $item){?>
 	
+=======
+		$(document).ready(function(){
+	<?php foreach($menu as $item){?>
+>>>>>>> 26eadeae85738b067dee1b3ae832e87b4e571e65
 =======
 		$(document).ready(function(){
 	<?php foreach($menu as $item){?>
@@ -79,8 +84,11 @@
 	<?php }?>
 	});
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
 	
+=======
+>>>>>>> 26eadeae85738b067dee1b3ae832e87b4e571e65
 =======
 >>>>>>> 26eadeae85738b067dee1b3ae832e87b4e571e65
 	</script>
