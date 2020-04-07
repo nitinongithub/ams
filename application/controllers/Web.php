@@ -34,7 +34,7 @@ class Web extends CI_Controller {
 	'start_date'=>$this->input->post('start'),
 	'end_date'=>$this->input->post('end'),
 	'session_created'=>$this->input->post('start')
-		);
+	);
 		
 		$result=$this->mm->insert_session($data);
 		if($result)
@@ -57,17 +57,46 @@ function index()
 	}
 	
 	
+	function add_fac()
+	{
+		$r['d']= $this->mm->subjectadd();
+		$r['b']= $this->mm->course();
+		$r['a']= $this->mm->department();
+		$this->load->view('add_fac',$r);
+	}
 	function add_faculty()
 	{
-		$a = $this->mm->add_faculty();
-		if($a == true)
+		$u = $this->input->post('uername');
+		$p = $this->input->post('password');
+		$id = $this->input->post('fac_id');
+		$e = $this->input->post('email');
+		$n = $this->input->post('name');
+		$co = $this->input->post('contact');
+		$de = $this->input->post('dept');
+		$result=$this->mm->add_faculty($u,$p,$id,$e,$n,$co,$de);
+		if($result)
 		{
-		
-			redirect('web/add_fac');
+		echo  1;	
 		}
 		else
 		{
-		 redirect('web/add_fac');
+		echo  0;	
+		}
+	}
+	function add_subfaculty()
+	{
+		$i = $this->input->post('id');
+		$co = $this->input->post('course');
+		$s = $this->input->post('subject');
+		$c = $this->input->post('cls');
+		$result=$this->mm->add_subfaculty($i,$co,$s,$c);
+		if($result)
+		{
+		echo  1;	
+		}
+		else
+		{
+		echo  0;	
 		}
 	}
 
@@ -92,48 +121,29 @@ function index()
 		{
 		echo  0;	
 		}
-
 	}
 	
 	
-	function add_subfaculty()
+	function addstudent()
 	{
-		$a = $this->mm->add_subfaculty();
-		if($a == true)
-		{
-		
-			redirect('web/add_fac');   
-		}
-
+	$r['b']= $this->mm->course();
+	$r['c']= $this->mm->semester();		
+	$r['a']= $this->mm->department();
+	$this->load->view('student',$r);
 	}
-	
 	function add_student()
 	{
-		$a = $this->mm->add_student();
-		if($a == true)
-		{
-		redirect('web');
-		}
-		else
-		{
-		redirect('web/add_std');
-		}
-		
-	}
-	
-	function add_par()
-	{
-		$this->load->view('add_par');
-	}
-	function add_parent()
-	{
-		$u = $this->input->post('username');
+		$us = $this->input->post('usrname');
 		$p = $this->input->post('password');
-		$par = $this->input->post('parent');
-		$e = $this->input->post('fac_email');
+		$std = $this->input->post('name');
+		$en = $this->input->post('enroll');
+		$r = $this->input->post('rollno');
 		$c = $this->input->post('contact');
-		$r = $this->input->post('relation');
-		$result=$this->mm->add_parent($u,$p,$par,$e,$c,$r);
+		$em = $this->input->post('email');
+		$de = $this->input->post('department');
+		$co = $this->input->post('course');
+		$sem = $this->input->post('semester');
+		$result = $this->mm->add_student($us,$p,$std,$en,$r,$c,$em,$de,$co,$sem);
 		if($result)
 		{
 		echo  1;	
@@ -144,6 +154,32 @@ function index()
 		}
 	}
 	
+	function add_par()
+	{
+		$r['a'] = $this->mm->checkusr();
+		$this->load->view('add_par',$r);
+	}
+	function add_parent()
+	{
+		
+		$up = $this->input->post('username');
+		$p = $this->input->post('password');
+		$par = $this->input->post('parent');
+		$e = $this->input->post('fac_email');
+		$c = $this->input->post('contact');
+		$r = $this->input->post('relation');
+		$result=$this->mm->add_parent($up,$p,$par,$e,$c,$r);
+		if($result)
+		{
+		echo  1;	
+		}
+		else
+		{
+		echo  0;	
+		}
+		
+	}
+	
 	
 	
 	function contact(){
@@ -151,37 +187,16 @@ function index()
 	}
 	
 
-	function add_fac()
-	{
-	$r['d']= $this->mm->subjectadd();
-	$r['b']= $this->mm->course();
-	$r['a']= $this->mm->department();
-	$this->load->view('add_fac',$r);
-	}
-	
-	function mark_attendance()
-	{
-		$id2 = $this->input->get('id');
-		$id = $this->input->get('id');
-		$r['f'] = $this->mm->departmentdata($id);
-		$r['d'] = $this->mm->mark_attendance();
-		$id1 = $this->input->get('id');
-		$r['a'] = $this->mm->coursedata($id1);
-		$r['g'] = $this->mm->coursemark();
-		$r['b'] = $this->mm->view_Profilefac();
-		$r['e'] = $this->mm->subject();
-		$r['c'] = $this->mm->semesterdata($id2);
-	$this->load->view('mark_attendance',$r);
-	}
 	
 	function view_attend()
 	{
-	$this->load->view('view_attend');
+	$r['a'] = $this->mm->student();
+	$this->load->view('view_attend',$r);
 	}
 	function std_view_attend()
 	{
-
-	$this->load->view('std_view_attend');
+	
+	$this->load->view('std_view_attend',$r);
 	}
 	
 	
@@ -221,10 +236,6 @@ function index()
 	{
 		$this->load->view('about');
 	}
-	
-	
-	
-	
 	
 	function feedback()
 	{
@@ -273,17 +284,29 @@ function index()
 	
 	
 	
-	
-	
-	function test()
+	function send_id()
 	{
-		$data['session'] = $this->mm->getsession();
-		$data['user_status'] = $this->mm->getUsrStatus();
-		$data['login_record'] = $this->mm->getLoginData();
-		
-		$this->load->view('test', $data);
+	$id = $this->input->post('faculty_id');
+	$res = $this->mm->send_id($id);
+		echo json_encode($res);
 	}
-	
+	function sendsub()
+	{
+	$id = $this->input->post('subject');
+	$res = $this->mm->send_sem($id);
+		echo json_encode($res);
+	}
+	function take_student()
+	{
+	$id = $this->input->post('semester');
+	$res = $this->mm->take_std($id);
+		echo json_encode($res);
+	}
+	function mark_attendance()
+	{
+		$r['a'] = $this->mm->choosefac();
+		$this->load->view('mark_attendance',$r);
+	}
 	
 }
 

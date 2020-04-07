@@ -58,7 +58,7 @@
 			{
 				jQuery.ajax({
 				type: "POST",
-				url: "<?php echo base_url('/index.php/web/give_feedback');?>",
+				url: "<?php echo site_url('/web/give_feedback');?>",
 				dataType: 'html',
 				data: 
 				{parent: parent, 
@@ -82,6 +82,7 @@
 			{
 				alert("pls fill all fields first");
 			}
+			return false;
 		});
 	});
 

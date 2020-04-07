@@ -78,7 +78,7 @@
 			{
 				jQuery.ajax({
 				type: "POST",
-				url: "<?php echo base_url('/index.php/web/insert_session'); ?>",
+				url: "<?php echo site_url('/web/insert_session'); ?>",
 				dataType: 'html',
 				data: {sess_id: sess_id, start:start,end:end},
 				success: function(res) 
@@ -91,7 +91,7 @@
 				},
 				error:function()
 				{
-					alert('error');	
+					alert(' session exist');	
 				}
 				});
 			}
@@ -99,6 +99,7 @@
 			{
 				alert("pls fill all fields first");
 			}
+			return false;
 		});
 	});
 

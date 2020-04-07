@@ -79,7 +79,7 @@
 						</select>
 					</div>
 					<div class="form-group">
-					<button id="btn"  class="btn btn-primary float-right">submit</button>
+					<button id="btn" class="btn btn-primary float-right">submit</button>
 				<input id="rst" type="reset" class="btn btn-primary float-left">
 					
 				</div>
@@ -91,7 +91,7 @@
 	$(document).ready(function(){
 		$("#form").hide();
 		$("#form").slideDown('slow');
-
+		
 		$('#btn').on('click',function(){
 			var username = $('#username').val();
 			var password = $('#password').val();
@@ -99,37 +99,37 @@
 			var fac_email = $('#fac_email').val();
 			var contact = $('#contact').val();
 			var relation = $('#relation').val();
-
-			if(username != '' && password != '' && parent != '' && fac_email != '' && contact != '' && relation != '')
+			if(username != '' &&  password != '' && parent != '' && fac_email != '' && contact != '' && relation != '')
 			{
-				$.ajax({
+					$.ajax({
 					type: "POST",
 					url: "<?php echo site_url('/web/add_parent'); ?>",
 					data: {
-						username: username,
-						password:password,
-						parent:parent,
-						fac_email:fac_email,
-						contact:contact,
-						relation:relation
+					username: username,
+					password:password,
+					parent:parent,
+					fac_email:fac_email,
+					contact:contact,
+					relation:relation
 					},
 					success: function(res) 
 					{
-						if(res==1)
-						{
-							alert('parent added successfully');	
-						}
-						else{
+					if(res==1)
+					{
+						alert('parent added successfully');	
+					}
+					else
+					{
 						alert('error');
-						}
+					}
 					},
 					error:function(xhr, status, error)
 					{
-						console.log(xhr.responseText);	
+					alert('already exist');	
 					}
-				});
+					});
 			}
-			else
+		    else
 			{
 				alert("pls fill all fields first");
 				
@@ -138,12 +138,5 @@
 			return false; // This statement is necessary when you are using submit button
 		});
 	});
-	
-	
-	
-	
-	
-	
-	
 	</script>
 </html>

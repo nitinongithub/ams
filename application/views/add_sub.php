@@ -65,7 +65,7 @@
 			{
 				jQuery.ajax({
 				type: "POST",
-				url: "<?php echo base_url('/index.php/web/add_subject'); ?>",
+				url: "<?php echo site_url('/web/add_subject'); ?>",
 				dataType: 'html',
 				data: 
 				{subject: subject, 
@@ -89,6 +89,7 @@
 			{
 				alert("pls fill all fields first");
 			}
+			return false;
 		});
 	});
 

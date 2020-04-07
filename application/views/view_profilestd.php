@@ -103,8 +103,7 @@
 			}
 			});
 		}
-	});
-	$(function(){
+		
 		view_profilestdsub();
 		function view_profilestdsub(){
 		$.ajax({

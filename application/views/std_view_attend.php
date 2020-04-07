@@ -1,3 +1,3 @@
 <?php 
-print_r($r);
+print_r($a);
 ?>
