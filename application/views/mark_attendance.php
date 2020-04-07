@@ -14,6 +14,9 @@
 	#y{
 	margin-left:30px;
 	}
+	#tab{
+	margin-top:20px;
+	}
 	</style>
 	</head>
 	<body>
@@ -44,7 +47,7 @@
 			   <button  type="" style="margin-left:5px;" id="btn2"  class="btn btn-success float-right">select student</button>
 			   </div><br><br>
 			   <div class="container-fluid ">
-				<table class="table table-striped table-bordered" >
+				<table class="table table-striped table-bordered" id="tab" >
 				<thead class="thead-dark">
 				<tr class="text-center">
 					<th scope="col">Roll No</th>
@@ -68,7 +71,7 @@
 	var faculty_id = $('#faculty_id').val();
 	if(faculty_id != '')
 	{
-					jQuery.ajax({
+					$.ajax({
 					type: "POST",
 					url: "<?php echo site_url('/web/send_id'); ?>",
 					dataType:"json",
@@ -103,7 +106,7 @@
 		var subject = $('#subject').val();
 		if(subject != '')
 		{
-		jQuery.ajax({
+		$.ajax({
 			type: "POST",
 					url: "<?php echo site_url('/web/sendsub'); ?>",
 					dataType:"json",
@@ -129,7 +132,7 @@
 	var semester = $('#semester').val();
 	var course = $('#course').val();
 
-	jQuery.ajax({
+	$.ajax({
 				type: "POST",
 					url: "<?php echo site_url('/web/take_student'); ?>",
 					dataType:"json",

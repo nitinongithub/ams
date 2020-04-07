@@ -277,9 +277,11 @@ function index()
 	$a = $this->mm->feedback();
 	echo json_encode($a);
 	}
-	function feed_delete()
+	function deletefeed()
 	{
-	$this->mm->feed_delete();
+	$id = $this->input->post('id');
+	$res = $this->mm->deletefeed($id);
+	echo json_encode($res);
 	}
 	
 	

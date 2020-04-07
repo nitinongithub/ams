@@ -37,6 +37,17 @@ class My_model extends CI_Model{
 		return false;
 		}
 	}
+	function deletefeed($id)
+	{
+		$this->db->where('feedback_id',$id);
+		$this->db->delete('feedback');
+		$query = $this->db->get();
+		return $query->result();
+	}
+	
+	
+	
+	
 	function get_menu()
 	{
 		$this->db->where('c.STATUS',$this->session->userdata('sts_'));

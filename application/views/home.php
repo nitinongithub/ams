@@ -1,7 +1,9 @@
-<html>
+<html lang="en">
 	<head>
 		<title>
 		HOME</title>
+		<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<link rel="stylesheet" href="<?php echo base_url();?>css/stylehome.css">
 		<script src="https://kit.fontawesome.com/ada59038f7.js" crossorigin="anonymous"></script>
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
@@ -63,14 +65,24 @@
 	</body>
 	
 	<script type="text/javascript">
-	<?php foreach($menu as $item){?>
+<<<<<<< HEAD
 	$(document).ready(function(){
+	<?php foreach($menu as $item){?>
+	
+=======
+		$(document).ready(function(){
+	<?php foreach($menu as $item){?>
+>>>>>>> 26eadeae85738b067dee1b3ae832e87b4e571e65
 	$("#<?php echo $item->item;?>").click(function(){
 	$("#pages").load('<?php echo site_url($item->path);?>');
 	});
-	});
 	<?php }?>
+	});
+<<<<<<< HEAD
 	
+	
+=======
+>>>>>>> 26eadeae85738b067dee1b3ae832e87b4e571e65
 	</script>
 </html>
 	

@@ -1,26 +1,17 @@
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"  crossorigin="anonymous">
-	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"  crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"  crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"  crossorigin="anonymous"></script>
-    <title>view feedback</title>
-	<style>
+<style>
 	.table{
 	margin-top:50px;
 	}
-		
-	</style>
-	</head>
-	<body>
+</style>	
+	
+
 		<div class="container-fluid ">
-				<table class="table table-striped table-bordered" >
+				<table class="table table-hover table-striped" >
 				<thead class="thead-dark">
 				<tr class="text-center">
 					<th scope="col">Parent Name</th>
 					<th scope="col">Feedback</th>
+					<th scope="col">Delete feedback </th>
 				</tr>
 				</thead>
 				<tbody class="c" id="show_data">
@@ -34,7 +25,7 @@
 		function view_feedback(){
 		$.ajax({
 			type:'ajax',
-			url :"<?php echo site_url('web/view_feedback');?>",
+			url :"<?php echo site_url('feedcntl/view_feedback');?>",
 			async :false,
 			dataType:'json',
 			success : function(data){
@@ -43,8 +34,10 @@
 			var i;
 			for(i=0;i< data.length;i++){
 				hey += '<tr class="table-primary text-center">'+
+				
 				'<td>'+data[i].parent_name+'</td>'+
 				'<td>'+data[i].feedback+'</td>'+
+				'<td>'+'<button type="submit" class="btn btn-danger danger-item" id="'+data[i].feedback_id+'" ><i class="fas fa-trash-alt" style="color:white;"></i></button>'+'</td>'+
 				'</tr>';
 			}
 				$('#show_data').html(hey);
@@ -58,20 +51,27 @@
 			});
 				return false;
 		}
+		$(".danger-item").on('click',function(){
+		var id = $(this).attr('id');
+		if(confirm('are you sure you want to delete?'))
+		{	
+	
+			$.ajax({
+			 url:"<?php echo site_url('/feedcntl/deletefeed');?>",
+				method:"POST",
+				data:{id:id},
+				success:function(res){
+					
+				}
+			});
+		}
+		return false;
 	});
+});
 
 	
 	</script>
-</html>
 
-	function add_session()
-	{
-		var parameter = $("#myform").serialize();
-		$.post("<?php echo site_url('web/insert_session');?>",parameter,
-		function(res)
-		{
-			alert('session created successfully');
-		});
-	}
-		
+
+
 	
