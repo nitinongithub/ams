@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 04, 2020 at 08:31 AM
+-- Generation Time: Apr 07, 2020 at 08:53 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.2
 
@@ -32,11 +32,10 @@ CREATE TABLE `attendance` (
   `attend_id` int(11) NOT NULL,
   `enrollment_no` int(10) NOT NULL,
   `course_id` varchar(10) NOT NULL,
-  `subject_name` varchar(20) NOT NULL,
+  `subject_code` varchar(10) NOT NULL,
   `status` varchar(20) NOT NULL,
   `date` date NOT NULL,
-  `session_id` int(20) NOT NULL,
-  `faculty_id` int(10) NOT NULL
+  `session_id` int(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -75,6 +74,7 @@ CREATE TABLE `department` (
 --
 
 INSERT INTO `department` (`dept_id`, `dept_name`) VALUES
+('choose', 'choose'),
 ('fcbm', 'Faculty of Business Administration'),
 ('ftcs', 'Faculty OF Technology And Computer Applications');
 
@@ -189,20 +189,20 @@ CREATE TABLE `menu` (
 --
 
 INSERT INTO `menu` (`menu_id`, `item`, `path`, `status`) VALUES
-(2, 'add_faculty', 'web/add_fac', 1),
-(3, 'view_profile', 'web/index2', 1),
-(4, 'add_subject', 'web/add_sub', 1),
-(5, 'mark_attendance', 'web/mark_attendance', 1),
-(6, 'view_attend', 'web/view_attend', 1),
-(7, 'stdview_attend', 'web/std_view_attend', 1),
-(8, 'view_profile', 'web/index3', 1),
-(9, 'feedback', 'web/feedback', 1),
-(10, 'generate_report', 'web/generate_report', 1),
-(11, 'view_feedback', 'web/index4', 1),
-(12, 'manage_session', 'web/manage_session', 1),
-(13, 'add_parent', 'web/add_par', 1),
-(15, 'view_profile', 'web/index1', 1),
-(16, 'Add_student', 'authenticate/addstudent', 1);
+(2, 'Add_Faculty', 'web/add_fac', 1),
+(3, 'View_Profile', 'web/index2', 1),
+(4, 'Add_Subject', 'web/add_sub', 1),
+(5, 'Mark_Attendance', 'web/mark_attendance', 1),
+(6, 'View_Attendance', 'web/view_attend', 1),
+(7, 'Student_View_Attendance', 'web/std_view_attend', 1),
+(8, 'View_Profile', 'web/index3', 1),
+(9, 'Feedback', 'web/feedback', 1),
+(10, 'Generate_Report', 'web/generate_report', 1),
+(11, 'View_Feedback', 'web/index4', 1),
+(12, 'Manage_Session', 'web/manage_session', 1),
+(13, 'Add_Parent', 'web/add_par', 1),
+(15, 'View_Profile', 'web/index1', 1),
+(16, 'Add_student', 'web/addstudent', 1);
 
 -- --------------------------------------------------------
 
@@ -247,15 +247,9 @@ INSERT INTO `semester` (`semester_id`, `semester_name`, `course_id`) VALUES
 ('sembba1', 'first', 'bba'),
 ('sembba2', 'second', 'bba'),
 ('sembba3', 'third', 'bba'),
-('sembba4', 'forth', 'bba'),
-('sembba5', 'fifth', 'bba'),
-('sembba6', 'sixth', 'bba'),
 ('sembca1', 'first', 'bca'),
 ('sembca2', 'second', 'bca'),
-('sembca3', 'third', 'bca'),
-('sembca4', 'forth', 'bca'),
-('sembca5', 'Fifth', 'bca'),
-('sembca6', 'sixth', 'bca');
+('sembca3', 'third', 'bca');
 
 -- --------------------------------------------------------
 
@@ -276,7 +270,8 @@ CREATE TABLE `session` (
 
 INSERT INTO `session` (`sess_id`, `start_date`, `end_date`, `session_created`) VALUES
 (34, '2020-04-16', '2020-04-30', '2020-04-16'),
-(2020, '1-2-2020', '1-2-2021', '1-2-2020');
+(2020, '1-2-2020', '1-2-2021', '1-2-2020'),
+(2034, '2020-02-01', '2021-02-01', '2020-02-01');
 
 -- --------------------------------------------------------
 
@@ -326,7 +321,8 @@ CREATE TABLE `subfaculty` (
 INSERT INTO `subfaculty` (`subfac_id`, `subject_code`, `course_id`, `class`, `faculty_id`) VALUES
 (6, 'web_tech', 'bca', 'lacture', 3),
 (15, '.net', 'bca', 'lacture', 5),
-(17, 'economic', 'bba', 'lacture', 6);
+(17, 'economic', 'bba', 'lacture', 6),
+(18, 'economic', 'bba', 'lacture', 5);
 
 -- --------------------------------------------------------
 
@@ -380,7 +376,7 @@ INSERT INTO `user_menu` (`u_id`, `menu_id`, `STID`, `status`) VALUES
 (9, 16, 1, 1),
 (10, 6, 1, 1),
 (11, 11, 1, 1),
-(13, 7, 2, 1),
+(13, 6, 2, 1),
 (14, 15, 2, 1),
 (15, 9, 2, 1),
 (16, 10, 2, 1),
@@ -422,9 +418,9 @@ INSERT INTO `user_status` (`STID`, `STATUS`, `ACTIVE`, `pic`) VALUES
 ALTER TABLE `attendance`
   ADD PRIMARY KEY (`attend_id`),
   ADD KEY `session_id` (`session_id`),
-  ADD KEY `enrollment_no` (`enrollment_no`),
   ADD KEY `course_id` (`course_id`),
-  ADD KEY `faculty_id` (`faculty_id`);
+  ADD KEY `subject_id` (`subject_code`),
+  ADD KEY `enrollment_no` (`enrollment_no`);
 
 --
 -- Indexes for table `course`
@@ -557,7 +553,7 @@ ALTER TABLE `employee`
 -- AUTO_INCREMENT for table `faculty`
 --
 ALTER TABLE `faculty`
-  MODIFY `faculty_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `faculty_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=679;
 
 --
 -- AUTO_INCREMENT for table `feedback`
@@ -575,13 +571,13 @@ ALTER TABLE `menu`
 -- AUTO_INCREMENT for table `parent`
 --
 ALTER TABLE `parent`
-  MODIFY `parent_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `parent_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `subfaculty`
 --
 ALTER TABLE `subfaculty`
-  MODIFY `subfac_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `subfac_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `user_menu`
@@ -604,9 +600,9 @@ ALTER TABLE `user_status`
 --
 ALTER TABLE `attendance`
   ADD CONSTRAINT `attendance_ibfk_1` FOREIGN KEY (`session_id`) REFERENCES `session` (`sess_id`),
-  ADD CONSTRAINT `attendance_ibfk_2` FOREIGN KEY (`enrollment_no`) REFERENCES `student` (`enrollment_no`),
   ADD CONSTRAINT `attendance_ibfk_3` FOREIGN KEY (`course_id`) REFERENCES `course` (`course_id`),
-  ADD CONSTRAINT `attendance_ibfk_4` FOREIGN KEY (`faculty_id`) REFERENCES `faculty` (`faculty_id`);
+  ADD CONSTRAINT `attendance_ibfk_5` FOREIGN KEY (`subject_code`) REFERENCES `subject` (`subject_code`),
+  ADD CONSTRAINT `attendance_ibfk_6` FOREIGN KEY (`enrollment_no`) REFERENCES `student` (`enrollment_no`);
 
 --
 -- Constraints for table `course`
