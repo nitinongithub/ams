@@ -63,14 +63,13 @@
 	</body>
 	
 	<script type="text/javascript">
+		$(document).ready(function(){
 	<?php foreach($menu as $item){?>
-	$(document).ready(function(){
 	$("#<?php echo $item->item;?>").click(function(){
 	$("#pages").load('<?php echo site_url($item->path);?>');
 	});
-	});
 	<?php }?>
-	
+	});
 	</script>
 </html>
 	
