@@ -1,15 +1,3 @@
-<html lang="en">
-	<head>
-		<title>HOME</title>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-		<link rel="stylesheet" href="<?php echo base_url();?>css/stylehome.css">
-		<script src="https://kit.fontawesome.com/ada59038f7.js" crossorigin="anonymous"></script>
-		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
-	</head>
-	<body>
 <style>
 	#x{
 	margin-left:30px;
@@ -190,6 +178,3 @@
 
 
 </script>
-</div>
-</body>
-</html>
