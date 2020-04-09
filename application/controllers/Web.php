@@ -309,9 +309,9 @@ function index()
 		$c = $this->input->post('subject');
 		$d = $this->input->post('date');
 		$data = $this->input->post('student');
-		echo count($data);
-		if(count($data)!=0){
-			echo $data[0];
+		echo "Total selected - " . count($data) . "<br>";
+		for($i=0;$i<count($data);$i++){
+			echo "Data found is " .$data[$i] ."<br>";
 		}
 	}
 	function mark_attendance()

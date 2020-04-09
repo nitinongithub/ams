@@ -163,6 +163,20 @@
 						'</td>'+
 						'</tr>';
 					}
+					std += '<tr class="table-primary text-center">'+
+						'<td>'+2+'</td>'+
+						'<td>'+2+'</td>'+
+						'<td>nitin</td>'+
+						'<td>'+'<input type="checkbox" class="form-check-input" name="student[]" value="10"> present'+
+						'</td>'+
+						'</tr>';
+					std += '<tr class="table-primary text-center">'+
+						'<td>'+2+'</td>'+
+						'<td>'+2+'</td>'+
+						'<td>mohan</td>'+
+						'<td>'+'<input type="checkbox" class="form-check-input" name="student[]" value="12"> present'+
+						'</td>'+
+						'</tr>';
 						$('#std_show').html(std);
 						
 					}
