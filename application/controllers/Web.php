@@ -309,7 +309,10 @@ function index()
 		$c = $this->input->post('subject');
 		$d = $this->input->post('date');
 		$data = $this->input->post('student');
-		echo $data;
+		echo count($data);
+		if(count($data)!=0){
+			echo $data[0];
+		}
 	}
 	function mark_attendance()
 	{
