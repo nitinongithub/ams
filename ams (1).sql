@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 07, 2020 at 08:53 AM
+-- Generation Time: Apr 09, 2020 at 12:14 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.2
 
@@ -35,6 +35,7 @@ CREATE TABLE `attendance` (
   `subject_code` varchar(10) NOT NULL,
   `status` varchar(20) NOT NULL,
   `date` date NOT NULL,
+  `faculty_id` int(10) NOT NULL,
   `session_id` int(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -56,7 +57,9 @@ CREATE TABLE `course` (
 
 INSERT INTO `course` (`course_id`, `course_name`, `dept_id`) VALUES
 ('bba', 'Bachelor In Business Administration', 'fcbm'),
-('bca', 'Bachelor In Computer Application', 'ftcs');
+('bca', 'Bachelor In Computer Application', 'ftcs'),
+('mba', 'Master In Business Administration', 'fcbm'),
+('mca', 'master In Computer Application', 'ftcs');
 
 -- --------------------------------------------------------
 
@@ -81,26 +84,6 @@ INSERT INTO `department` (`dept_id`, `dept_name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `employee`
---
-
-CREATE TABLE `employee` (
-  `id` int(10) NOT NULL,
-  `student_name` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `employee`
---
-
-INSERT INTO `employee` (`id`, `student_name`) VALUES
-(1, 'knlkmnlk'),
-(2, 'meenakshi'),
-(3, 'meenakshi');
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `faculty`
 --
 
@@ -121,7 +104,8 @@ CREATE TABLE `faculty` (
 INSERT INTO `faculty` (`faculty_id`, `faculty_name`, `contact`, `email`, `sess_id`, `username`, `dept_id`) VALUES
 (3, 'roshan chopra', 2147483647, 'tiwarimeenu593@gmail', 2020, 'roshan', 'ftcs'),
 (5, 'nandi joshi', 2147483647, 'tiwarimeenu593@gmail', 2020, 'nandi', 'fcbm'),
-(6, 'bhupesh rathaur', 2147483647, 'tiwarimeenu593@gmail', 2020, 'bhupesh', 'fcbm');
+(6, 'bhupesh rathaur', 2147483647, 'tiwarimeenu593@gmail', 2020, 'bhupesh', 'fcbm'),
+(7, 'hjfghj', 564769869, 'tiwarimeenu593@gmail', 2020, 'tyrur', 'fcbm');
 
 -- --------------------------------------------------------
 
@@ -141,9 +125,9 @@ CREATE TABLE `feedback` (
 --
 
 INSERT INTO `feedback` (`feedback_id`, `parent_name`, `feedback`, `sess_id`) VALUES
-(2, 'naveen', 'you should come up with children', 2020),
-(3, 'bhfru', 'nvnbcccvbn', 2020),
-(11, 'chdjfk', ' vjndvkmv,dmbjcm,;x', 2020);
+(34, 'meenakshi', 'need to be improved', 2020),
+(35, 'mohan', 'need to be improved', 2020),
+(36, 'roshan', 'need to be improved', 2020);
 
 -- --------------------------------------------------------
 
@@ -165,11 +149,14 @@ CREATE TABLE `login` (
 INSERT INTO `login` (`username`, `password`, `STID`, `sess_id`) VALUES
 ('admin', 'meena123', 1, 2020),
 ('bhupesh', '1', 3, 2020),
+('disha', 'disha123', 4, 2020),
 ('kc', 'kc123', 2, 2020),
 ('manisha', 'manisha123', 4, 2020),
 ('meenakshi', 'meena123', 4, 2020),
 ('nandi', 'nandi123', 3, 2020),
-('roshan', 'r', 3, 2020);
+('rakhi', 'rakhi123', 4, 2020),
+('roshan', 'r', 3, 2020),
+('tyrur', 'duyg', 3, 2020);
 
 -- --------------------------------------------------------
 
@@ -198,7 +185,7 @@ INSERT INTO `menu` (`menu_id`, `item`, `path`, `status`) VALUES
 (8, 'View_Profile', 'web/index3', 1),
 (9, 'Feedback', 'web/feedback', 1),
 (10, 'Generate_Report', 'web/generate_report', 1),
-(11, 'View_Feedback', 'web/index4', 1),
+(11, 'View_Feedback', 'feedcntl/index4', 1),
 (12, 'Manage_Session', 'web/manage_session', 1),
 (13, 'Add_Parent', 'web/add_par', 1),
 (15, 'View_Profile', 'web/index1', 1),
@@ -246,10 +233,12 @@ CREATE TABLE `semester` (
 INSERT INTO `semester` (`semester_id`, `semester_name`, `course_id`) VALUES
 ('sembba1', 'first', 'bba'),
 ('sembba2', 'second', 'bba'),
-('sembba3', 'third', 'bba'),
 ('sembca1', 'first', 'bca'),
 ('sembca2', 'second', 'bca'),
-('sembca3', 'third', 'bca');
+('semmba1', 'first', 'mba'),
+('semmba2', 'second', 'mba'),
+('semmca1', 'first', 'mca'),
+('semmca2', 'second', 'mca');
 
 -- --------------------------------------------------------
 
@@ -283,8 +272,8 @@ CREATE TABLE `student` (
   `enrollment_no` int(10) NOT NULL,
   `student_name` varchar(20) NOT NULL,
   `roll_no` int(10) NOT NULL,
-  `email` varchar(20) NOT NULL,
-  `contact` int(11) NOT NULL,
+  `email` varchar(30) NOT NULL,
+  `contact` bigint(20) NOT NULL,
   `username` varchar(20) NOT NULL,
   `sess_id` int(20) NOT NULL,
   `course_id` varchar(10) NOT NULL,
@@ -298,7 +287,9 @@ CREATE TABLE `student` (
 
 INSERT INTO `student` (`enrollment_no`, `student_name`, `roll_no`, `email`, `contact`, `username`, `sess_id`, `course_id`, `semester_id`, `dept_id`) VALUES
 (1, 'meenakshi tiwari', 1, 'tiwarimeenu593@gmail', 2147483647, 'meenakshi', 2020, 'bca', 'sembca1', 'ftcs'),
-(2, 'manisha joshi', 2, 'tiwarimeenu593@gmail', 2147483647, 'manisha', 2020, 'bca', 'sembca1', 'ftcs');
+(2, 'manisha joshi', 2, 'tiwarimeenu593@gmail', 8923423206, 'manisha', 2020, 'bca', 'sembca1', 'ftcs'),
+(3, 'rakhi joshi', 3, 'tiwarimeenu@gamil.com', 7456935618, 'rakhi', 2020, 'bca', 'sembca1', 'ftcs'),
+(4, 'disha joshi', 4, 'tiwarikavita@123gmail.com', 7456935618, 'disha', 2020, 'bca', 'sembca1', 'ftcs');
 
 -- --------------------------------------------------------
 
@@ -333,20 +324,21 @@ INSERT INTO `subfaculty` (`subfac_id`, `subject_code`, `course_id`, `class`, `fa
 CREATE TABLE `subject` (
   `subject_code` varchar(20) NOT NULL,
   `subject_name` varchar(20) NOT NULL,
-  `semester_id` varchar(10) NOT NULL
+  `semester_id` varchar(10) NOT NULL,
+  `course_id` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `subject`
 --
 
-INSERT INTO `subject` (`subject_code`, `subject_name`, `semester_id`) VALUES
-('.net', '.net', 'sembca1'),
-('dbms', 'dbms', 'sembca1'),
-('economic', 'economic', 'sembba1'),
-('php', 'php', 'sembca1'),
-('python', 'python', 'sembca1'),
-('web_tech', 'web tech', 'sembca1');
+INSERT INTO `subject` (`subject_code`, `subject_name`, `semester_id`, `course_id`) VALUES
+('.net', '.net', 'sembca1', 'bca'),
+('business', 'business', 'sembba1', 'bba'),
+('dbms', 'dbms', 'sembca1', 'bca'),
+('economic', 'economic', 'sembba1', 'bba'),
+('statstics', 'statstics', 'sembba1', 'bba'),
+('web_tech', 'web tech', 'sembca1', 'bca');
 
 -- --------------------------------------------------------
 
@@ -420,7 +412,8 @@ ALTER TABLE `attendance`
   ADD KEY `session_id` (`session_id`),
   ADD KEY `course_id` (`course_id`),
   ADD KEY `subject_id` (`subject_code`),
-  ADD KEY `enrollment_no` (`enrollment_no`);
+  ADD KEY `enrollment_no` (`enrollment_no`),
+  ADD KEY `faculty_id` (`faculty_id`);
 
 --
 -- Indexes for table `course`
@@ -434,12 +427,6 @@ ALTER TABLE `course`
 --
 ALTER TABLE `department`
   ADD PRIMARY KEY (`dept_id`);
-
---
--- Indexes for table `employee`
---
-ALTER TABLE `employee`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `faculty`
@@ -517,7 +504,8 @@ ALTER TABLE `subfaculty`
 --
 ALTER TABLE `subject`
   ADD PRIMARY KEY (`subject_code`),
-  ADD KEY `semester_id` (`semester_id`);
+  ADD KEY `semester_id` (`semester_id`),
+  ADD KEY `course_id` (`course_id`);
 
 --
 -- Indexes for table `user_menu`
@@ -544,12 +532,6 @@ ALTER TABLE `attendance`
   MODIFY `attend_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `employee`
---
-ALTER TABLE `employee`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
 -- AUTO_INCREMENT for table `faculty`
 --
 ALTER TABLE `faculty`
@@ -559,7 +541,7 @@ ALTER TABLE `faculty`
 -- AUTO_INCREMENT for table `feedback`
 --
 ALTER TABLE `feedback`
-  MODIFY `feedback_id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `feedback_id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT for table `menu`
@@ -602,7 +584,8 @@ ALTER TABLE `attendance`
   ADD CONSTRAINT `attendance_ibfk_1` FOREIGN KEY (`session_id`) REFERENCES `session` (`sess_id`),
   ADD CONSTRAINT `attendance_ibfk_3` FOREIGN KEY (`course_id`) REFERENCES `course` (`course_id`),
   ADD CONSTRAINT `attendance_ibfk_5` FOREIGN KEY (`subject_code`) REFERENCES `subject` (`subject_code`),
-  ADD CONSTRAINT `attendance_ibfk_6` FOREIGN KEY (`enrollment_no`) REFERENCES `student` (`enrollment_no`);
+  ADD CONSTRAINT `attendance_ibfk_6` FOREIGN KEY (`enrollment_no`) REFERENCES `student` (`enrollment_no`),
+  ADD CONSTRAINT `attendance_ibfk_7` FOREIGN KEY (`faculty_id`) REFERENCES `faculty` (`faculty_id`);
 
 --
 -- Constraints for table `course`
@@ -666,7 +649,8 @@ ALTER TABLE `subfaculty`
 -- Constraints for table `subject`
 --
 ALTER TABLE `subject`
-  ADD CONSTRAINT `subject_ibfk_1` FOREIGN KEY (`semester_id`) REFERENCES `semester` (`semester_id`);
+  ADD CONSTRAINT `subject_ibfk_1` FOREIGN KEY (`semester_id`) REFERENCES `semester` (`semester_id`),
+  ADD CONSTRAINT `subject_ibfk_2` FOREIGN KEY (`course_id`) REFERENCES `course` (`course_id`);
 
 --
 -- Constraints for table `user_menu`
