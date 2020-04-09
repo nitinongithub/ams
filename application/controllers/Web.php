@@ -51,16 +51,20 @@ class Web extends CI_Controller {
 function index()
 	{
 		$id = $this->input->get('id');	
-	$data['a']= $this->mm->stdsubdata($id);	
+		$data['a']= $this->mm->stdsubdata($id);	
 		$data['menu'] = $this->mm->get_menu();
 		$this->load->view('home', $data);
 	}
 	
-	
+	function subjectadd()
+	{
+		$id = $this->input->post('course');
+		$res = $this->mm->subjectadd($id);
+		echo json_encode($res);
+	}
 	function add_fac()
 	{
-		$r['d']= $this->mm->subjectadd();
-		$r['b']= $this->mm->course();
+		$r['d']= $this->mm->coursefac();
 		$r['a']= $this->mm->department();
 		$this->load->view('add_fac',$r);
 	}
@@ -102,7 +106,7 @@ function index()
 
 	function add_sub()
 	{
-	$r['c']= $this->mm->semester();	
+	$r['c']= $this->mm->semestersub();	
 	$this->load->view('add_sub',$r);
 	}
 	function add_subject()
@@ -123,13 +127,22 @@ function index()
 		}
 	}
 	
-	
 	function addstudent()
-	{
-	$r['b']= $this->mm->course();
-	$r['c']= $this->mm->semester();		
+	{		
 	$r['a']= $this->mm->department();
 	$this->load->view('student',$r);
+	}
+	function semester()
+	{
+		$id = $this->input->post('course');
+		$res = $this->mm->semester($id);
+		echo json_encode($res);
+	}
+	function course()
+	{
+		$id = $this->input->post('department');
+		$res = $this->mm->course($id);
+		echo json_encode($res);
 	}
 	function add_student()
 	{
@@ -268,21 +281,6 @@ function index()
 	}
 	
 	
-	function index4()
-	{
-		$this->load->view('view_feedback');
-	}
-	function view_feedback()
-	{
-	$a = $this->mm->feedback();
-	echo json_encode($a);
-	}
-	function deletefeed()
-	{
-	$id = $this->input->post('id');
-	$res = $this->mm->deletefeed($id);
-	echo json_encode($res);
-	}
 	
 	
 	
@@ -303,6 +301,15 @@ function index()
 	$id = $this->input->post('semester');
 	$res = $this->mm->take_std($id);
 		echo json_encode($res);
+	}
+	function insert_data()
+	{
+		$a = $this->input->post('faculty_id');
+		$b = $this->input->post('course');
+		$c = $this->input->post('subject');
+		$d = $this->input->post('date');
+		$data = $this->input->post('student');
+		echo $data;
 	}
 	function mark_attendance()
 	{

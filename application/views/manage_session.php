@@ -1,11 +1,3 @@
-<html>
-	<head>
-		<title> manage session </title>
-		<link rel="stylesheet" href="<?php echo base_url();?>css/style7.css">
-		<script src="https://kit.fontawesome.com/ada59038f7.js" crossorigin="anonymous"></script>
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"  crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"  crossorigin="anonymous">
-	</head>
 		<style>
 			body{
 				background-image:url(<?php echo base_url('images/'.$this->session->userdata('pic_'));?>);
@@ -40,7 +32,6 @@
 		}
 			
 		</style>
-	<body>
 	<form id="myform" method="post" name="myform" role="form">
 	<div class="container" >
 				<div class="d-flex justify-content-center social_icon">
@@ -104,4 +95,3 @@
 	});
 
 </script>
-</html>

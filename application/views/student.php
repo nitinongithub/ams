@@ -1,11 +1,4 @@
-<html>
-	<head>
-		<title> add student</title>
-		<link rel="stylesheet" href="<?php echo base_url();?>css/style7.css">
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"  crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" crossorigin="anonymous">
-	</head>
+
 	<style>
 		body{
 			background-image:url(<?php echo base_url('images/'.$this->session->userdata('pic_'));?>);
@@ -28,7 +21,6 @@
 			background-color:#FFC312;
 			}
 	</style>
-	<body>
 	<div class="container">
 	<div class="card-header" id="dot">
 		<form id="form" method="post" name="form" role="form">
@@ -91,9 +83,7 @@
 				<span class="input-group-text md-addon" >Course</span>
 			  </div>
 			  <select class="form-control"  name="course" id="course">  
-			 <?php foreach($b as $item){?>
-					<option value="<?php echo $item->course_id;?>"><?php echo $item->course_id;?></option>
-					<?php }?>
+			  
 			  </select>
 			  </div>
 			  <div class="md-form input-group input-group-sm mb-3">
@@ -101,10 +91,7 @@
 				<span class="input-group-text md-addon" >semester</span>
 			  </div>
 			  <select class="form-control" name="semester" id="semester">
-			  <?php foreach($c as $item){?>
-				<option><?php echo $item->semester_id;?></option>
-				<?php }?>
-			  </select>
+		</select>
 			  </div>
 			  	<button   id="btn" class="btn btn-primary float-right">submit</button>
 				<input id="rst" type="reset" value="reset" class="btn btn-primary float-left">
@@ -115,6 +102,42 @@
 	$(document).ready(function(){
 	$("#form").hide();
 	$("#form").slideDown('slow');
+	$('#department').change(function(){
+	var department = $(this).val();
+	$.ajax({
+				url:"<?php echo site_url('/web/course');?>",
+				method:"POST",
+				data:{department:department},
+				dataType:"json",
+				success:function(res){
+				var cor = '';
+				var i;
+				for(i=0;i<res.length;i++)
+				{
+					cor+='<option value="'+res[i].course_id+'">'+res[i].course_id+'</option>';
+				}
+				$('#course').html(cor);
+				}
+	});
+	});
+	$('#course').change(function(){
+	var course = $("#course").val();
+		$.ajax({
+				url:"<?php echo site_url('/web/semester');?>",
+				method:"POST",
+				data:{course:course},
+				dataType:"json",
+				success:function(res){
+				var sem = '';
+				var i;
+				for(i=0;i<res.length;i++)
+				{
+					sem+='<option value="'+res[i].semester_id+'">'+res[i].semester_id+'</option>';
+				}
+				$('#semester').html(sem);
+				}
+	});
+	});
 	$('#btn').on('click',function(){
 			var usrname = $('#usrname').val();
 			var password = $('#password').val();
@@ -169,9 +192,6 @@
 			return false; // This statement is necessary when you are using submit button
 		});
 	
-	});
+});
+</script>
 	
-	
-	</script>
-	
-</html>

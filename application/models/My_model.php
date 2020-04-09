@@ -82,15 +82,17 @@ class My_model extends CI_Model{
 		$query = $this->db->get();
 		return $query->result();
 	}
-	function course()
+	function course($id)
 	{ 
+		$this->db->where('dept_id',$id);
 		$this->db->select('a.course_id');
 		$this->db->from('course a');
 		$query = $this->db->get();
 		return $query->result();
 	}
-	function semester()
+	function semester($id)
 	{
+		$this->db->where('course_id',$id);
 		$this->db->select('a.semester_id');
 		$this->db->from('semester a');
 		$query = $this->db->get();
@@ -99,15 +101,22 @@ class My_model extends CI_Model{
 	
 	
 	
-	function subjectadd()
+	function subjectadd($id)
 	{
+		$this->db->where('course_id',$id);
 		$this->db->select('a.subject_code');
 		$this->db->from('subject a');
 		$query = $this->db->get();
 		return $query->result();
 	}
 	
-	
+	function coursefac()
+	{ 
+		$this->db->select('a.course_id');
+		$this->db->from('course a');
+		$query = $this->db->get();
+		return $query->result();
+	}
 	
 	function add_faculty($u,$p,$id,$e,$n,$co,$de)
 	{
@@ -239,7 +248,13 @@ class My_model extends CI_Model{
 			return 0;
 		}
 	}
-	
+	function semestersub()
+	{
+		$this->db->select('a.semester_id');
+		$this->db->from('semester a');
+		$query = $this->db->get();
+		return $query->result();
+	}
 	
 	function give_feedback($data)
 	{

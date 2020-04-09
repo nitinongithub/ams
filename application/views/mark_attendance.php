@@ -1,13 +1,4 @@
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"  crossorigin="anonymous">
-	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"  crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"  crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"  crossorigin="anonymous"></script>
-    <title> Mark Attendance </title>
-	<style>
+<style>
 	#x{
 	margin-left:30px;
 	}
@@ -17,12 +8,17 @@
 	#tab{
 	margin-top:20px;
 	}
+	body
+	{
+		background-image:url(<?php echo base_url('images/tech1.jpg');?>);		
+		background-repeat:no-repeat;
+			background-size:cover;
+	}
 	</style>
-	</head>
-	<body>
-	<div class="container">
-		<form  class="form-inline"  id="form" method="post" name="form" role="form">
-			<div class="form-group">
+<div class="container-fluid">
+		<form  class="form-inline"  id="form" method="post" name="form" role="form" action="<?php echo site_url('web/insert_data');?>">
+	
+			<div class="form-group" ">
 				<label for="faculty_id">Faculty Id:</label>
 				<select class="form-control" name="faculty_id" id="faculty_id">
 				<?php foreach($a as $item){?>
@@ -45,9 +41,12 @@
 			<select class="form-control" name="semester" id="semester">
 			  </select>
 			   <button  type="" style="margin-left:5px;" id="btn2"  class="btn btn-success float-right">select student</button>
-			   </div><br><br>
-			   <div class="container-fluid ">
-				<table class="table table-striped table-bordered" id="tab" >
+			   </div>
+					<label for="date"  id="y">Date:</label>
+						<input type="date" class="form-control" name="date" id="date"><br><br>
+			   <div class="table-responsive">
+				<table class="table table-hover" id="tab" >
+				<caption>List of student</caption>
 				<thead class="thead-dark">
 				<tr class="text-center">
 					<th scope="col">Roll No</th>
@@ -59,12 +58,10 @@
 				<tbody class="c" id="std_show">
 				</tbody >
 				</table>
-		</div>
-			</form>
-			
-		
-	
-	</body>
+				<button  type="submit" style="color:white;" id="attend"  class="btn btn-success float-right">submit</button>
+				
+			</div>
+		</form>
 	<script>
 	$(document).ready(function(){
 	$('#btn').on('click',function(){
@@ -149,7 +146,8 @@
 				'<td>'+res[i].roll_no+'</td>'+
 				'<td>'+res[i].enrollment_no+'</td>'+
 				'<td>'+res[i].student_name+'</td>'+
-				'<td>'+'present'+'</td>'+
+				'<td>'+'<input type="checkbox" class="form-check-input" name="student[]" value="'+res[i].enrollment_no+'"> present'+
+				'</td>'+
 				'</tr>';
 			}
 				$('#std_show').html(std);
@@ -157,9 +155,11 @@
 					}
 	
 	});
-		return false;
+	$('#btn2').hide();
+	return false;
 	});
+	
 });
 
-	</script>
-</html>
+
+</script>

@@ -9,6 +9,7 @@
 				<table class="table table-hover table-striped" >
 				<thead class="thead-dark">
 				<tr class="text-center">
+				<th scope="col">Sr no</th>
 					<th scope="col">Parent Name</th>
 					<th scope="col">Feedback</th>
 					<th scope="col">Delete feedback </th>
@@ -34,10 +35,10 @@
 			var i;
 			for(i=0;i< data.length;i++){
 				hey += '<tr class="table-primary text-center">'+
-				
+					'<td>'+(i+1)+'</td>'+
 				'<td>'+data[i].parent_name+'</td>'+
 				'<td>'+data[i].feedback+'</td>'+
-				'<td>'+'<button type="submit" class="btn btn-danger danger-item" id="'+data[i].feedback_id+'" ><i class="fas fa-trash-alt" style="color:white;"></i></button>'+'</td>'+
+				'<td>'+'<button  type="submit" class="btn btn-danger danger-item" id="'+data[i].feedback_id+'" ><i class="fas fa-trash-alt" style="color:white;"></i></button>'+'</td>'+
 				'</tr>';
 			}
 				$('#show_data').html(hey);
@@ -61,17 +62,15 @@
 				method:"POST",
 				data:{id:id},
 				success:function(res){
-					
-				}
+			
+			}
 			});
 		}
 		return false;
 	});
 });
+</script>
 
-	
-	</script>
-
-
+		
 
 	
