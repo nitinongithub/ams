@@ -206,11 +206,7 @@ function index()
 	$r['a'] = $this->mm->student();
 	$this->load->view('view_attend',$r);
 	}
-	function std_view_attend()
-	{
 	
-	$this->load->view('std_view_attend',$r);
-	}
 	
 	
 	function index3()
@@ -283,7 +279,11 @@ function index()
 	
 	
 	
-	
+	function mark_attendance()
+	{
+		$r['a'] = $this->mm->choosefac();
+		$this->load->view('mark_attendance',$r);
+	}
 	function send_id()
 	{
 	$id = $this->input->post('faculty_id');
@@ -308,17 +308,28 @@ function index()
 		$b = $this->input->post('course');
 		$c = $this->input->post('subject');
 		$d = $this->input->post('date');
+		$e = $this->input->post('semester');
 		$data = $this->input->post('student');
-		echo "Total selected - " . count($data) . "<br>";
-		for($i=0;$i<count($data);$i++){
-			echo "Data found is " .$data[$i] ."<br>";
+		if($data>=0 && $d != 0)
+		{
+		$x = $this->mm->insert_data($a,$b,$c,$d,$data,$e);
+		echo "<script> window.location.href='';
+		alert('attendance added successfully..');</script>";
+		}
+		else
+		{
+			
+		redirect('web');
 		}
 	}
-	function mark_attendance()
+	
+	
+	function std_view_attend()
 	{
-		$r['a'] = $this->mm->choosefac();
-		$this->load->view('mark_attendance',$r);
+	
+	$this->load->view('std_view_attend');
 	}
+	
 	
 }
 

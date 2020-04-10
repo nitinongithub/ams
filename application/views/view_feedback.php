@@ -54,6 +54,7 @@
 		}
 		$(".danger-item").on('click',function(){
 		var id = $(this).attr('id');
+		alert(id);
 		if(confirm('are you sure you want to delete?'))
 		{	
 	
@@ -73,4 +74,7 @@
 
 		
 
-	
+	echo "Total selected - " . count($data) . "<br>";
+		for($i=0;$i<count($data);$i++){
+			echo "Data found is " .$data[$i] ."<br>";
+		}

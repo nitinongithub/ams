@@ -16,7 +16,7 @@
 	}
 	</style>
 <div class="container-fluid">
-		<form  class="form-inline"  id="form" method="post" name="form" role="form" action="<?php echo site_url('web/insert_data');?>">
+		<form  class="form-inline"  id="format" method="post" name="form" role="form" action="<?php echo site_url('web/insert_data');?>">
 	
 			<div class="form-group">
 				<label for="faculty_id">Faculty Id:</label>
@@ -33,7 +33,7 @@
 			  </select>
 			  <div class="form-group" >
 				<label for="subject" id="y">Subject:</label>
-			<select class="form-control" name="" id="subject">
+			<select class="form-control" name="subject" id="subject">
 			  </select>
 			  </div>
 			   <button type=""  style="margin-left:5px;" id="btn1"  class="btn btn-success float-right">submit</button>
@@ -58,7 +58,7 @@
 				<tbody class="c" id="std_show">
 				</tbody >
 				</table>
-				<button  type="submit" style="color:white;" id="attend"  class="btn btn-success float-right">submit</button>
+				<button  type="button" style="color:white;" id="attend"  class="btn btn-success float-right">submit</button>
 				
 			</div>
 		</form>
@@ -151,20 +151,7 @@
 						'</td>'+
 						'</tr>';
 					}
-					std += '<tr class="table-primary text-center">'+
-						'<td>'+2+'</td>'+
-						'<td>'+2+'</td>'+
-						'<td>nitin</td>'+
-						'<td>'+'<input type="checkbox" class="form-check-input" name="student[]" value="10"> present'+
-						'</td>'+
-						'</tr>';
-					std += '<tr class="table-primary text-center">'+
-						'<td>'+2+'</td>'+
-						'<td>'+2+'</td>'+
-						'<td>mohan</td>'+
-						'<td>'+'<input type="checkbox" class="form-check-input" name="student[]" value="12"> present'+
-						'</td>'+
-						'</tr>';
+					
 						$('#std_show').html(std);
 						
 					}
@@ -173,7 +160,10 @@
 	$('#btn2').hide();
 	return false;
 	});
-	
+	$('#attend').on('click',function(){
+		$('#format').submit();
+	});
+	return false;
 });
 
 

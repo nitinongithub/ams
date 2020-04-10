@@ -386,6 +386,46 @@ class My_model extends CI_Model{
 		$query= $this->db->get();
 		return $query->result();
 	}
-	
+	function insert_data($a,$b,$c,$d,$data,$e)
+	{
+		
+		$this->db->where('semester_id',$e);
+		$this->db->select('a.enrollment_no');
+		$this->db->from('student a');
+		$query= $this->db->get();
+		if($data>=0)
+		{	
+			foreach ($query->result() as $r)
+			{
+				$data1 = array(
+			'enrollment_no' => $r->enrollment_no,
+			'status'=> 'absent',
+			'sess_id'=>2020,
+			'course_id'=>$b,
+			'subject_code'=>$c,
+			'date'=>$d,
+			'faculty_id'=>$a
+			);
+			$this->db->insert('attendance',$data1);
+			}
+		}
+			
+		if($data>0)
+		{
+			for($i=0;$i<count($data);$i++)
+			{
+				$data2= array
+				(
+				'status'=> 'present'	
+				);
+				$this->db->where('course_id',$b);
+				$this->db->where('subject_code',$c);
+				$this->db->where('date',$d);
+				$this->db->where('enrollment_no',$data[$i]);
+				$this->db->update('attendance',$data2);
+			}
+		}
+		return 1;	
+	}
 	
 }
