@@ -427,5 +427,56 @@ class My_model extends CI_Model{
 		}
 		return 1;	
 	}
+	function getname()
+	{
+		$this->db->where('username',$this->session->userdata('usr_'));
+		$this->db->select('a.student_name');
+		$this->db->from('student a');
+		$query= $this->db->get();
+		return $query->result();
+	}
+	function std_attend ($a,$s,$e)
+	{
+		$this->db->where('enrollment_no',$a);
+		$this->db->where('date >=',$s);
+		$this->db->where('date <=',$e);
+		$this->db->select('c.subject_name,a.status,a.date');
+		$this->db->from('attendance a');
+		$this->db->join('subject c','c.subject_code = a.subject_code');
+		$query= $this->db->get();
+		return $query->result();
+	}
+	function get_data($a)
+	{
+		$this->db->where('enrollment_no',$a);
+		$this->db->select('a.student_name,b.course_name,d.semester_name,c.dept_name');
+		$this->db->from('student a');
+		$this->db->join('course b','b.course_id = a.course_id');
+		$this->db->join('department c','c.dept_id = a.dept_id');
+		$this->db->join('semester d','d.semester_id = a.semester_id');
+		$query= $this->db->get();
+		return $query->result();
+	}
 	
+	
+	
+	
+	function student_attend($s,$e)
+	{
+		$this->db->where('username',$this->session->userdata('usr_'));
+		$this->db->select('a.enrollment_no');
+		$this->db->from('student a');
+		$query= $this->db->get();
+		$r = $query->row();
+		$this->db->where('enrollment_no',$r->enrollment_no);
+		$this->db->where('date >=',$s);
+		$this->db->where('date <=',$e);
+		$this->db->select('c.subject_name,a.status,a.date');
+		$this->db->from('attendance a');
+		$this->db->join('subject c','c.subject_code = a.subject_code');
+		$this->db->order_by('date' ,'asc');
+		$query1= $this->db->get();
+		return $query1->result();
+	
+	}
 }

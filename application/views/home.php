@@ -37,7 +37,7 @@
 	{
 		margin-top:40px;
 		width:100%;
-		height:auto;
+		height:1050;
 	}
 	#pages
 	{

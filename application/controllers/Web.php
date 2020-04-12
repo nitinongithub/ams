@@ -198,17 +198,9 @@ function index()
 	function contact(){
 	$this->load->view('contact');
 	}
-	
 
-	
-	function view_attend()
-	{
-	$r['a'] = $this->mm->student();
-	$this->load->view('view_attend',$r);
-	}
-	
-	
-	
+
+
 	function index3()
 	{
 		$this->load->view('view_profilefac');
@@ -273,7 +265,8 @@ function index()
 	
 	function generate_report()
 	{
-	$this->load->view('generate_report');
+		$r['x'] = $this->mm->attend();
+	$this->load->view('generate_report',$r);
 	}
 	
 	
@@ -326,10 +319,37 @@ function index()
 	
 	function std_view_attend()
 	{
-	
-	$this->load->view('std_view_attend');
+		$r['b']= $this->mm->stdsubdata();
+	$r['a']= $this->mm->getname();
+	$this->load->view('std_view_attend',$r);
+	}
+	function student_attend()
+	{
+		$s = $this->input->post('start');
+		$e = $this->input->post('end');
+		$res = $this->mm->student_attend($s,$e);
+		echo json_encode($res);
 	}
 	
+	
+	function view_attend()
+	{
+	$this->load->view('view_attend');
+	}
+	function all_attend()
+	{
+		$a = $this->input->post('enroll');
+		$s = $this->input->post('start');
+		$e = $this->input->post('end');
+		$res = $this->mm->std_attend($a,$s,$e);
+		echo json_encode($res);
+	}
+	function std_data()
+	{
+		$a = $this->input->post('enroll');
+		$res = $this->mm->get_data($a);
+		echo json_encode($res);
+	}
 	
 }
 

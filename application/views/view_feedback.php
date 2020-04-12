@@ -71,10 +71,3 @@
 	});
 });
 </script>
-
-		
-
-	echo "Total selected - " . count($data) . "<br>";
-		for($i=0;$i<count($data);$i++){
-			echo "Data found is " .$data[$i] ."<br>";
-		}

@@ -6,11 +6,11 @@
 		}
 		.std{
 		height:100%;
-		background-color:#FFC312;
+		background-color:#FF5733;
 		}
 		.img-fluid{
-		width:6%;
-		height:6%;
+		width:10%;
+		height:10%;
 		}
 		 h2{
 		color:red;
