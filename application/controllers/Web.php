@@ -16,12 +16,11 @@ class Web extends CI_Controller {
 	{
 		$this->load->view('view_profilepar');
 	}
-	function view_profile()
-	{
-		$r = $this->mm->view_profile();
-		echo json_encode($r);
+	function view_profiles()
+	{	
+	$r = $this->mm->view_profile();
+	echo json_encode($r);
 	}
-	
 	
 	function manage_session()
 	{
@@ -103,6 +102,20 @@ function index()
 		echo  0;	
 		}
 	}
+	function delete_faculty()
+	{
+		$id = $this->input->post('facid');
+		$name = $this->input->post('usernamefac');
+		$res = $this->mm->delete_fac($id,$name);
+		if($res)
+		{
+			echo  1;	
+		}
+		else
+		{
+			echo 0;
+		}
+	}
 
 	function add_sub()
 	{
@@ -167,6 +180,8 @@ function index()
 		}
 	}
 	
+	
+	
 	function add_par()
 	{
 		$r['a'] = $this->mm->checkusr();
@@ -191,6 +206,19 @@ function index()
 		echo  0;	
 		}
 		
+	}
+	function delete_parent()
+	{
+		$upar = $this->input->post('usernamepar');
+		$res = $this->mm->delete_par($upar);
+		if($res)
+		{
+			echo  1;	
+		}
+		else
+		{
+			echo 0;
+		}
 	}
 	
 	
@@ -221,11 +249,12 @@ function index()
 	{
 	$this->load->view('view_profilestd');
 	}
-	function view_profiles()
+	function view_profilestd()
 	{	
 	$r = $this->mm->view_profiles();
 	echo json_encode($r);
 	}
+	
 	function view_stdsubdata()
 	{
 		$r = $this->mm->stdsubdata();
@@ -263,15 +292,6 @@ function index()
 	
 	
 	
-	function generate_report()
-	{
-		$r['x'] = $this->mm->attend();
-	$this->load->view('generate_report',$r);
-	}
-	
-	
-	
-	
 	function mark_attendance()
 	{
 		$r['a'] = $this->mm->choosefac();
@@ -303,7 +323,7 @@ function index()
 		$d = $this->input->post('date');
 		$e = $this->input->post('semester');
 		$data = $this->input->post('student');
-		if($data>=0 && $d != 0)
+		if($data>='' && $d != '')
 		{
 		$x = $this->mm->insert_data($a,$b,$c,$d,$data,$e);
 		echo "<script> window.location.href='';
@@ -311,11 +331,9 @@ function index()
 		}
 		else
 		{
-			
-		redirect('web');
+			redirect('web');
 		}
 	}
-	
 	
 	function std_view_attend()
 	{
@@ -327,9 +345,13 @@ function index()
 	{
 		$s = $this->input->post('start');
 		$e = $this->input->post('end');
-		$res = $this->mm->student_attend($s,$e);
+		$st = date("d-m-Y", strtotime($s));
+		$en = date("d-m-Y", strtotime($e));
+		$res = $this->mm->student_attend($st,$en);
 		echo json_encode($res);
 	}
+	
+	
 	
 	
 	function view_attend()
@@ -341,7 +363,9 @@ function index()
 		$a = $this->input->post('enroll');
 		$s = $this->input->post('start');
 		$e = $this->input->post('end');
-		$res = $this->mm->std_attend($a,$s,$e);
+		$st = date("d-m-Y", strtotime($s));
+		$en = date("d-m-Y", strtotime($e));
+		$res = $this->mm->std_attend($a,$st,$en);
 		echo json_encode($res);
 	}
 	function std_data()
@@ -350,6 +374,9 @@ function index()
 		$res = $this->mm->get_data($a);
 		echo json_encode($res);
 	}
+	
+	
+	
 	
 }
 

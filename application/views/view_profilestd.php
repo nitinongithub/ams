@@ -1,11 +1,11 @@
-		<style>
+<style>
 			.std1{
-		height:100%;
+		height:800px;
 		background-color:white;
 		margin-top:0px;
 		}
 		.std{
-		height:100%;
+		height:800px;
 		background-color:#FF5733;
 		}
 		.img-fluid{
@@ -69,7 +69,7 @@
 		function view_profilestd(){
 		$.ajax({
 			type:'ajax',
-			url :"<?php echo site_url('web/view_profiles');?>",
+			url :"<?php echo site_url('web/view_profilestd');?>",
 			async :false,
 			dataType:'json',
 			success : function(data){
@@ -167,4 +167,3 @@
 		}
 	});
 	</script>
-	

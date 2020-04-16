@@ -1,148 +1,166 @@
 <style>
-	#x{
-	margin-left:30px;
-	}
-	#y{
-	margin-left:30px;
-	}
+	
 	#tab{
-	margin-top:20px;
+		margin-top:10px;
 	}
 	body
 	{
-		background-image:url(<?php echo base_url('images/tech1.jpg');?>);		
+		background-image:url(<?php echo base_url('images/tech.jpg');?>);		
 		background-repeat:no-repeat;
-			background-size:cover;
+		background-size:cover;
 	}
-	</style>
+	label
+	{
+		color:white;
+	}
+	#attend
+	{
+		margin-left:5px;
+	}
+	.text-center{
+		margin-top:0px;
+	width:400px;
+	margin-left:350px;
+	}
+</style>
 <div class="container-fluid">
-		<form  class="form-inline"  id="format" method="post" name="form" role="form" action="<?php echo site_url('web/insert_data');?>">
-	
-			<div class="form-group">
-				<label for="faculty_id">Faculty Id:</label>
-				<select class="form-control" name="faculty_id" id="faculty_id">
-				<?php foreach($a as $item){?>
-			  <option value="<?php echo $item->faculty_id;?>"><?php echo $item->faculty_id;?></option>
-				<?php }?>
-			  </select>
-			</div>
-			<button  type="" style="margin-left:5px;" id="btn"  class="btn btn-success float-right">submit</button>
+<div class="header">
+<h1><center>Amrapali Attendance Portal</center></h1><br><br>
+</div>
+	<form  class="form-group"  id="format" method="post" name="format" role="form" action="<?php echo site_url('web/insert_data');?>">
+		<div class="container">
+		<div class="text-center">
+		<div class="form-group">
+			<label for="faculty_id" id="a">Faculty Id:</label>
+			<select class="form-control" name="faculty_id" id="faculty_id">
+			<?php foreach($a as $item){?>
+				<option value="<?php echo $item->faculty_id;?>"><?php echo $item->faculty_id;?></option>
+			<?php }?>
+			</select>
+		</div>
+			<button  type="" style="margin-left:5px;" id="btn"  class="btn btn-success float-right">submit</button><br><br>
 			<div class="form-group" >
 				<label for="course_id" id="x">Course:</label>
-			<select class="form-control" name="course" id="course">
-			  </select>
-			  <div class="form-group" >
+				<select class="form-control" name="course" id="course">
+				</select>
+			</div>
+			<div class="form-group" >
 				<label for="subject" id="y">Subject:</label>
-			<select class="form-control" name="subject" id="subject">
-			  </select>
+				<select class="form-control" name="subject" id="subject">
+				</select>
+				<button type=""  style="margin-left:5px;" id="btn1"  class="btn btn-success float-right">submit</button><br><br>
+				<label for="subject" id="z">Semester:</label>
+				<select class="form-control" name="semester" id="semester">
+				</select>
+				<button  type=""  id="btn2"  class="btn btn-success float-right">select student</button><br><br>
+			
+				<label for="date"  id="w">Date:</label>
+					<input type="text" class="form-control" name="date" id="date"><br><br>
 			  </div>
-			   <button type=""  style="margin-left:5px;" id="btn1"  class="btn btn-success float-right">submit</button>
-			<label for="subject" id="y">Semester:</label>
-			<select class="form-control" name="semester" id="semester">
-			  </select>
-			   <button  type="" style="margin-left:5px;" id="btn2"  class="btn btn-success float-right">select student</button>
-			   </div>
-					<label for="date"  id="y">Date:</label>
-						<input type="date" class="form-control" name="date" id="date"><br><br>
+			</div>
+			</div>
 			   <div class="table-responsive">
 				<table class="table table-hover" id="tab" >
-				<caption>List of student</caption>
-				<thead class="thead-dark">
-				<tr class="text-center">
-					<th scope="col">Roll No</th>
-					<th scope="col">Enrollment</th>
-					<th scope="col">Student Name</th>
-						<th scope="col">Status</th>
-				</tr>
-				</thead>
-				<tbody class="c" id="std_show">
-				</tbody >
+					<caption>List of student</caption>
+					<thead class="thead-dark">
+						<tr class="text-center">
+							<th scope="col">Roll No</th>
+							<th scope="col">Enrollment</th>
+							<th scope="col">Student Name</th>
+							<th scope="col">Status</th>
+						</tr>
+					</thead>
+					<tbody class="c" id="std_show">
+					</tbody>
 				</table>
-				<button  type="button" style="color:white;" id="attend"  class="btn btn-success float-right">submit</button>
-				
+				<button  type="button" style="color:white;" id="attend"  class="btn btn-success float-right">Add Attendance</button>
+				</form>
 			</div>
-		</form>
-	<script>
-	$(document).ready(function(){
+		
+<script>
+$(document).ready(function(){
+	$('#tab').hide();
 	$('#btn').on('click',function(){
 	var faculty_id = $('#faculty_id').val();
 	if(faculty_id != '')
 	{
-					$.ajax({
-					type: "POST",
-					url: "<?php echo site_url('/web/send_id'); ?>",
-					dataType:"json",
-					data: {
-					faculty_id: faculty_id
-					},
-					success: function(res)
-					{
-					var hey= '';
-					var i;
-				for(i=0;i< res.length;i++){
-				hey += '<option value='+res[i].subject_code+'>'+res[i].subject_code+'</option>';
+		$.ajax({
+			type: "POST",
+			url: "<?php echo site_url('/web/send_id'); ?>",
+			dataType:"json",
+			data: {
+			faculty_id: faculty_id
+			},
+			success: function(res)
+			{
+				var hey= '';
+				var i;
+				for(i=0;i< res.length;i++)
+				{
+					hey += '<option value='+res[i].subject_code+'>'+res[i].subject_code+'</option>';
 				}
-				$('#subject').html(hey);
+					$('#subject').html(hey);
 				var he= '';
-					var i;
-				for(i=0;i< res.length;i++){
-				he += '<option value='+res[i].course_id+'>'+res[i].course_id+'</option>';
+				var i;
+				for(i=0;i< res.length;i++)
+				{
+					he += '<option value='+res[i].course_id+'>'+res[i].course_id+'</option>';
 				}
-				$('#course').html(he);
-					}
-					});
+					$('#course').html(he);
+			}
+		});
 	}
 	else
-		{
-			alert('error');
-		}
-	return false;
+	{
+		alert('error');
+	}
+		return false;
 	});
 	$('#btn1').on('click',function(){
 		$('#btn').hide();
 		var subject = $('#subject').val();
 		if(subject != '')
 		{
-		$.ajax({
-			type: "POST",
-					url: "<?php echo site_url('/web/sendsub'); ?>",
-					dataType:"json",
-					data: {
+			$.ajax({
+				type: "POST",
+				url: "<?php echo site_url('/web/sendsub'); ?>",
+				dataType:"json",
+				data:
+				{
 					subject: subject
-					},
-					success: function(res)
-					{
+				},
+				success: function(res)
+				{
 					var html= '';
 					var i;
-				for(i=0;i< res.length;i++){
-				html += '<option value='+res[i].semester_id+'>'+res[i].semester_id+'</option>';
-				}
-				$('#semester').html(html);
+					for(i=0;i< res.length;i++)
+					{
+						html += '<option value='+res[i].semester_id+'>'+res[i].semester_id+'</option>';
 					}
-		
+						$('#semester').html(html);
+				}
 			});
 		}
-		return false;
+			return false;
 	});
 	$('#btn2').click(function(){
-	$('#btn1').hide();
-	var semester = $('#semester').val();
-	var course = $('#course').val();
-
-	$.ajax({
+		$('#btn1').hide();
+		var semester = $('#semester').val();
+		var course = $('#course').val();
+		$.ajax({
 				type: "POST",
-					url: "<?php echo site_url('/web/take_student'); ?>",
-					dataType:"json",
-					data: {
-					semester: semester,
-					course : course
-					},
-					success: function(res)
-					{
+				url: "<?php echo site_url('/web/take_student'); ?>",
+				dataType:"json",
+				data: {
+				semester: semester,
+				course : course
+				},
+				success: function(res)
+				{
 					var std= '';
-
 					var i;
-					for(i=0;i< res.length;i++){
+					for(i=0;i< res.length;i++)
+					{
 						std += '<tr class="table-primary text-center">'+
 						'<td>'+res[i].roll_no+'</td>'+
 						'<td>'+res[i].enrollment_no+'</td>'+
@@ -151,20 +169,26 @@
 						'</td>'+
 						'</tr>';
 					}
-					
 						$('#std_show').html(std);
-						
-					}
-	
-	});
-	$('#btn2').hide();
-	return false;
+						$('#tab').slideDown('fast');
+						$('#a,#w,#x,#y,#z').hide();
+						$('#faculty_id,#course,#semester,#subject').hide();
+						$("#date").datepicker({ dateFormat: 'dd-mm-yy' }).datepicker("setDate", new Date());	
+				}
+			});
+				$('#btn2').hide();
+				return false;
 	});
 	$('#attend').on('click',function(){
+		if(confirm('do you like to submit...'))
+		{
 		$('#format').submit();
+		}
+		else
+		{
+			$("#pages").load('http://localhost/ams/index.php/web/mark_attendance');
+		}
 	});
 	return false;
 });
-
-
 </script>

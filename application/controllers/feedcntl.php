@@ -22,7 +22,7 @@ function index4()
 	{
 	$id = $this->input->post('id');
 	$res = $this->mm->deletefeed($id);
-	echo json_encode($res);
+		echo json_encode($res);
 	}
 }
 ?>

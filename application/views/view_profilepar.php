@@ -1,16 +1,17 @@
 		<style>
 			.par1{
-		height:100%;
+		height:700px;
 		background-color:white;
 		margin-top:0px;
 		}
 		.par{
-		height:100%;
+		height:700px;
 		background-color:#FFC312;
 		}
 		.img-fluid{
 		width:10%;
 		height:10%;
+		margin-left:30px;
 		}
 		 h2{
 		color:red;
@@ -23,7 +24,7 @@
 				<div class="header">
 				<h2>Amrapali Group Of Institutes</h2>
 				<h4>Shiksha Nagar,Haldwani</h4><br>
-				<h1>Parent Details</h1>
+				<h1 style="color:black">Parent Details</h1>
 				</div>
 			</div>
 			<div class="table-responsive-lg">
@@ -47,7 +48,7 @@
 		function view_profilepar(){
 			$.ajax({
 			type:'ajax',
-			url :"<?php echo site_url('web/view_profile');?>",
+			url :"<?php echo site_url('web/view_profiles');?>",
 			async :false,
 			dataType:'json',
 			success : function(data){

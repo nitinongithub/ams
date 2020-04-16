@@ -1,32 +1,37 @@
-		<style>
-			.br{
-		height:100%;
+<style>
+	.br
+	{
+		height:auto;
 		background-color:white;
 		margin-top:0px;
-		}
-		.dr{
-		height:100%;
+	}
+	.dr
+	{
+		height:auto;
 		background-color:#FFC312;
-		}
-		.img-fluid{
+	}
+	.img-fluid
+	{
 		width:10%;
 		height:10%;
-		}
-		 h2{
+		margin-left:30px;
+	}
+	h2
+	{
 		color:red;
-		}
-		</style>
-	<div class="container-fluid dr">
-		<div class="container br">
-			<div class="text-center">
-				<img src="http://localhost/ams/images/amrapali1.png" class="img-fluid" alt="Responsive image">
-				<div class="header">
-				<h2>Amrapali Group Of Institutes</h2>
-				<h4>Shiksha Nagar,Haldwani</h4><br>
-				<h3>Faculty Details</h3>
-				</div>
+	}
+</style>
+<div class="container-fluid dr">
+	<div class="container br">
+		<div class="text-center">
+			<img src="http://localhost/ams/images/amrapali1.png" class="img-fluid" alt="Responsive image">
+			<div class="header">
+			<h2>Amrapali Group Of Institutes</h2>
+			<h4>Shiksha Nagar,Haldwani</h4><br>
+			<h3>Faculty Details</h3>
 			</div>
-			<div class="table-responsive">
+		</div>
+		<div class="table-responsive">
 			<table class="table table-dark" >
 				<tr id="shownamefac">
 				</tr>
@@ -39,24 +44,23 @@
 				</div>
 			</table>
 			<div class="text-center">
-			<div class="header">
-				<h3 style="margin-top:100px;">Academic Teaching Details</h3>
+				<div class="header">
+				<h3 style="margin-top:130px;">Academic Teaching Details</h3>
 				</div>
-				</div>
-				<div class="table-responsive">
-				<table class="table table-dark" >
-				<thead class="thead-dark">
-					<tr class="text-center">
-						<th scope="col">Subject Name</th>
-						<th scope="col">Course</th>
-						<th scope="col"> class</th>
-					</tr>	
-				</thead>
-				<tbody class="c" id="show_fac1">
-				</tbody >
-			</table>
 			</div>
-				
+			<div class="table-responsive">
+				<table class="table table-dark" >
+					<thead class="thead-dark">
+						<tr class="text-center">
+							<th scope="col">Subject Name</th>
+							<th scope="col">Course</th>
+							<th scope="col"> class</th>
+						</tr>	
+					</thead>
+					<tbody class="c" id="show_fac1">
+					</tbody >
+				</table>
+			</div>
 		</div>
 	</div>
 	</body>

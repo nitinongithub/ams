@@ -41,8 +41,7 @@ class My_model extends CI_Model{
 	{
 		$this->db->where('feedback_id',$id);
 		$this->db->delete('feedback');
-		$query = $this->db->get();
-		return $query->result();
+		return 1;
 	}
 	
 	
@@ -160,7 +159,26 @@ class My_model extends CI_Model{
 		$this->db->insert('subfaculty', $data3);
 		return true;
 	}
-	
+	function delete_fac($id,$name)
+	{
+		$this->db->where('STID',3);
+		$this->db->select('a.username');
+		$this->db->from('login a');
+		$query = $this->db->get();
+		foreach($query->result() as $i)
+		{
+		if( $name == $i->username )
+		{
+			$this->db->where('faculty_id',$id);
+			$this->db->delete('subfaculty');
+			$this->db->where('username',$name);
+			$this->db->delete('faculty');
+			$this->db->where('username',$name);
+			$this->db->delete('login');			
+			return 1;
+		}
+		}
+	}
 	
 	
 	
@@ -233,7 +251,24 @@ class My_model extends CI_Model{
 		}
 	
 	}
-	
+	function delete_par($upar)
+	{
+		$this->db->where('STID',2);
+		$this->db->select('a.username');
+		$this->db->from('login a');
+		$query = $this->db->get();
+		foreach($query->result() as $i)
+		{
+		if( $upar == $i->username )
+		{
+			$this->db->where('username',$upar);
+			$this->db->delete('parent');
+			$this->db->where('username',$upar);
+			$this->db->delete('login');	
+			return 1;
+		}
+		}
+	}
 	
 	
 	function add_subject($data)
@@ -267,7 +302,6 @@ class My_model extends CI_Model{
 			return 0;
 		}
 	}
-	
 	
 	
 	function view_profiles()
@@ -323,7 +357,7 @@ class My_model extends CI_Model{
 	
 	function view_profile()
 	{
-		$this->db->where('username', $this->session->userdata('usr_') );
+		$this->db->where('username', $this->session->userdata('usr_'));
 		$this->db->select('a.parent_name, a.relation, a.email, a.contact');
 		$this->db->from('parent a');
 		$query = $this->db->get();
@@ -386,16 +420,18 @@ class My_model extends CI_Model{
 		$query= $this->db->get();
 		return $query->result();
 	}
+	
+	
 	function insert_data($a,$b,$c,$d,$data,$e)
 	{
-		
 		$this->db->where('semester_id',$e);
 		$this->db->select('a.enrollment_no');
 		$this->db->from('student a');
 		$query= $this->db->get();
 		if($data>=0)
 		{	
-			foreach ($query->result() as $r)
+			
+		foreach ($query->result() as $r)
 			{
 				$data1 = array(
 			'enrollment_no' => $r->enrollment_no,
@@ -412,6 +448,7 @@ class My_model extends CI_Model{
 			
 		if($data>0)
 		{
+			
 			for($i=0;$i<count($data);$i++)
 			{
 				$data2= array
@@ -423,10 +460,15 @@ class My_model extends CI_Model{
 				$this->db->where('date',$d);
 				$this->db->where('enrollment_no',$data[$i]);
 				$this->db->update('attendance',$data2);
+		
 			}
 		}
-		return 1;	
+	
+	return 1;	
+					
 	}
+	
+	
 	function getname()
 	{
 		$this->db->where('username',$this->session->userdata('usr_'));
@@ -435,11 +477,11 @@ class My_model extends CI_Model{
 		$query= $this->db->get();
 		return $query->result();
 	}
-	function std_attend ($a,$s,$e)
+	function std_attend ($a,$st,$en)
 	{
 		$this->db->where('enrollment_no',$a);
-		$this->db->where('date >=',$s);
-		$this->db->where('date <=',$e);
+		$this->db->where('date >=',$st);
+		$this->db->where('date <=',$en);
 		$this->db->select('c.subject_name,a.status,a.date');
 		$this->db->from('attendance a');
 		$this->db->join('subject c','c.subject_code = a.subject_code');
@@ -461,7 +503,7 @@ class My_model extends CI_Model{
 	
 	
 	
-	function student_attend($s,$e)
+	function student_attend($st,$en)
 	{
 		$this->db->where('username',$this->session->userdata('usr_'));
 		$this->db->select('a.enrollment_no');
@@ -469,8 +511,8 @@ class My_model extends CI_Model{
 		$query= $this->db->get();
 		$r = $query->row();
 		$this->db->where('enrollment_no',$r->enrollment_no);
-		$this->db->where('date >=',$s);
-		$this->db->where('date <=',$e);
+		$this->db->where('date >=',$st);
+		$this->db->where('date <=',$en);
 		$this->db->select('c.subject_name,a.status,a.date');
 		$this->db->from('attendance a');
 		$this->db->join('subject c','c.subject_code = a.subject_code');
@@ -479,4 +521,8 @@ class My_model extends CI_Model{
 		return $query1->result();
 	
 	}
+	
+	
+	
+	
 }

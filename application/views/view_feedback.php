@@ -18,10 +18,15 @@
 				<tbody class="c" id="show_data">
 				</tbody >
 				</table>
+				<button  value="submit" style="color:white;" id="check"  class="btn btn-primary float-center">Refresh</button>
 		</div>
 	</body>
 	<script type="text/javascript">
 	$(function(){
+		$('#check').hide();
+		$('#check').on('click',function(){
+		$("#pages").load('http://localhost/ams/index.php/feedcntl/index4');
+		});
 		view_feedback();
 		function view_feedback(){
 		$.ajax({
@@ -54,7 +59,6 @@
 		}
 		$(".danger-item").on('click',function(){
 		var id = $(this).attr('id');
-		alert(id);
 		if(confirm('are you sure you want to delete?'))
 		{	
 	
@@ -63,11 +67,18 @@
 				method:"POST",
 				data:{id:id},
 				success:function(res){
+					if(res == 1)
+					{
+			alert('deleted successfully...');
 			
-			}
+					}
+					
+					$('#check').slideDown('slow');
+				}
+				
 			});
+			
 		}
-		return false;
 	});
 });
 </script>

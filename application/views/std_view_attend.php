@@ -1,11 +1,11 @@
 <style>
 		.std1{
-		height:100%;
+		height:auto;
 		background-color:white;
 		margin-top:0px;
 		}
 		.std{
-		height:100%;
+		height:auto;
 		background-color:#900C3F  ;
 		}
 		.img-fluid{
@@ -50,13 +50,17 @@
 			<div class="form-inline">
 				<button  value="submit" style="color:white;" id="student"  class="btn btn-primary float-right">submit</button>
 			</div>
+			
+		</div>
+		<div class="text-center">
+		<h1 id="matter" style="color:black;margin-top:250px;font-family:Segoe Script;"><p><b><i>  "It Is So Important To Understand Your Good Attendance Ups Yours Chance of Graduating"</i></b></p><h1>
 		</div>
 			<table  id="tab" class="table table-dark" >
 			<thead>
 				<tr>
-					<th> Present</th>
-					<th> Absent</th>
-					<th> Total</th>
+					<th>Lecture Present</th>
+					<th>Lecture Absent</th>
+					<th> Total classes</th>
 				</tr>
 			</thead>
 			<tbody id="number">
@@ -78,10 +82,9 @@
 		<div class="text-center">
 		<h3 id="avg">  Average Attendance</h3>
 		<h2 id="average"></h2> 
+		<button  type="button" id="print" style="color:white;"  class="btn btn-primary float-center" onclick=" $('#print').hide();window.print();$('#print').slideDown('slow');">print</button>
 		</div>
 	</form>
-	
-	
 	</div>
 	</div>
 	
@@ -149,6 +152,7 @@
 				$('#allattend,#enroll,#z').hide();
 				$('#start,#x').hide();
 				$('#end,#y').hide();
+				$('#matter').hide();
 				$('#tab,#tabl,#avg,#average,#a').slideDown('slow');
 				}		
 		});
@@ -157,4 +161,3 @@
 	});
 	});
 	</script>
-		

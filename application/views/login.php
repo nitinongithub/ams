@@ -7,7 +7,7 @@
 	<link rel="stylesheet" href="<?php echo base_url();?>css/stylelogin.css">
 </head>
 <body>
-<header><h1 id="id1"><b>ATTENDANCE MANAGEMENT SYSTEM </b></h1></header>
+<header><h1 id="id1" style="font-family:Segoe Script"><b>ATTENDANCE MANAGEMENT SYSTEM </b></h1></header>
 <div class="container" >
 	<div class="d-flex justify-content-center h-100" >
 		<div class="card" >
@@ -45,19 +45,21 @@
 		</div>
 	</div>
 	</div>
-<header><h1 id="id2"><b><center>ATTEND TODAY, ACHIEVE TOMORROW </center></b></h1></header>
+<header><h1 id="id2" style="font-family:Segoe Script"><b><center>ATTEND TODAY, ACHIEVE TOMORROW </center></b></h1></header>
+<div class="text-center">
+<h2 style="color:white"><b>Created By</b></h2>
+<h1 id="meena" style="color:black;animation:slide-right;font-family:Segoe Script;font-weight:bold;">Meenakshi Tiwari</h1>
+<h1 id="bhagu" style="color:black;font-family:Segoe Script;font-weight:bold;">Bhagwati Bora</h1>
+</div>
 </body>
+</html>
 <script>
 $(document).ready(function(){
 	$("#btn").click(function(){
-	$("#form").submit()
+		$("#form").submit()
 	});
-	});
-	$(document).ready(function(){
 	$("#dot").hide();
 	$("#dot").slideDown('slow');
-	
-	});
+});
 	
 </script>
-</html>
