@@ -4,6 +4,7 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<link rel="stylesheet" href="<?php echo base_url();?>css/stylehome.css">
+		<link href='http://fonts.googleapis.com/css?family=Berkshire+Swash' rel='stylesheet' type='text/css'>
 		<script src="https://kit.fontawesome.com/ada59038f7.js" crossorigin="anonymous"></script>
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.11/jquery-ui.min.js"></script>
@@ -29,6 +30,7 @@
 		color:white;
 		text-decoration:none;
 		font-weight:bold;
+		font-family:Segoe Script;
 	}
 	.bdr{
 		position:fixed;
@@ -42,6 +44,8 @@
 		background-image:url(<?php echo base_url('images/tech.jpg');?>);		
 		background-repeat:no-repeat;
 		background-size:cover;
+		
+		
 	}
 	#pages
 	{
@@ -55,6 +59,7 @@
 		<div class="container-fluid bdr">
 			<div class="navbar-header">
 				<h3 id="id1"> <?php echo $this->session->userdata('sts_');?></h3>
+				
 			</div>
 			<ul class="nav navbar-nav">
 				<li class="active">

@@ -14,6 +14,10 @@
 		}
 		 h2{
 		color:red;
+		text-shadow: 1px 1px 0px #ededed, 4px 4px 0px rgba(0,0,0,0.15);
+		}
+		.c{
+			font_size:10px;
 		}
 		</style>
 	<div class="container-fluid std">
@@ -77,56 +81,56 @@
 			var hey= '';
 			var i;
 			for(i=0;i< data.length;i++){
-						hey += '<th>Enrollment No</th>';
+						hey += '<th class="c">Enrollment No</th>';
 				hey += '<td>'+data[i].enrollment_no+'</td>';
 			}
 			$('#showenroll').html(hey);
 			var hey= '';
 			var i;
 			for(i=0;i< data.length;i++){
-						hey += '<th>Roll No</th>';
+						hey += '<th class="c">Roll No</th>';
 				hey += '<td>'+data[i].roll_no+'</td>';
 			}
 			$('#showroll').html(hey);
 			var hey= '';
 			var i;
 			for(i=0;i< data.length;i++){
-						hey += '<th>Student Name</th>';
+						hey += '<th class="c">Student Name</th>';
 				hey += '<td>'+data[i].student_name+'</td>';
 			}
 			$('#showname').html(hey);
 			var hey= '';
 			var i;
 			for(i=0;i< data.length;i++){
-						hey += '<th>Email</th>';
+						hey += '<th class="c">Email</th>';
 				hey += '<td>'+data[i].email+'</td>';
 			}
 			$('#showema').html(hey);
 			var hey= '';
 			var i;
 			for(i=0;i< data.length;i++){
-						hey += '<th>Contact</th>';
+						hey += '<th class="c">Contact</th>';
 				hey += '<td>'+data[i].contact+'</td>';
 			}
 			$('#showcon').html(hey);
 			var hey= '';
 			var i;
 			for(i=0;i< data.length;i++){
-						hey += '<th>Department</th>';
+						hey += '<th class="c">Department</th>';
 				hey += '<td>'+data[i].dept_name+'</td>';
 			}
 			$('#showdept').html(hey);
 			var hey= '';
 			var i;
 			for(i=0;i< data.length;i++){
-						hey += '<th>Course</th>';
+						hey += '<th class="c">Course</th>';
 				hey += '<td>'+data[i].course_name+'</td>';
 			}
 			$('#showcou').html(hey);
 			var hey= '';
 			var i;
 			for(i=0;i< data.length;i++){
-				hey += '<th>Semester</th>';
+				hey += '<th class="c">Semester</th>';
 				hey += '<td>'+data[i].semester_name+'</td>';
 			}
 			$('#showsem').html(hey);

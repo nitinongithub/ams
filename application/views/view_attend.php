@@ -28,13 +28,22 @@
 	{
 		color:white;
 	}
+	#x{
+	font-size:20px;
+	}
+	#y{
+	font-size:20px;
+	}
+	#z{
+	font-size:20px;
+	}
 </style>
 <div class="container-fluid std">
 	<div class="container std1">
 		<div class="text-center">
 		<img src="<?php echo base_url();?>images/amrapali1.png" class="img-fluid">
 			<div class="header">
-				<h2 id="top" style="color:red;">Amrapali Group Of Institutes</h2>
+				<h2 id="top" style="color:red;text-shadow: 1px 1px 0px #ededed, 4px 4px 0px rgba(0,0,0,0.15);">Amrapali Group Of Institutes</h2>
 				<h4>Shiksha Nagar,Haldwani</h4><br>
 				<h3><u><b>Attendance</b></u></h3>
 			</div>
@@ -103,6 +112,11 @@
 			<h3 id="avg">  Average Attendance</h3>
 			<h2 id="average"></h2> 
 		</div>
+		<div class="p-3 mb-2 bg-success text-black answer" >
+		<div class="text-center">
+		<h1 id="answer"><h1>
+		</div>
+		</div>
 		</form>
 		<div class="text-center">
 		<button  type="button" id="print" style="color:white;"  class="btn btn-primary float-center" onclick=" $('#print').hide();window.print();$('#check,#print').slideDown('slow');">print</button>
@@ -112,7 +126,7 @@
 </div>
 <script>
 $(document).ready(function(){
-	$('#tab,#avg,#a').hide();
+	$('#tab,#avg,#a,.answer').hide();
 	$('#check').hide();
 	$('#enroll').change(function(){
 	var enroll = $('#enroll').val();
@@ -230,10 +244,19 @@ $(document).ready(function(){
 				$('#start,#x').hide();
 				$('#end,#y').hide();
 				$('#matter').hide();
-				$('#tab,#avg,#a').slideDown('slow');
+				$('#tab,#avg,#a,.answer').slideDown('slow');
 				$('#name,#dept,#course,#semester').slideDown('slow');
-				
-			}	
+				var ans;
+				if(l >= 75 )
+				{
+					ans = 'Excellent..<i class="fas fa-smile"></i>'
+				}
+				else{
+				ans = 'Improve your attendance..<i class="fas fa-frown"></i>'
+				}
+				$('#answer').html(ans);
+				$('.answer').delay(5000).fadeOut();
+			}
 		});
 	}
 	else

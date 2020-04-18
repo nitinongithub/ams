@@ -16,10 +16,10 @@
 				<div class="d-flex justify-content-end social_icon">
 					<span><a  href="<?php echo site_url('authenticate/login');?>"><i class="fas fa-home"></i></a></span>
 					<span><a href="<?php echo site_url('web/contact');?>"><i class="far fa-address-book"></i></a></span>
-					<span><a href="<?php echo site_url('web/about');?>"><i class="fas fa-info-circle"></i></a></span>
-					<span><a href="<?php echo site_url('web/about');?>"><i class="fab fa-facebook-square"></i></a></span>
-					<span><a href="<?php echo site_url('web/about');?>"><i class="fab fa-google-plus-square"></i></a></span>
-					<span><a href="<?php echo site_url('web/about');?>"><i class="fab fa-twitter-square"></i></a></span>
+					<span><a href="#"><i class="fas fa-info-circle"></i></a></span>
+					<span><a href="#"><i class="fab fa-facebook-square"></i></a></span>
+					<span><a href="#"><i class="fab fa-google-plus-square"></i></a></span>
+					<span><a href="#"><i class="fab fa-twitter-square"></i></a></span>
 				</div>
 			</div>
 			<div class="card-body" >
@@ -48,8 +48,8 @@
 <header><h1 id="id2" style="font-family:Segoe Script"><b><center>ATTEND TODAY, ACHIEVE TOMORROW </center></b></h1></header>
 <div class="text-center">
 <h2 style="color:white"><b>Created By</b></h2>
-<h1 id="meena" style="color:black;animation:slide-right;font-family:Segoe Script;font-weight:bold;">Meenakshi Tiwari</h1>
-<h1 id="bhagu" style="color:black;font-family:Segoe Script;font-weight:bold;">Bhagwati Bora</h1>
+<h1 id="meena" style="color:black;animation:slide-right;font-family:Comic Sans MS;font-weight:bold;">Meenakshi Tiwari</h1>
+<h1 id="bhagu" style="color:black;font-family:Comic Sans MS;font-weight:bold;">Bhagwati Bora</h1>
 </div>
 </body>
 </html>

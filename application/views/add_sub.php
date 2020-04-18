@@ -22,6 +22,7 @@
 	}
 	.c
 	{
+		font-size:20px;
 		color:#FFC312;
 	}
 </style>

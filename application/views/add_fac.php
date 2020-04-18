@@ -108,7 +108,7 @@
 				</div>
 				<div class="form-group">
 					<input id="rst" type="reset" class="btn btn-primary float-left">
-					<button  id="btn"  class="btn btn-primary float-left">submit</button>
+					<button  id="btn"  class="btn btn-primary float-left">submit</button><br>
 				</div>
 				<button  id="delfac"  class="btn btn-danger float-right">Delete Account</button>
 			</div>
@@ -245,17 +245,18 @@ $(document).ready(function(){
 	$('#btn2').on('click',function(){
 		var id = $('#id').val();
 		var course = $('#course').val();
-		var subject = $('#subject').val();
+		var subjectfac = $('#subjectfac').val();
 		var cls = $('#cls').val();
-		if(id != '' &&  course != '' && subject != '' && cls != '')
+		if(id != '' &&  course != '' && subjectfac != '' && cls != '')
 		{
+	
 			$.ajax({
 				type: "POST",
 				url: "<?php echo site_url('/web/add_subfaculty'); ?>",
 				data: {
 					id: id,
 					course:course,
-					subject:subject,
+					subjectfac:subjectfac,
 					cls:cls,
 					},
 				success: function(res) 
@@ -314,6 +315,10 @@ $(document).ready(function(){
 				}
 			}
 		});
+	}
+	else
+	{
+	alert('fill');
 	}
 	return false;
 	});

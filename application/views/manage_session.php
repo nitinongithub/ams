@@ -17,6 +17,7 @@
 	{
 		color:white;
 		margin-top:10px;
+		font-size:20px;
 	}
 	.social_icon span
 	{
@@ -38,9 +39,7 @@
 </style>
 <form id="myform" method="post" name="myform" role="form">
 	<div class="container" >
-		<div class="d-flex justify-content-center social_icon">
-			<span><i class="fas fa-user-plus" style="color:white;"></i></span>
-		</div>
+		
 		<div class="form-group">
 		<label for="session_id" class="c">Session Id:</label>
 			<input type="text" class="form-control" id="sess_id" name="id" >

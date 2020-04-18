@@ -23,13 +23,16 @@
 		font-weight:bold;
 		background-color:#FFC312;
 	}
+.c{
+	font-size:20px;
+	}
 </style>
 <div class="container">
 	<div class="card-header" id="dot">
 		<form id="form1" method="post" name="form1" type="form">
 		<h4>Give Feedback</h4>
 			<div class="form-group">
-			<label for="parent" class="c">Parent Name</label>
+			<label for="parent" class="c">Name</label>
 				<input type="text" class="form-control" id="parent" name="parent" required>
 			</div>
 			<div class="form-group">
@@ -61,7 +64,8 @@ $(document).ready(function(){
 				{
 					if(res==1)
 					{
-						alert(' success');	
+						alert(' success');
+						$("#pages").load('http://localhost/ams/index.php/web/feedback');
 					}
 			
 				},

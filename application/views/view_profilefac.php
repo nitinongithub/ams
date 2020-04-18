@@ -1,13 +1,13 @@
 <style>
 	.br
 	{
-		height:auto;
+		height:730;
 		background-color:white;
 		margin-top:0px;
 	}
 	.dr
 	{
-		height:auto;
+		height:730;
 		background-color:#FFC312;
 	}
 	.img-fluid
@@ -18,6 +18,7 @@
 	}
 	h2
 	{
+		text-shadow: 1px 1px 0px #ededed, 4px 4px 0px rgba(0,0,0,0.15);
 		color:red;
 	}
 </style>

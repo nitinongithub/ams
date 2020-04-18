@@ -1,7 +1,7 @@
 <style>
 	
 	#tab{
-		margin-top:10px;
+		margin-top:30px;
 	}
 	body
 	{
@@ -22,23 +22,43 @@
 	width:400px;
 	margin-left:350px;
 	}
+	#a{
+	font-size:20px;
+	}
+	#x{
+	font-size:20px;
+	}
+	#y{
+	font-size:20px;
+	}
+	#z{
+	font-size:20px;
+	}
+	#w{
+	font-size:20px;
+	}
+	.item{
+	width:400px;
+	height:100px;
+	}
+	
 </style>
 <div class="container-fluid">
-<div class="header">
-<h1><center>Amrapali Attendance Portal</center></h1><br><br>
+	<div class="header">
+	<h1><center>Amrapali Attendance Portal</center></h1><br><br>
 </div>
-	<form  class="form-group"  id="format" method="post" name="format" role="form" action="<?php echo site_url('web/insert_data');?>">
-		<div class="container">
-		<div class="text-center">
-		<div class="form-group">
-			<label for="faculty_id" id="a">Faculty Id:</label>
-			<select class="form-control" name="faculty_id" id="faculty_id">
-			<?php foreach($a as $item){?>
-				<option value="<?php echo $item->faculty_id;?>"><?php echo $item->faculty_id;?></option>
-			<?php }?>
-			</select>
-		</div>
-			<button  type="" style="margin-left:5px;" id="btn"  class="btn btn-success float-right">submit</button><br><br>
+<form  class="form-group"  id="format" method="post" name="format" role="form" action="<?php echo site_url('web/insert_data');?>">
+	<div class="container">
+		<div class="container item">
+			<div class="form-group">
+				<label for="faculty_id" id="a">Faculty Id:</label>
+				<select class="form-control" name="faculty_id" id="faculty_id">
+				<?php foreach($a as $item){?>
+					<option value="<?php echo $item->faculty_id;?>"><?php echo $item->faculty_id;?></option>
+				<?php }?>
+				</select>
+				<button  type="" style="margin-left:5px;" id="btn"  class="btn btn-success float-right">submit</button><br>
+			</div>
 			<div class="form-group" >
 				<label for="course_id" id="x">Course:</label>
 				<select class="form-control" name="course" id="course">
@@ -46,40 +66,40 @@
 			</div>
 			<div class="form-group" >
 				<label for="subject" id="y">Subject:</label>
-				<select class="form-control" name="subject" id="subject">
-				</select>
-				<button type=""  style="margin-left:5px;" id="btn1"  class="btn btn-success float-right">submit</button><br><br>
+					<select class="form-control" name="subject" id="subject">
+					</select>
+					<button type=""  style="margin-left:5px;" id="btn1"  class="btn btn-success float-right">submit</button><br>
 				<label for="subject" id="z">Semester:</label>
-				<select class="form-control" name="semester" id="semester">
-				</select>
-				<button  type=""  id="btn2"  class="btn btn-success float-right">select student</button><br><br>
+					<select class="form-control" name="semester" id="semester">
+					</select>
+					<button  type=""  id="btn2"  class="btn btn-success float-right">select student</button><br><br>
 			
 				<label for="date"  id="w">Date:</label>
 					<input type="text" class="form-control" name="date" id="date"><br><br>
-			  </div>
 			</div>
-			</div>
-			   <div class="table-responsive">
-				<table class="table table-hover" id="tab" >
-					<caption>List of student</caption>
-					<thead class="thead-dark">
-						<tr class="text-center">
-							<th scope="col">Roll No</th>
-							<th scope="col">Enrollment</th>
-							<th scope="col">Student Name</th>
-							<th scope="col">Status</th>
-						</tr>
-					</thead>
-					<tbody class="c" id="std_show">
-					</tbody>
-				</table>
-				<button  type="button" style="color:white;" id="attend"  class="btn btn-success float-right">Add Attendance</button>
-				</form>
-			</div>
+		</div>
+	</div></br>
+   <div class="table-responsive">
+		<table class="table table-hover" id="tab" >
+			<caption>List of student</caption>
+			<thead class="thead-dark">
+				<tr class="text-center">
+					<th scope="col">Roll No</th>
+					<th scope="col">Enrollment</th>
+					<th scope="col">Student Name</th>
+					<th scope="col">Status</th>
+				</tr>
+			</thead>
+			<tbody class="c" id="std_show">
+			</tbody>
+		</table>
+		<button  type="button" style="color:white;" id="attend"  class="btn btn-success float-right">Add Attendance</button>
+	</form>
+</div>
 		
 <script>
 $(document).ready(function(){
-	$('#tab').hide();
+	$('#tab,#attend').hide();
 	$('#btn').on('click',function(){
 	var faculty_id = $('#faculty_id').val();
 	if(faculty_id != '')
@@ -170,7 +190,7 @@ $(document).ready(function(){
 						'</tr>';
 					}
 						$('#std_show').html(std);
-						$('#tab').slideDown('fast');
+						$('#tab,#attend').slideDown('fast');
 						$('#a,#w,#x,#y,#z').hide();
 						$('#faculty_id,#course,#semester,#subject').hide();
 						$("#date").datepicker({ dateFormat: 'dd-mm-yy' }).datepicker("setDate", new Date());	

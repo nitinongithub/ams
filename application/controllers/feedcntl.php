@@ -9,20 +9,5 @@ class feedcntl extends CI_Controller {
 		$this->load->model('my_model','mm');
 
 	}
-function index4()
-	{
-		$this->load->view('view_feedback');
-	}
-	function view_feedback()
-	{
-	$a = $this->mm->feedback();
-	echo json_encode($a);
-	}
-	function deletefeed()
-	{
-	$id = $this->input->post('id');
-	$res = $this->mm->deletefeed($id);
-		echo json_encode($res);
-	}
-}
+
 ?>

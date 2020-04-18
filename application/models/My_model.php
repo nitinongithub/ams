@@ -2,6 +2,8 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class My_model extends CI_Model{
+	
+	
 	function checklogin()
 	{
 		$this->db->where('username', $this->input->post('username'));
@@ -23,28 +25,6 @@ class My_model extends CI_Model{
 		}
 	return $bool_;
 	}
-	function feedback()
-	{
-		$this->db->select('a.feedback_id,a.parent_name,a.feedback');
-		$this->db->from('feedback a');
-		$query = $this->db->get();
-		if($query->num_rows()>0)
-		{
-			return $query->result();
-		}
-		else
-		{
-		return false;
-		}
-	}
-	function deletefeed($id)
-	{
-		$this->db->where('feedback_id',$id);
-		$this->db->delete('feedback');
-		return 1;
-	}
-	
-	
 	
 	
 	function get_menu()
@@ -57,6 +37,7 @@ class My_model extends CI_Model{
 		$query=$this->db->get();
 	return $query->result();
 	}
+	
 	
 	
 	function insert_session($data)
@@ -74,111 +55,6 @@ class My_model extends CI_Model{
 	
 	
 	
-	function department()
-	{
-		$this->db->select('a.dept_id,a.dept_name');
-		$this->db->from('department a');
-		$query = $this->db->get();
-		return $query->result();
-	}
-	function course($id)
-	{ 
-		$this->db->where('dept_id',$id);
-		$this->db->select('a.course_id');
-		$this->db->from('course a');
-		$query = $this->db->get();
-		return $query->result();
-	}
-	function semester($id)
-	{
-		$this->db->where('course_id',$id);
-		$this->db->select('a.semester_id');
-		$this->db->from('semester a');
-		$query = $this->db->get();
-		return $query->result();
-	}
-	
-	
-	
-	function subjectadd($id)
-	{
-		$this->db->where('course_id',$id);
-		$this->db->select('a.subject_code');
-		$this->db->from('subject a');
-		$query = $this->db->get();
-		return $query->result();
-	}
-	
-	function coursefac()
-	{ 
-		$this->db->select('a.course_id');
-		$this->db->from('course a');
-		$query = $this->db->get();
-		return $query->result();
-	}
-	
-	function add_faculty($u,$p,$id,$e,$n,$co,$de)
-	{
-		$this->db->select('a.username');
-		$this->db->from('login a');
-		$query = $this->db->get();
-		$r = $query->row();
-		if( $u != $r->username)
-		{
-		$data1 = array(
-		'username'=> $u,
-		'password' => $p,
-		'STID' => 3,
-		'sess_id' => 2020
-		);
-		$data2 = array(
-		'faculty_id' => $id,
-		'faculty_name'=> $n,
-		'contact' => $co,
-		'email'=>  $e,
-		'dept_id' => $de,
-		'sess_id' => 2020,
-		'username'=> $u
-		);
-		$this->db->insert('login', $data1);
-		$this->db->insert('faculty', $data2);
-		return 1;
-		}
-		else{
-		return 0;
-		}
-	}
-	function add_subfaculty($i,$co,$s,$c)
-	{
-		$data3 = array(
-		'faculty_id'=> $i,
-		'subject_code' => $s,
-		'course_id'=> $co,
-		'class' => $c 
-		);
-		$this->db->insert('subfaculty', $data3);
-		return true;
-	}
-	function delete_fac($id,$name)
-	{
-		$this->db->where('STID',3);
-		$this->db->select('a.username');
-		$this->db->from('login a');
-		$query = $this->db->get();
-		foreach($query->result() as $i)
-		{
-		if( $name == $i->username )
-		{
-			$this->db->where('faculty_id',$id);
-			$this->db->delete('subfaculty');
-			$this->db->where('username',$name);
-			$this->db->delete('faculty');
-			$this->db->where('username',$name);
-			$this->db->delete('login');			
-			return 1;
-		}
-		}
-	}
 	
 	
 	
@@ -219,6 +95,114 @@ class My_model extends CI_Model{
 	}
 	
 	
+	function add_subject($data)
+	{
+	
+		if($this->db->insert('subject', $data))
+		{
+			return 1;
+		}
+		else
+		{
+			return 0;
+		}
+	}
+	
+	
+	function semestersub()
+	{
+		$this->db->select('a.semester_id');
+		$this->db->from('semester a');
+		$query = $this->db->get();
+		return $query->result();
+	}
+	
+	
+	function department()
+	{
+		$this->db->select('a.dept_id,a.dept_name');
+		$this->db->from('department a');
+		$query = $this->db->get();
+		return $query->result();
+	}
+	function coursefac()
+	{ 
+		$this->db->select('a.course_id');
+		$this->db->from('course a');
+		$query = $this->db->get();
+		return $query->result();
+	}
+	function delete_fac($id,$name)
+	{
+		$this->db->where('STID',3);
+		$this->db->select('a.username');
+		$this->db->from('login a');
+		$query = $this->db->get();
+		foreach($query->result() as $i)
+		{
+		if( $name == $i->username )
+		{
+			$this->db->where('faculty_id',$id);
+			$this->db->delete('subfaculty');
+			$this->db->where('username',$name);
+			$this->db->delete('faculty');
+			$this->db->where('username',$name);
+			$this->db->delete('login');			
+			return 1;
+		}
+		}
+	}
+	function add_faculty($u,$p,$id,$e,$n,$co,$de)
+	{
+		$this->db->select('a.username');
+		$this->db->from('login a');
+		$query = $this->db->get();
+		$r = $query->row();
+		if( $u != $r->username)
+		{
+		$data1 = array(
+		'username'=> $u,
+		'password' => $p,
+		'STID' => 3,
+		'sess_id' => 2020
+		);
+		$data2 = array(
+		'faculty_id' => $id,
+		'faculty_name'=> $n,
+		'contact' => $co,
+		'email'=>  $e,
+		'dept_id' => $de,
+		'sess_id' => 2020,
+		'username'=> $u
+		);
+		$this->db->insert('login', $data1);
+		$this->db->insert('faculty', $data2);
+		return 1;
+		}
+		else{
+		return 0;
+		}
+	}
+	function add_sufaculty($i,$co,$s,$c)
+	{
+		$data3 = array(
+		'faculty_id'=> $i,
+		'subject_code' => $s,
+		'course_id'=> $co,
+		'class' => $c 
+		);
+		$this->db->insert('subfaculty', $data3);
+		return true;
+	}
+	
+	
+	function checkusr()
+	{
+		$this->db->select('a.username');
+		$this->db->from('login a');
+		$query = $this->db->get();
+		return $query->result();
+	}
 	function add_parent($up,$p,$par,$e,$c,$r)
 	{
 		$this->db->select('a.username');
@@ -271,25 +255,83 @@ class My_model extends CI_Model{
 	}
 	
 	
-	function add_subject($data)
+	function getname()
 	{
+		$this->db->where('username',$this->session->userdata('usr_'));
+		$this->db->select('a.student_name');
+		$this->db->from('student a');
+		$query= $this->db->get();
+		return $query->result();
+	}
+	function std_attend ($a,$st,$en)
+	{
+		$this->db->where('enrollment_no',$a);
+		$this->db->where('date >=',$st);
+		$this->db->where('date <=',$en);
+		$this->db->select('c.subject_name,a.status,a.date');
+		$this->db->from('attendance a');
+		$this->db->join('subject c','c.subject_code = a.subject_code');
+		$query= $this->db->get();
+		return $query->result();
+	}
+	function get_data($a)
+	{
+		$this->db->where('enrollment_no',$a);
+		$this->db->select('a.student_name,b.course_name,d.semester_name,c.dept_name');
+		$this->db->from('student a');
+		$this->db->join('course b','b.course_id = a.course_id');
+		$this->db->join('department c','c.dept_id = a.dept_id');
+		$this->db->join('semester d','d.semester_id = a.semester_id');
+		$query= $this->db->get();
+		return $query->result();
+	}
 	
-		if($this->db->insert('subject', $data))
+	
+	
+	function feedback()
+	{
+		$this->db->select('a.feedback_id,a.name,a.feedback');
+		$this->db->from('feedback a');
+		$query = $this->db->get();
+		if($query->num_rows()>0)
 		{
-			return 1;
+			return $query->result();
 		}
 		else
 		{
-			return 0;
+		return false;
 		}
 	}
-	function semestersub()
+	function deletefeed($id)
 	{
+		$this->db->where('feedback_id',$id);
+		$this->db->delete('feedback');
+		return 1;
+	}
+	
+	
+	
+	function course($id)
+	{ 
+		$this->db->where('dept_id',$id);
+		$this->db->select('a.course_id');
+		$this->db->from('course a');
+		$query = $this->db->get();
+		return $query->result();
+	}
+	function semester($id)
+	{
+		$this->db->where('course_id',$id);
 		$this->db->select('a.semester_id');
 		$this->db->from('semester a');
 		$query = $this->db->get();
 		return $query->result();
 	}
+	
+	
+	
+	
+	
 	
 	function give_feedback($data)
 	{
@@ -370,13 +412,7 @@ class My_model extends CI_Model{
 		return false;
 		}
 	}
-	function checkusr()
-	{
-		$this->db->select('a.username');
-		$this->db->from('login a');
-		$query = $this->db->get();
-		return $query->result();
-	}
+	
 	
 	
 	
@@ -468,41 +504,6 @@ class My_model extends CI_Model{
 					
 	}
 	
-	
-	function getname()
-	{
-		$this->db->where('username',$this->session->userdata('usr_'));
-		$this->db->select('a.student_name');
-		$this->db->from('student a');
-		$query= $this->db->get();
-		return $query->result();
-	}
-	function std_attend ($a,$st,$en)
-	{
-		$this->db->where('enrollment_no',$a);
-		$this->db->where('date >=',$st);
-		$this->db->where('date <=',$en);
-		$this->db->select('c.subject_name,a.status,a.date');
-		$this->db->from('attendance a');
-		$this->db->join('subject c','c.subject_code = a.subject_code');
-		$query= $this->db->get();
-		return $query->result();
-	}
-	function get_data($a)
-	{
-		$this->db->where('enrollment_no',$a);
-		$this->db->select('a.student_name,b.course_name,d.semester_name,c.dept_name');
-		$this->db->from('student a');
-		$this->db->join('course b','b.course_id = a.course_id');
-		$this->db->join('department c','c.dept_id = a.dept_id');
-		$this->db->join('semester d','d.semester_id = a.semester_id');
-		$query= $this->db->get();
-		return $query->result();
-	}
-	
-	
-	
-	
 	function student_attend($st,$en)
 	{
 		$this->db->where('username',$this->session->userdata('usr_'));
@@ -516,12 +517,67 @@ class My_model extends CI_Model{
 		$this->db->select('c.subject_name,a.status,a.date');
 		$this->db->from('attendance a');
 		$this->db->join('subject c','c.subject_code = a.subject_code');
-		$this->db->order_by('date' ,'asc');
+		$this->db->order_by('subject_name' ,'asc');
 		$query1= $this->db->get();
 		return $query1->result();
 	
 	}
 	
+	function subjectadd($id)
+	{
+		$this->db->where('course_id',$id);
+		$this->db->select('a.subject_code');
+		$this->db->from('subject a');
+		$query = $this->db->get();
+		return $query->result();
+	}
+	function update_attend($a,$b,$c,$d,$abs,$pre,$e)
+	{
+		if($pre>=0)
+		{
+			for($i=0;$i<count($pre);$i++)
+			{
+				$this->db->where('enrollment_no',$pre[$i]);
+				$this->db->where('subject_code',$c);
+				$this->db->where('date',$d);
+				$this->db->select('a.attend_id');
+				$this->db->from('attendance a');
+				$query= $this->db->get();
+				foreach($query->result() as $k)
+				{
+					$data2= array
+					(
+					'status'=> 'present'	
+					);
+				$this->db->where('attend_id',$k->attend_id);
+				$this->db->update('attendance',$data2);
+				}
+			}
+		}
+		if($abs>=0)
+		{
+			for($i=0;$i<count($abs);$i++)
+			{
+				$this->db->where('enrollment_no',$abs[$i]);
+				$this->db->where('subject_code',$c);
+				$this->db->where('date',$d);
+				$this->db->select('a.attend_id');
+				$this->db->from('attendance a');
+				$query1= $this->db->get();
+				foreach($query1->result() as $j)
+				{
+					$data1= array
+					(
+					'status'=> 'absent'	
+					);
+					$this->db->where('attend_id',$j->attend_id);
+					$this->db->update('attendance',$data1);
+				}
+			}
+		}
+		return 1;
+	
+	}
 	
 	
 	

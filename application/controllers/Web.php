@@ -7,20 +7,19 @@ class Web extends CI_Controller {
 		parent::__construct();
 		//redirect('authenticate/uc');
 		$this->load->model('my_model','mm');
-		if(!$this->session->userdata('sts_')){ redirect('authenticate');}
+		
 
 	}
 	
 	
-	function index1()
+	function index()
 	{
-		$this->load->view('view_profilepar');
+		$id = $this->input->get('id');	
+		$data['a']= $this->mm->stdsubdata($id);	
+		$data['menu'] = $this->mm->get_menu();
+		$this->load->view('home', $data);
 	}
-	function view_profiles()
-	{	
-	$r = $this->mm->view_profile();
-	echo json_encode($r);
-	}
+	
 	
 	function manage_session()
 	{
@@ -47,98 +46,7 @@ class Web extends CI_Controller {
     }
 	
 	
-function index()
-	{
-		$id = $this->input->get('id');	
-		$data['a']= $this->mm->stdsubdata($id);	
-		$data['menu'] = $this->mm->get_menu();
-		$this->load->view('home', $data);
-	}
 	
-	function subjectadd()
-	{
-		$id = $this->input->post('course');
-		$res = $this->mm->subjectadd($id);
-		echo json_encode($res);
-	}
-	function add_fac()
-	{
-		$r['d']= $this->mm->coursefac();
-		$r['a']= $this->mm->department();
-		$this->load->view('add_fac',$r);
-	}
-	function add_faculty()
-	{
-		$u = $this->input->post('uername');
-		$p = $this->input->post('password');
-		$id = $this->input->post('fac_id');
-		$e = $this->input->post('email');
-		$n = $this->input->post('name');
-		$co = $this->input->post('contact');
-		$de = $this->input->post('dept');
-		$result=$this->mm->add_faculty($u,$p,$id,$e,$n,$co,$de);
-		if($result)
-		{
-		echo  1;	
-		}
-		else
-		{
-		echo  0;	
-		}
-	}
-	function add_subfaculty()
-	{
-		$i = $this->input->post('id');
-		$co = $this->input->post('course');
-		$s = $this->input->post('subject');
-		$c = $this->input->post('cls');
-		$result=$this->mm->add_subfaculty($i,$co,$s,$c);
-		if($result)
-		{
-		echo  1;	
-		}
-		else
-		{
-		echo  0;	
-		}
-	}
-	function delete_faculty()
-	{
-		$id = $this->input->post('facid');
-		$name = $this->input->post('usernamefac');
-		$res = $this->mm->delete_fac($id,$name);
-		if($res)
-		{
-			echo  1;	
-		}
-		else
-		{
-			echo 0;
-		}
-	}
-
-	function add_sub()
-	{
-	$r['c']= $this->mm->semestersub();	
-	$this->load->view('add_sub',$r);
-	}
-	function add_subject()
-	{
-		$data = array(
-		'subject_code' => $this->input->post('subject'),
-		'subject_name' => $this->input->post('subject'),
-		'semester_id' => $this->input->post('semester')
-		);		
-		$result=$this->mm->add_subject($data);
-		if($result)
-		{
-		echo  1;	
-		}
-		else
-		{
-		echo  0;	
-		}
-	}
 	
 	function addstudent()
 	{		
@@ -182,6 +90,31 @@ function index()
 	
 	
 	
+	function add_sub()
+	{
+		$r['c']= $this->mm->semestersub();	
+		$this->load->view('add_sub',$r);
+	}
+	
+	function add_subject()
+	{
+		$data = array(
+		'subject_code' => $this->input->post('subject'),
+		'subject_name' => $this->input->post('subject'),
+		'semester_id' => $this->input->post('semester')
+		);		
+		$result=$this->mm->add_subject($data);
+		if($result)
+		{
+		echo  1;	
+		}
+		else
+		{
+		echo  0;	
+		}
+	}
+	
+	
 	function add_par()
 	{
 		$r['a'] = $this->mm->checkusr();
@@ -222,13 +155,33 @@ function index()
 	}
 	
 	
-	
-	function contact(){
-	$this->load->view('contact');
+	function view_attend()
+	{
+	$this->load->view('view_attend');
 	}
-
-
-
+	function all_attend()
+	{
+		$a = $this->input->post('enroll');
+		$s = $this->input->post('start');
+		$e = $this->input->post('end');
+		$st = date("d-m-Y", strtotime($s));
+		$en = date("d-m-Y", strtotime($e));
+		$res = $this->mm->std_attend($a,$st,$en);
+		echo json_encode($res);
+	}
+	
+	
+	function index1()
+	{
+		$this->load->view('view_profilepar');
+	}
+	function view_profiles()
+	{	
+	$r = $this->mm->view_profile();
+	echo json_encode($r);
+	}
+	
+	
 	function index3()
 	{
 		$this->load->view('view_profilefac');
@@ -260,13 +213,80 @@ function index()
 		$r = $this->mm->stdsubdata();
 		echo json_encode($r);
 	}
-
-
-	function about()
+	
+	
+	
+	function add_fac()
 	{
-		$this->load->view('about');
+		$r['d']= $this->mm->coursefac();
+		$r['a']= $this->mm->department();
+		$this->load->view('add_fac',$r);
+	}
+	function add_faculty()
+	{
+		$u = $this->input->post('uername');
+		$p = $this->input->post('password');
+		$id = $this->input->post('fac_id');
+		$e = $this->input->post('email');
+		$n = $this->input->post('name');
+		$co = $this->input->post('contact');
+		$de = $this->input->post('dept');
+		$result=$this->mm->add_faculty($u,$p,$id,$e,$n,$co,$de);
+		if($result)
+		{
+		echo  1;	
+		}
+		else
+		{
+		echo  0;	
+		}
+	}
+	function subjectadd()
+	{
+		$id = $this->input->post('course');
+		$res = $this->mm->subjectadd($id);
+		echo json_encode($res);
+	}
+	function add_subfaculty()
+	{
+		$i = $this->input->post('id');
+		$co = $this->input->post('course');
+		$s = $this->input->post('subjectfac');
+		$c = $this->input->post('cls');
+		$result=$this->mm->add_sufaculty($i,$co,$s,$c);
+		if($result)
+		{
+		echo  1;	
+		}
+		else
+		{
+		echo  0;	
+		}
+	}	
+	function delete_faculty()
+	{
+		$id = $this->input->post('facid');
+		$name = $this->input->post('usernamefac');
+		$res = $this->mm->delete_fac($id,$name);
+		if($res)
+		{
+			echo  1;	
+		}
+		else
+		{
+			echo 0;
+		}
 	}
 	
+	
+	
+	function contact()
+	{
+		$this->load->view('contact');
+	}
+	
+		
+		
 	function feedback()
 	{
 		
@@ -275,7 +295,7 @@ function index()
 	function give_feedback()
 	{
 	$data = array(
-		'parent_name'=> $this->input->post('parent'),
+		'name'=> $this->input->post('parent'),
 		'feedback'=> $this->input->post('feedback'),
 		'sess_id'=> 2020
 		);
@@ -288,6 +308,21 @@ function index()
 		{
 		echo  0;	
 		}
+	}
+	function index4()
+	{
+		$this->load->view('view_feedback');
+	}
+	function view_feedback()
+	{
+	$a = $this->mm->feedback();
+	echo json_encode($a);
+	}
+	function deletefeed()
+	{
+	$id = $this->input->post('id');
+	$res = $this->mm->deletefeed($id);
+		echo json_encode($res);
 	}
 	
 	
@@ -337,7 +372,7 @@ function index()
 	
 	function std_view_attend()
 	{
-		$r['b']= $this->mm->stdsubdata();
+	$r['b']= $this->mm->stdsubdata();
 	$r['a']= $this->mm->getname();
 	$this->load->view('std_view_attend',$r);
 	}
@@ -351,23 +386,6 @@ function index()
 		echo json_encode($res);
 	}
 	
-	
-	
-	
-	function view_attend()
-	{
-	$this->load->view('view_attend');
-	}
-	function all_attend()
-	{
-		$a = $this->input->post('enroll');
-		$s = $this->input->post('start');
-		$e = $this->input->post('end');
-		$st = date("d-m-Y", strtotime($s));
-		$en = date("d-m-Y", strtotime($e));
-		$res = $this->mm->std_attend($a,$st,$en);
-		echo json_encode($res);
-	}
 	function std_data()
 	{
 		$a = $this->input->post('enroll');
@@ -376,7 +394,31 @@ function index()
 	}
 	
 	
-	
+	function update_attend()
+	{
+		$r['a'] = $this->mm->choosefac();
+		$this->load->view('update_attendance',$r);
+	}
+	function update_data()
+	{
+		$a = $this->input->post('faculty_id');
+		$b = $this->input->post('course');
+		$c = $this->input->post('subject');
+		$d = $this->input->post('date');
+		$e = $this->input->post('semester');
+		$pre = $this->input->post('student');
+		$abs = $this->input->post('students');	
+		if($abs>'' && $pre>'' && $d != '')
+		{
+		$x = $this->mm->update_attend($a,$b,$c,$d,$pre,$abs,$e);
+		echo "<script> window.location.href='';
+		alert('attendance updated successfully..');</script>";
+		}
+		else
+		{
+			redirect('web');
+		}
+	}
 	
 }
 
