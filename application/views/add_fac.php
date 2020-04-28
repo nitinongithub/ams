@@ -108,7 +108,7 @@
 				</div>
 				<div class="form-group">
 					<input id="rst" type="reset" class="btn btn-primary float-left">
-					<button  id="btn"  class="btn btn-primary float-left">submit</button><br>
+					<button  id="btn"  class="btn btn-primary float-left">submit</button>
 				</div>
 				<button  id="delfac"  class="btn btn-danger float-right">Delete Account</button>
 			</div>
@@ -130,7 +130,7 @@
 			<button  id="deletefac"  class="btn btn-danger float-right">Delete</button>
 		</form>
 		<div class="card-header" id="dot">
-			<button id="id2" class="btn btn-primary float-center">Add teaching details </button></br>
+			<button id="id2" class="btn btn-primary float-center">Add teaching details </button>
 			<form id="form2" method="post" name="form2" role="form">
 			<h4>teaching details</h4>
 				<div class="md-form input-group input-group-sm mb-3">

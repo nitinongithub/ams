@@ -25,6 +25,10 @@
 	#y{
 	font-size:20px;
 	}
+	.item{
+	width:400px;
+	height:100px;
+	}
 </style>
 	<div class="container-fluid std">
 		<div class="container std1">
@@ -39,25 +43,26 @@
 				</div>
 			</div>
 			<form id="viewatd" name="viewatd" method="post" type="form">
-			<div class="d-flex justify-content-center item">
+			<div class="container item">
 		
-			<div class="form-inline">
+			<div class="form-group">
 				<label id="x" for="start" class="col-2 col-form-label">Date From:</label>
 				<div class="col-10">
 					<input class="form-control" type="date" value="" id="start">
 				</div>
 			</div>
-			<div class="form-inline">
+			<div class="form-group">
 			<label for="end" id="y" class="col-2 col-form-label">Date to:</label>
 			<div class="col-10">
 				<input class="form-control" type="date" value="" id="end">
 			</div>
 			</div>
-			<div class="form-inline">
-				<button  value="submit" style="color:white;" id="student"  class="btn btn-primary float-right">submit</button>
+			<div class="form-group">
+			<div class="col-10">
+				<button  value="submit" style="color:white;" id="student"  class="btn btn-success float-left">submit</button>
 			</div>
-			
-		</div>
+			</div>
+			</div>
 		<div class="text-center">
 		<h1 id="matter" style="color:black;margin-top:250px;font-family:Segoe Script;"><p><b><i>  "It Is So Important To Understand Your Good Attendance Ups Yours Chance of Graduating"</i></b></p><h1>
 		</div>

@@ -7,6 +7,7 @@
 	}
 	.std
 	{
+		margin-top:0px;
 		height:auto;
 		background-color:#A98190;
 	}
@@ -37,6 +38,10 @@
 	#z{
 	font-size:20px;
 	}
+	.item{
+	width:400px;
+	height:100px;
+	}
 </style>
 <div class="container-fluid std">
 	<div class="container std1">
@@ -48,31 +53,30 @@
 				<h3><u><b>Attendance</b></u></h3>
 			</div>
 		</div>
-		<form id="viewall" name="viewall" method="post" type="form">
-			<div class="d-flex justify-content-center item">
-				<div class="form-inline">
+		<form id="viewall"  name="viewall" method="post" type="form">
+<div class="container item">
+				<div class="form-group">
 				<label id="x" for="enroll" class="col-2 col-form-label">Enrollment:</label>
 					<div class="col-10">
 						<input class="form-control" type="text" value="" id="enroll">
 					</div>
 				</div>
-			<div class="form-inline">
+			<div class="form-group">
 				<label id="y" for="start" class="col-2 col-form-label">Date From:</label>
 				<div class="col-10">
 					<input class="form-control" type="date" value="" id="start">
 				</div>
 			</div>
-			<div class="form-inline">
+			<div class="form-group">
 				<label for="end" id="z" class="col-2 col-form-label">Date to:</label>
 				<div class="col-10">
 					<input class="form-control" type="date" value="" id="end">
 				</div>
 			</div>
-			<div class="form-inline">
-				<button  value="submit" style="color:white;" id="allattend"  class="btn btn-primary float-right">submit</button>
-				
+			<div class="form-group">
+				<button  value="submit" style="color:white;" id="allattend"  class="btn btn-success float-center">submit</button>
 			</div>
-		</div>
+			</div><br><br>
 		<div class="text-center">
 	
 	<h1 id="matter" style="color:black;margin-top:250px;font-family:Segoe Script;"><p><b><i>  "It Is So Important To Understand Your Good Attendance Ups Yours Chance of Graduating"</i></b></p><h1>
@@ -202,6 +206,8 @@ $(document).ready(function(){
 			},
 			success: function(res) 
 			{
+				if(res != '')
+				{
 				var hey= '';
 				var i;
 				for(i=0;i< res.length;i++)
@@ -256,6 +262,11 @@ $(document).ready(function(){
 				}
 				$('#answer').html(ans);
 				$('.answer').delay(5000).fadeOut();
+				}
+				else
+				{
+					alert('enrollment not exist');
+				}
 			}
 		});
 	}

@@ -45,7 +45,7 @@
 </style>
 <div class="container-fluid">
 	<div class="header">
-	<h1><center>Amrapali Attendance Portal</center></h1><br><br>
+	<h1 style="color:white;"><center>Amrapali Attendance Portal</center></h1><br><br>
 </div>
 <form  class="form-group"  id="format" method="post" name="format" role="form" action="<?php echo site_url('web/insert_data');?>">
 	<div class="container">

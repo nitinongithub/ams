@@ -7,9 +7,7 @@ class Authenticate extends CI_Controller {
 		
 		$this->load->model('my_model','mm');
 	}
-	function index(){
-		redirect('authenticate/login');
-	}
+	
 	function login()
 	{
 		//$this->load->view('uc');
@@ -31,13 +29,13 @@ class Authenticate extends CI_Controller {
 		$r = $this->mm->checklogin();
 		if($r == true)
 		{
-			echo "<script>alert('login Successfully....!!!! ');</script>";
-		redirect('web');
+			echo "<script> window.location.href='http://localhost/ams/index.php/web/index';
+		alert('login successful..');</script>";
 		} 
 		else 
 		{
-			echo "<script>alert('error');</script>";
-			redirect('authenticate/login');
+		echo "<script> window.location.href='http://localhost/ams/index.php/authenticate/login';
+		alert('error');</script>";
 		}
 		
 	}

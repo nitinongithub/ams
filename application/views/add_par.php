@@ -17,7 +17,7 @@
 	}
 	.container
 	{
-		height: 60%;
+		height: 65%;
 		margin-top: 100px;
 		margin-bottom: auto;
 		width: 500px;
@@ -35,20 +35,20 @@
 <div class="container">
 	<div class="card-header" id="dot">
 		<form id="form" method="post" name="form" role="form">
-		<h4>Login Details</h4>
-			<div class="md-form input-group input-group-sm mb-3">
+		<h4 id="l">Login Details</h4>
+			<div id="d1" class="md-form input-group input-group-sm mb-3">
 				<div class="input-group-prepend">
 					<span class="input-group-text " ><i class="fas fa-user"></i></span>
 				</div>
 				<input id="username" type="text" name="username" class="form-control" placeholder="username" >
 			</div>
-			<div class="md-form input-group input-group-sm mb-3">
+			<div id="d2" class="md-form input-group input-group-sm mb-3">
 				<div class="input-group-prepend">
 					<span class="input-group-text " ><i class="fas fa-key"></i></span>
 				</div>
 				<input id="password" type="text" name="password" class="form-control" placeholder="password" >
 			</div>
-			<h4>Parent Details</h4>
+			<h4 id="p">Parent Details</h4>
 			<div class="md-form input-group input-group-sm mb-3">
 				<div class="input-group-prepend">
 					<span class="input-group-text " ><i class="fas fa-user"></i></span>
@@ -78,10 +78,11 @@
 				</select>
 			</div>
 			<div class="form-group">
-				<input id="rst" type="reset" class="btn btn-primary float-left">
-				<button id="btn" class="btn btn-primary float-left">submit</button>
-				<button id="deletepar" class="btn btn-danger float-right">Delete Account</button>
-			</div>
+				<input id="rst" type="reset" class="btn btn-success float-left">
+				<button id="btn" class="btn btn-success float-left">submit</button>
+				<button id="deletepar" class="btn btn-danger float-right">Delete Account</button><br><br>
+				</div>
+		
 		</form>
 		<form id="form1" method="post" name="form1" role="form">
 			<h4>Delete Account</h4>
@@ -174,5 +175,6 @@ $(document).ready(function(){
 	}
 	return false;
 	});
+	
 });
 </script>

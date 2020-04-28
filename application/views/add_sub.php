@@ -35,11 +35,16 @@
 				<input type="text" class="form-control" id="subject" name="name" required>
 			</div>
 			<div class="form-group">
+			<label class="c">course:</label>
+				<select class="form-control" id="course" name="course">
+				<?php foreach($b as $item){?>
+					<option><?php echo $item->course_id;?></option>
+				<?php }?>
+				</select>
+			</div>
+			<div class="form-group">
 			<label class="c">Semester:</label>
 				<select class="form-control" id="semester" name="semester">
-				<?php foreach($c as $item){?>
-					<option><?php echo $item->semester_id;?></option>
-				<?php }?>
 				</select>
 			</div>
 			<button   id="btn" type="submit" class="btn btn-primary float-right">submit</button>
@@ -49,20 +54,50 @@
 </div>
 <script>
 $(document).ready(function(){
+	$('#course').change(function(){
+	var course = $('#course').val();
+	jQuery.ajax({
+				type: "POST",
+				url: "<?php echo site_url('/web/subjectsem'); ?>",
+				dataType: 'json',
+				data: 
+				{course:course
+				},
+				success: function(res) 
+				{
+					var sub = '';
+				var i;
+				for(i=0;i<res.length;i++)
+				{
+					sub+='<option value="'+res[i].semester_id+'">'+res[i].semester_id+'</option>';
+				}
+					$('#semester').html(sub);
+			
+				},
+				error:function()
+				{
+					alert('oops something went wrong');	
+				}
+			});
+	});
 	$("#form").hide();
 	$("#form").slideDown('slow');
 	$('#btn').on('click',function(){
 		var subject = $('#subject').val();
+		var course = $('#course').val();
 		var semester = $('#semester').val();
-		if(subject != '' && semester != '')
+		
+		if(subject != '' && semester != '' && course != '')
 		{
+			
 			jQuery.ajax({
 				type: "POST",
 				url: "<?php echo site_url('/web/add_subject'); ?>",
 				dataType: 'html',
 				data: 
 				{subject: subject, 
-				semester: semester
+				semester: semester,
+				course:course
 				},
 				success: function(res) 
 				{

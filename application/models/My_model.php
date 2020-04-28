@@ -6,6 +6,7 @@ class My_model extends CI_Model{
 	
 	function checklogin()
 	{
+		$this->db->where('sess_id',2020);
 		$this->db->where('username', $this->input->post('username'));
 		$this->db->where('password', $this->input->post('password'));
 		$this->db->select('a.username, b.STATUS, b.pic');
@@ -19,13 +20,33 @@ class My_model extends CI_Model{
 			$this->session->set_userdata('sts_', $r->STATUS);
 			$this->session->set_userdata('pic_', $r->pic);
 		
-			$bool_ = true;
+	
+	$bool_ = true;
 		} else {
 			$bool_ = false;
 		}
 	return $bool_;
 	}
 	
+	
+	function ch_password($u,$p)
+	{
+		$this->db->select('a.username');
+		$this->db->from('login a');
+		$query = $this->db->get();
+		foreach( $query->result() as $x)
+		{
+		if($u == $x->username)
+		{
+				$data= array(
+				'password' => $p
+			);
+				$this->db->where('username',$u);
+				$this->db->update('login',$data);
+				return 1;
+		}
+		}
+	}
 	
 	function get_menu()
 	{
@@ -109,8 +130,9 @@ class My_model extends CI_Model{
 	}
 	
 	
-	function semestersub()
+	function semestersub($a)
 	{
+		$this->db->where('course_id',$a);
 		$this->db->select('a.semester_id');
 		$this->db->from('semester a');
 		$query = $this->db->get();
@@ -237,6 +259,7 @@ class My_model extends CI_Model{
 	}
 	function delete_par($upar)
 	{
+		$this->db->where('sess_id',2020);
 		$this->db->where('STID',2);
 		$this->db->select('a.username');
 		$this->db->from('login a');
@@ -254,9 +277,9 @@ class My_model extends CI_Model{
 		}
 	}
 	
-	
 	function getname()
 	{
+		$this->db->where('sess_id',2020);
 		$this->db->where('username',$this->session->userdata('usr_'));
 		$this->db->select('a.student_name');
 		$this->db->from('student a');
@@ -265,17 +288,28 @@ class My_model extends CI_Model{
 	}
 	function std_attend ($a,$st,$en)
 	{
+		$this->db->select('a.enrollment_no');
+		$this->db->from('student a');
+		$query = $this->db->get();
+		 foreach($query->result() as $r)
+		 {
+			 if($a == $r->enrollment_no)
+			 {
+			$this->db->where('sess_id',2020);
 		$this->db->where('enrollment_no',$a);
 		$this->db->where('date >=',$st);
 		$this->db->where('date <=',$en);
 		$this->db->select('c.subject_name,a.status,a.date');
 		$this->db->from('attendance a');
 		$this->db->join('subject c','c.subject_code = a.subject_code');
-		$query= $this->db->get();
-		return $query->result();
+		$query1= $this->db->get();
+		return $query1->result();
+			 }
+		}
 	}
 	function get_data($a)
 	{
+		$this->db->where('sess_id',2020);
 		$this->db->where('enrollment_no',$a);
 		$this->db->select('a.student_name,b.course_name,d.semester_name,c.dept_name');
 		$this->db->from('student a');
@@ -290,6 +324,7 @@ class My_model extends CI_Model{
 	
 	function feedback()
 	{
+		$this->db->where('sess_id',2020);
 		$this->db->select('a.feedback_id,a.name,a.feedback');
 		$this->db->from('feedback a');
 		$query = $this->db->get();
@@ -304,6 +339,7 @@ class My_model extends CI_Model{
 	}
 	function deletefeed($id)
 	{
+		$this->db->where('sess_id',2020);
 		$this->db->where('feedback_id',$id);
 		$this->db->delete('feedback');
 		return 1;
@@ -313,6 +349,7 @@ class My_model extends CI_Model{
 	
 	function course($id)
 	{ 
+		
 		$this->db->where('dept_id',$id);
 		$this->db->select('a.course_id');
 		$this->db->from('course a');
@@ -348,6 +385,7 @@ class My_model extends CI_Model{
 	
 	function view_profiles()
 	{
+		$this->db->where('sess_id',2020);
 		$this->db->where('username', $this->session->userdata('usr_') );
 		$this->db->select('a.enrollment_no,a.roll_no,b.course_name,d.semester_id,d.semester_name,a.student_name, a.email, a.contact,c.dept_name');
 		$this->db->from('student a');
@@ -377,6 +415,7 @@ class My_model extends CI_Model{
 	
 	function view_profilefac()
 	{
+		$this->db->where('sess_id',2020);
 		$this->db->where('username', $this->session->userdata('usr_'));
 		$this->db->select('a.faculty_id,a.faculty_name,a.contact,a.email,b.dept_name');
 		$this->db->from('faculty a');
@@ -386,6 +425,7 @@ class My_model extends CI_Model{
 	}
 	function view_profilefac1()
 	{
+		$this->db->where('sess_id',2020);
 		$this->db->where('username', $this->session->userdata('usr_'));
 		$this->db->select('c.subject_name, d.course_name, b.class');
 		$this->db->from('faculty a');
@@ -399,6 +439,7 @@ class My_model extends CI_Model{
 	
 	function view_profile()
 	{
+		$this->db->where('sess_id',2020);
 		$this->db->where('username', $this->session->userdata('usr_'));
 		$this->db->select('a.parent_name, a.relation, a.email, a.contact');
 		$this->db->from('parent a');
@@ -418,6 +459,7 @@ class My_model extends CI_Model{
 	
 	function choosefac()
 	{
+		$this->db->where('sess_id',2020);
 		$this->db->where('username',$this->session->userdata('usr_'));
 		$this->db->select('a.faculty_id');
 		$this->db->from('faculty a');
@@ -450,6 +492,7 @@ class My_model extends CI_Model{
 	}
 	function student()
 	{
+		$this->db->where('sess_id',2020);
 		$this->db->where('semester_id','sembca1');
 		$this->db->select('a.roll_no,a.student_name,a.enrollment_no');
 		$this->db->from('student a');
@@ -506,6 +549,7 @@ class My_model extends CI_Model{
 	
 	function student_attend($st,$en)
 	{
+		$this->db->where('sess_id',2020);
 		$this->db->where('username',$this->session->userdata('usr_'));
 		$this->db->select('a.enrollment_no');
 		$this->db->from('student a');
@@ -537,6 +581,7 @@ class My_model extends CI_Model{
 		{
 			for($i=0;$i<count($pre);$i++)
 			{
+				$this->db->where('sess_id',2020);
 				$this->db->where('enrollment_no',$pre[$i]);
 				$this->db->where('subject_code',$c);
 				$this->db->where('date',$d);
@@ -558,6 +603,7 @@ class My_model extends CI_Model{
 		{
 			for($i=0;$i<count($abs);$i++)
 			{
+				$this->db->where('sess_id',2020);
 				$this->db->where('enrollment_no',$abs[$i]);
 				$this->db->where('subject_code',$c);
 				$this->db->where('date',$d);

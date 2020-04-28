@@ -1,54 +1,45 @@
-<style>
-	body
-	{
-		background-image:url(<?php echo base_url('images/'.$this->session->userdata('pic_'));?>);
-		background-size:cover;
-		background-repeat:no-repeat;
-	}
-	.container
-	{
-		height: 50%;
-		margin-top: 100px;
-		margin-bottom: auto;
-		width: 500px;
-		background-color: rgba(0,0,0,0.5);
-	}
-	.card-header
-	{
-		color:white;
-	}
-	.input-group-prepend span
-	{
-		color:black;
-		font-weight:bold;
-		background-color:#FFC312;
-	}
-.c{
-	font-size:20px;
-	}
-</style>
-<div class="container">
-	<div class="card-header" id="dot">
-		<form id="form1" method="post" name="form1" type="form">
-		<h4>Give Feedback</h4>
-			<div class="form-group">
-			<label for="parent" class="c">Name</label>
-				<input type="text" class="form-control" id="parent" name="parent" required>
+
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>css/main.css">
+
+
+	<div class="bg-contact2" style="background-image:url(<?php echo base_url('images/tech.jpg');?>);">
+		<div class="container-contact2">
+			<div class="wrap-contact2">
+				<form class="contact2-form validate-form">
+					<span class="contact2-form-title">
+						<b>Feedback Portal</b>
+					</span>
+
+					<div class="wrap-input2 validate-input" data-validate="Name is required">
+					<span class="focus-input2" data-placeholder="NAME"></span>
+						<input class="input2" type="text" name="name" id="name">
+						
+					</div>
+
+					<div class="wrap-input2 validate-input" data-validate = "Message is required">
+					<span class="focus-input2" data-placeholder="FEEDBACK"></span>
+						<textarea class="input2" name="feed" id="feed"  ></textarea>
+						
+					</div>
+
+					<div class="container-contact2-form-btn">
+						<div class="wrap-contact2-form-btn">
+							<div class="contact2-form-bgbtn" ></div>
+							<button class="contact2-form-btn" id="btn">
+								Give Your Feedback
+							</button>
+						</div>
+					</div>
+				</form>
 			</div>
-			<div class="form-group">
-			<label for="feedback" class="c">feedback</label>
-				<textarea class="form-control" name="feedback" rows="5" id="feed" required></textarea>
-			</div>
-			<button   id="btn"  value="submit" class="btn btn-primary float-right">submit</button>
-		</form>
+		</div>
 	</div>
-</div>
+</body>
+</html>
 <script>
 $(document).ready(function(){
-	$("#form1").hide();
-	$("#form1").slideDown('slow');
 	$('#btn').on('click',function(){
-		var parent = $('#parent').val();
+		var name = $('#name').val();
 		var feedback = $('#feed').val();
 		if( parent != '' && feedback != '')
 		{
@@ -57,7 +48,7 @@ $(document).ready(function(){
 				url: "<?php echo site_url('/web/give_feedback');?>",
 				dataType: 'html',
 				data: 
-				{parent: parent, 
+				{name: name, 
 				feedback:feedback
 				},
 				success: function(res) 

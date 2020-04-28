@@ -10,14 +10,34 @@ class Web extends CI_Controller {
 		
 
 	}
+	function changepswd()
+	{
+		$this->load->view('changepswd');
+	}
+	function change_password()
+	{
+		$u = $this->input->post('user');
+		$p = $this->input->post('pass');
+		$r = $this->mm->ch_password($u,$p);
+		if($r)
+		{
+			echo 1;
+		}
+		else
+		{
+		echo 0;
+		}
+	}
 	
 	
 	function index()
 	{
+		$this->load->view('header');
 		$id = $this->input->get('id');	
 		$data['a']= $this->mm->stdsubdata($id);	
 		$data['menu'] = $this->mm->get_menu();
 		$this->load->view('home', $data);
+		$this->load->view('footer');
 	}
 	
 	
@@ -92,16 +112,22 @@ class Web extends CI_Controller {
 	
 	function add_sub()
 	{
-		$r['c']= $this->mm->semestersub();	
+		$r['b']= $this->mm->coursefac();	
 		$this->load->view('add_sub',$r);
 	}
-	
+	function subjectsem()
+	{
+		$a = $this->input->post('course');
+		$res=$this->mm->semestersub($a);
+		echo json_encode($res);
+	}
 	function add_subject()
 	{
 		$data = array(
 		'subject_code' => $this->input->post('subject'),
 		'subject_name' => $this->input->post('subject'),
-		'semester_id' => $this->input->post('semester')
+		'semester_id' => $this->input->post('semester'),
+		'course_id' => $this->input->post('course')
 		);		
 		$result=$this->mm->add_subject($data);
 		if($result)
@@ -154,7 +180,6 @@ class Web extends CI_Controller {
 		}
 	}
 	
-	
 	function view_attend()
 	{
 	$this->load->view('view_attend');
@@ -167,7 +192,14 @@ class Web extends CI_Controller {
 		$st = date("d-m-Y", strtotime($s));
 		$en = date("d-m-Y", strtotime($e));
 		$res = $this->mm->std_attend($a,$st,$en);
+		if($res != '')
+		{
 		echo json_encode($res);
+		}
+		else
+		{
+			echo 0;
+		}
 	}
 	
 	
@@ -278,8 +310,6 @@ class Web extends CI_Controller {
 		}
 	}
 	
-	
-	
 	function contact()
 	{
 		$this->load->view('contact');
@@ -295,7 +325,7 @@ class Web extends CI_Controller {
 	function give_feedback()
 	{
 	$data = array(
-		'name'=> $this->input->post('parent'),
+		'name'=> $this->input->post('name'),
 		'feedback'=> $this->input->post('feedback'),
 		'sess_id'=> 2020
 		);
