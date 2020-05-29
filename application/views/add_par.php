@@ -77,6 +77,12 @@
 					<option>Father</option>
 				</select>
 			</div>
+			<div class="md-form input-group input-group-sm mb-3">
+				<div class="input-group-prepend">
+					<span class="input-group-text " ><i class="fas fa-user"></i></span>
+				</div>
+				<input id="par" type="number" name="par" class="form-control" placeholder=" children enrollment" >
+			</div>
 			<div class="form-group">
 				<input id="rst" type="reset" class="btn btn-success float-left">
 				<button id="btn" class="btn btn-success float-left">submit</button>
@@ -108,6 +114,7 @@ $(document).ready(function(){
 		var fac_email = $('#fac_email').val();
 		var contact = $('#contact').val();
 		var relation = $('#relation').val();
+		var par = $('#par').val();
 		if(username != '' &&  password != '' && parent != '' && fac_email != '' && contact != '' && relation != '')
 		{
 			$.ajax({
@@ -119,7 +126,8 @@ $(document).ready(function(){
 					parent:parent,
 					fac_email:fac_email,
 					contact:contact,
-					relation:relation
+					relation:relation,
+					par : par
 				},
 				success: function(res) 
 				{

@@ -225,7 +225,7 @@ class My_model extends CI_Model{
 		$query = $this->db->get();
 		return $query->result();
 	}
-	function add_parent($up,$p,$par,$e,$c,$r)
+	function add_parent($up,$p,$par,$e,$c,$r, $en)
 	{
 		$this->db->select('a.username');
 		$this->db->from('login a');
@@ -246,6 +246,7 @@ class My_model extends CI_Model{
 		'email' => $e,
 		'contact' => $c,
 		'relation' => $r,
+		'enrollment_no'=> $en,
 		'sess_id' => 2020
 		);
 		$this->db->insert('parent',$data4);
@@ -295,7 +296,7 @@ class My_model extends CI_Model{
 		 {
 			 if($a == $r->enrollment_no)
 			 {
-			$this->db->where('sess_id',2020);
+		$this->db->where('sess_id',2020);
 		$this->db->where('enrollment_no',$a);
 		$this->db->where('date >=',$st);
 		$this->db->where('date <=',$en);
@@ -441,7 +442,7 @@ class My_model extends CI_Model{
 	{
 		$this->db->where('sess_id',2020);
 		$this->db->where('username', $this->session->userdata('usr_'));
-		$this->db->select('a.parent_name, a.relation, a.email, a.contact');
+		$this->db->select('a.parent_name,a.parent_id, a.relation, a.email, a.contact');
 		$this->db->from('parent a');
 		$query = $this->db->get();
 		if($query->num_rows()>0)
@@ -453,7 +454,16 @@ class My_model extends CI_Model{
 		return false;
 		}
 	}
-	
+	function childparent($a)
+	{
+		
+		$this->db->where('parent_id',$a);
+		$this->db->select('b.student_name');
+		$this->db->from('parent a');
+		$this->db->join('student b','b.enrollment_no= a.enrollment_no');
+		$query = $this->db->get();
+		return $query->result();
+	}
 	
 	
 	
@@ -624,6 +634,8 @@ class My_model extends CI_Model{
 		return 1;
 	
 	}
+	
+	
 	
 	
 	

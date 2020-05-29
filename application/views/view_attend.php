@@ -265,8 +265,12 @@ $(document).ready(function(){
 				}
 				else
 				{
-					alert('enrollment not exist');
+					alert('attendance not exist');
 				}
+			},
+			error: function()
+			{
+				alert('yup');
 			}
 		});
 	}

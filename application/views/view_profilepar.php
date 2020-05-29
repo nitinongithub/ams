@@ -38,9 +38,10 @@
 				</tr>
 				<tr id="showrel">
 				</tr>
+				<tr id="showstd">
+				</tr>
 				</table>
 				</div>
-		</div>
 	</div>
 	</body>
 	<script>
@@ -81,6 +82,14 @@
 				em += '<td>'+data[i].relation+'</td>';
 			$('#showrel').html(em);
 			}
+			var em= '';
+			var i;
+			for(i=0;i< data.length;i++){
+				em += '<th>children name</th>';
+				em += '<td>'+'<button  type="submit" class="btn btn-primary primary-item" id="'+data[i].parent_id+'" >click me</button>'+'</td>';
+			$('#showstd').html(em);
+			
+			}
 			},
 			error:function()
 			{
@@ -88,5 +97,23 @@
 			}
 			});
 		}
+		$(".primary-item").on('click',function(){
+		var id = $(this).attr('id');
+			$.ajax({
+			 url:"<?php echo site_url('/web/childpar');?>",
+				method:"POST",
+				data:{id:id},
+				dataType:"json",
+				success:function(res){
+					var em= '';
+			var i;
+			for(i=0;i< res.length;i++){
+				em += '<th>children name</th>';
+				em += '<td>'+res[i].student_name+'</td>';
+			$('#showstd').html(em);
+			}
+			}
+			});
+	});
 	});
 </script>

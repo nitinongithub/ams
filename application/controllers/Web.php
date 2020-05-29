@@ -10,10 +10,7 @@ class Web extends CI_Controller {
 		
 
 	}
-	function changepswd()
-	{
-		$this->load->view('changepswd');
-	}
+	
 	function change_password()
 	{
 		$u = $this->input->post('user');
@@ -155,7 +152,8 @@ class Web extends CI_Controller {
 		$e = $this->input->post('fac_email');
 		$c = $this->input->post('contact');
 		$r = $this->input->post('relation');
-		$result=$this->mm->add_parent($up,$p,$par,$e,$c,$r);
+		$en = $this->input->post('par');
+		$result=$this->mm->add_parent($up,$p,$par,$e,$c,$r, $en);
 		if($result)
 		{
 		echo  1;	
@@ -211,6 +209,12 @@ class Web extends CI_Controller {
 	{	
 	$r = $this->mm->view_profile();
 	echo json_encode($r);
+	}
+	function childpar()
+	{
+	$a = $this->input->post('id');
+	$res = $this->mm->childparent($a);
+	echo json_encode($res);
 	}
 	
 	
@@ -357,48 +361,6 @@ class Web extends CI_Controller {
 	
 	
 	
-	function mark_attendance()
-	{
-		$r['a'] = $this->mm->choosefac();
-		$this->load->view('mark_attendance',$r);
-	}
-	function send_id()
-	{
-	$id = $this->input->post('faculty_id');
-	$res = $this->mm->send_id($id);
-		echo json_encode($res);
-	}
-	function sendsub()
-	{
-	$id = $this->input->post('subject');
-	$res = $this->mm->send_sem($id);
-		echo json_encode($res);
-	}
-	function take_student()
-	{
-	$id = $this->input->post('semester');
-	$res = $this->mm->take_std($id);
-		echo json_encode($res);
-	}
-	function insert_data()
-	{
-		$a = $this->input->post('faculty_id');
-		$b = $this->input->post('course');
-		$c = $this->input->post('subject');
-		$d = $this->input->post('date');
-		$e = $this->input->post('semester');
-		$data = $this->input->post('student');
-		if($data>='' && $d != '')
-		{
-		$x = $this->mm->insert_data($a,$b,$c,$d,$data,$e);
-		echo "<script> window.location.href='';
-		alert('attendance added successfully..');</script>";
-		}
-		else
-		{
-			redirect('web');
-		}
-	}
 	
 	function std_view_attend()
 	{
@@ -424,7 +386,7 @@ class Web extends CI_Controller {
 	}
 	
 	
-	function update_attend()
+function update_attend()
 	{
 		$r['a'] = $this->mm->choosefac();
 		$this->load->view('update_attendance',$r);
@@ -443,6 +405,48 @@ class Web extends CI_Controller {
 		$x = $this->mm->update_attend($a,$b,$c,$d,$pre,$abs,$e);
 		echo "<script> window.location.href='';
 		alert('attendance updated successfully..');</script>";
+		}
+		else
+		{
+			redirect('web');
+		}
+	}
+function mark_attendance ()
+	{
+		$r['a'] = $this->mm->choosefac ();
+		$this->load->view ('mark_attendance', $r);
+	}
+	function send_id ()
+	{
+	$id = $this->input->post('faculty_id');
+	$res = $this->mm->send_id($id);
+		echo json_encode($res);
+	}
+	function sendsub ()
+	{
+	$id = $this->input->post('subject');
+	$res = $this->mm->send_sem ($id);
+		echo json_encode($res);
+	}
+	function take_student ()
+	{
+	$id = $this->input->post('semester');
+	$res = $this->mm->take_std($id);
+		echo json_encode($res);
+	}
+	function insert_data ()
+	{
+		$a = $this->input->post('faculty_id');
+		$b = $this->input->post('course');
+		$c = $this->input->post('subject');
+		$d = $this->input->post('date');
+		$e = $this->input->post('semester');
+		$data = $this->input->post('student');
+		if($data>='' && $d!= '')
+		{
+		$x = $this->mm->insert_data ($a, $b, $c, $d, $data, $e);
+		echo "<script> window. location. href='';
+		alert ('attendance added successfully.'); </script>";
 		}
 		else
 		{
